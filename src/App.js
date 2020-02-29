@@ -31,7 +31,7 @@ const App = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Document Analysis NLP
+            Data Science Projects
           </Typography>
           <Button color="inherit">Upload a file</Button>
           <Button color="inherit">Login</Button>
