@@ -1,9 +1,8 @@
 import React from 'react';
-import { AppBar, IconButton, Box, Button, Typography, Toolbar, makeStyles }
+import { AppBar, Box, Button, Typography, Toolbar, makeStyles }
   from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-
 import TextBox from './components/textBox'
+import CustomizedMenus from './components/menu/index';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,9 +26,10 @@ const App = () => {
     <Box className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
+          <CustomizedMenus/>
           <Typography variant="h6" className={classes.title}>
             Data Science Projects
           </Typography>
