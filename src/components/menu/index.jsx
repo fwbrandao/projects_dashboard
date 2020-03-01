@@ -9,9 +9,9 @@ import {
     makeStyles
 } from '@material-ui/core';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
 import MenuIcon from '@material-ui/icons/Menu';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
+import DescriptionIcon from '@material-ui/icons/Description';
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -82,13 +82,13 @@ export default function CustomizedMenus() {
             >
                 <StyledMenuItem>
                     <ListItemIcon>
-                        <SendIcon fontSize="small" />
+                        <FindInPageIcon fontSize="small" />
                     </ListItemIcon>
                     <ListItemText primary="Fake News Detector" />
                 </StyledMenuItem>
                 <StyledMenuItem>
                     <ListItemIcon>
-                        <DraftsIcon fontSize="small" />
+                        <DescriptionIcon fontSize="small" />
                     </ListItemIcon>
                     <ListItemText primary="Document Analysis NLP" />
                 </StyledMenuItem>
