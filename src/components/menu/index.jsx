@@ -12,6 +12,8 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MenuIcon from '@material-ui/icons/Menu';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import DescriptionIcon from '@material-ui/icons/Description';
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import FingerprintIcon from '@material-ui/icons/Fingerprint';
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -94,9 +96,15 @@ export default function CustomizedMenus() {
                 </StyledMenuItem>
                 <StyledMenuItem>
                     <ListItemIcon>
-                        <InboxIcon fontSize="small" />
+                        <InsertEmoticonIcon fontSize="small" />
                     </ListItemIcon>
-                    <ListItemText primary="Inbox" />
+                    <ListItemText primary="Face Recognition" />
+                </StyledMenuItem>
+                <StyledMenuItem>
+                    <ListItemIcon>
+                        <FingerprintIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="About" />
                 </StyledMenuItem>
             </StyledMenu>
         </div>
