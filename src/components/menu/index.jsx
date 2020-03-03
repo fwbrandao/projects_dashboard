@@ -8,7 +8,6 @@ import {
     IconButton,
     makeStyles
 } from '@material-ui/core';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MenuIcon from '@material-ui/icons/Menu';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import DescriptionIcon from '@material-ui/icons/Description';

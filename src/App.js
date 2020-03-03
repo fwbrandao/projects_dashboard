@@ -3,6 +3,7 @@ import { AppBar, Box, Button, Typography, Toolbar, makeStyles }
   from '@material-ui/core';
 import TextBox from './components/textBox'
 import CustomizedMenus from './components/menu/index';
+import AboutProject from './components/aboutProject';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,6 +40,7 @@ const App = () => {
       </AppBar>
       <Box mt={10} ml={10} mr={10}>
         <TextBox className={classes.textBox}/>
+        <AboutProject />
       </Box>
     </Box>
   );
