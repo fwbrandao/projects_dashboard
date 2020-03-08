@@ -39,8 +39,7 @@ const App = () => {
         </Toolbar>
       </AppBar>
       <Box mt={10} ml={10} mr={10}>
-        <TextBox className={classes.textBox}/>
-        <AboutProject />
+        <Typography variant="h2">Welcome to Data Science</Typography>
       </Box>
     </Box>
   );

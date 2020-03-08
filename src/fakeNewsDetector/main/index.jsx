@@ -6,6 +6,7 @@ const FakeNewsDetector = () => {
     return (
         <Box>
             <AboutProject />
+            <h1>Hoooray</h1>
         </Box>
     )
 }
