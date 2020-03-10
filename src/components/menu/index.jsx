@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import {
     withStyles,
     Menu,
@@ -81,30 +82,41 @@ export default function CustomizedMenus() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <StyledMenuItem>
-                    <ListItemIcon>
-                        <FindInPageIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Fake News Detector" />
-                </StyledMenuItem>
-                <StyledMenuItem>
-                    <ListItemIcon>
-                        <DescriptionIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Document Analysis NLP" />
-                </StyledMenuItem>
-                <StyledMenuItem>
-                    <ListItemIcon>
-                        <InsertEmoticonIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="Face Recognition" />
-                </StyledMenuItem>
-                <StyledMenuItem>
-                    <ListItemIcon>
-                        <FingerprintIcon fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText primary="About" />
-                </StyledMenuItem>
+                <Link to="/fakeNewsDetector">
+                    <StyledMenuItem>
+                        <ListItemIcon>
+                            <FindInPageIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary="Fake News Detector" />
+                    </StyledMenuItem>
+                </Link>
+
+                <Link to="/DocumentAnalysisNLP">
+                    <StyledMenuItem>
+                        <ListItemIcon>
+                            <DescriptionIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary="Document Analysis NLP" />
+                    </StyledMenuItem>
+                </Link>
+
+                <Link to="/FaceRecognition">
+                    <StyledMenuItem>
+                        <ListItemIcon>
+                            <InsertEmoticonIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary="Face Recognition" />
+                    </StyledMenuItem>
+                </Link>
+
+                <Link to="/About">
+                    <StyledMenuItem>
+                        <ListItemIcon>
+                            <FingerprintIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary="About" />
+                    </StyledMenuItem>
+                </Link>
             </StyledMenu>
         </div>
     );
