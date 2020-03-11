@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
+    link: {
+        textDecoration: 'none'
+    }
 }));
 
 const StyledMenu = withStyles({
@@ -82,7 +85,7 @@ export default function CustomizedMenus() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                <Link to="/fakeNewsDetector">
+                <Link to="/fakeNewsDetector" className={classes.link} >
                     <StyledMenuItem>
                         <ListItemIcon>
                             <FindInPageIcon fontSize="small" />
@@ -91,7 +94,7 @@ export default function CustomizedMenus() {
                     </StyledMenuItem>
                 </Link>
 
-                <Link to="/DocumentAnalysisNLP">
+                <Link to="/DocumentAnalysisNLP" className={classes.link}>
                     <StyledMenuItem>
                         <ListItemIcon>
                             <DescriptionIcon fontSize="small" />
@@ -100,7 +103,7 @@ export default function CustomizedMenus() {
                     </StyledMenuItem>
                 </Link>
 
-                <Link to="/FaceRecognition">
+                <Link to="/FaceRecognition" className={classes.link}>
                     <StyledMenuItem>
                         <ListItemIcon>
                             <InsertEmoticonIcon fontSize="small" />
@@ -109,7 +112,7 @@ export default function CustomizedMenus() {
                     </StyledMenuItem>
                 </Link>
 
-                <Link to="/">
+                <Link to="/" className={classes.link}>
                     <StyledMenuItem>
                         <ListItemIcon>
                             <FingerprintIcon fontSize="small" />
