@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import './index.css';
 
 import App from './App';
-import FakeNewsDetector from './fakeNewsDetector/main/index';
+import FakeNewsDetector from './projects/fakeNewsDetector/main/index';
 
 ReactDOM.render(
     <Router>
