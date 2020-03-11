@@ -13,7 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import DescriptionIcon from '@material-ui/icons/Description';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
-import FingerprintIcon from '@material-ui/icons/Fingerprint';
+import HomeIcon from '@material-ui/icons/Home';
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -115,7 +115,7 @@ export default function CustomizedMenus() {
                 <Link to="/" className={classes.link}>
                     <StyledMenuItem>
                         <ListItemIcon>
-                            <FingerprintIcon fontSize="small" />
+                            <HomeIcon fontSize="small" />
                         </ListItemIcon>
                         <ListItemText primary="Home" />
                     </StyledMenuItem>

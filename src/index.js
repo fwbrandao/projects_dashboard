@@ -5,14 +5,16 @@ import './index.css';
 
 import App from './App';
 import FakeNewsDetector from './projects/fakeNewsDetector/main/index';
+import DocumentAnalysisNLP from './projects/documentAnalysisNLP/main/index';
+import FaceRecognition from './projects/faceRecognition/main/index';
 
 ReactDOM.render(
     <Router>
         <Route path="/" exact component={App} />
         {/* <Route path="/About" component={About} /> */}
         <Route path="/fakeNewsDetector" component={FakeNewsDetector} />
-        {/* <Route path="/DocumentAnalysisNLP" component={DocumentAnalysisNLP} />
-        <Route path="/FaceRecognition" component={FaceRecognition} /> */}
+        <Route path="/DocumentAnalysisNLP" component={DocumentAnalysisNLP} />
+        <Route path="/FaceRecognition" component={FaceRecognition} />
     </Router>
 , document.getElementById('root'));
 
