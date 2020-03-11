@@ -109,12 +109,12 @@ export default function CustomizedMenus() {
                     </StyledMenuItem>
                 </Link>
 
-                <Link to="/About">
+                <Link to="/">
                     <StyledMenuItem>
                         <ListItemIcon>
                             <FingerprintIcon fontSize="small" />
                         </ListItemIcon>
-                        <ListItemText primary="About" />
+                        <ListItemText primary="Home" />
                     </StyledMenuItem>
                 </Link>
             </StyledMenu>

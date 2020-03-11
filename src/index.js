@@ -8,7 +8,7 @@ import FakeNewsDetector from './projects/fakeNewsDetector/main/index';
 
 ReactDOM.render(
     <Router>
-        <Route exact path="/" component={App} />
+        <Route path="/" exact component={App} />
         {/* <Route path="/About" component={About} /> */}
         <Route path="/fakeNewsDetector" component={FakeNewsDetector} />
         {/* <Route path="/DocumentAnalysisNLP" component={DocumentAnalysisNLP} />

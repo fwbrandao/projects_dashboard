@@ -26,9 +26,6 @@ const NavBar = () => {
     <Box className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton> */}
           <CustomizedMenus/>
           <Typography variant="h6" className={classes.title}>
             Data Science Projects
@@ -37,9 +34,9 @@ const NavBar = () => {
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
-      <Box mt={10} ml={10} mr={10}>
+      {/* <Box mt={10} ml={10} mr={10}>
         <Typography variant="h2">Welcome to Data Science</Typography>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

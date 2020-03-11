@@ -4,6 +4,7 @@ import { AppBar, Box, Button, Typography, Toolbar, makeStyles }
 import TextBox from './components/textBox'
 import CustomizedMenus from './components/menu/index';
 import AboutProject from './components/aboutProject';
+import NavBar from './components/navBar/index';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,19 +26,7 @@ const App = () => {
   const classes = useStyles();
   return (
     <Box className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton> */}
-          <CustomizedMenus/>
-          <Typography variant="h6" className={classes.title}>
-            Data Science Projects
-          </Typography>
-          <Button color="inherit">Upload a file</Button>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
+      <NavBar />
       <Box mt={10} ml={10} mr={10}>
         <Typography variant="h2">Welcome to Data Science</Typography>
       </Box>
