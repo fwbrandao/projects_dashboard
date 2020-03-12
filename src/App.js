@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    flexGrow: 1,
+    display: "flex",
+    justifyContent: "center"
   },
   textBox: {
     display: 'flex',
@@ -28,7 +29,7 @@ const App = () => {
     <Box className={classes.root}>
       <NavBar />
       <Box mt={10} ml={10} mr={10}>
-        <Typography variant="h2">Welcome to Data Science</Typography>
+        <Typography variant="h2" className={classes.title}>Welcome to Data Science</Typography>
       </Box>
     </Box>
   );

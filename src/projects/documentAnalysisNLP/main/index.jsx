@@ -9,6 +9,8 @@ const DocumentAnalysisNLP = () => {
             <NavBar />
             <AboutProject
                 title="Document Analysis NLP"
+                description="This is the description of this project"
+                gitHubLink=""
             />
         </Box>
     )
