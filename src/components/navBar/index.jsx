@@ -1,8 +1,9 @@
 import React from 'react';
-import { AppBar, Box, Button, Typography, Toolbar, makeStyles }
+import { AppBar, Box, Button, Typography, Toolbar, makeStyles, Tooltip, Link, IconButton }
   from '@material-ui/core';
 import CustomizedMenus from '../menu/index';
-import TextBox from '../textBox/index';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,17 +27,27 @@ const NavBar = () => {
     <Box className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <CustomizedMenus/>
+          <CustomizedMenus />
           <Typography variant="h6" className={classes.title}>
             Data Science Projects
           </Typography>
-          <Button color="inherit">Upload a file</Button>
-          <Button color="inherit">Login</Button>
+          <Tooltip title="Navigate to my github" aria-label="code">
+            <Link href="https://github.com/fwbrandao" target="_blank">
+              <IconButton aria-label="github" >
+                <GitHubIcon />
+              </IconButton>
+            </Link>
+          </Tooltip>
+          <Tooltip title="Navigate to my LinkedIn" aria-label="code">
+            <Link href="https://www.linkedin.com/in/fernando-brandao-170060151/" target="_blank">
+              <IconButton aria-label="LinkedIn" >
+                <LinkedInIcon color="action"/>
+              </IconButton>
+            </Link>
+          </Tooltip>
+          {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
       </AppBar>
-      {/* <Box mt={10} ml={10} mr={10}>
-        <Typography variant="h2">Welcome to Data Science</Typography>
-      </Box> */}
     </Box>
   );
 }

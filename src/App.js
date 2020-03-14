@@ -1,9 +1,8 @@
 import React from 'react';
-import { Box, Typography, makeStyles, Tooltip, Link, IconButton }
+import { Box, Typography, makeStyles }
   from '@material-ui/core';
 import NavBar from './components/navBar/index';
 import BGImage from './images/arif-wahid-y3FkHW1cyBE-unsplash.png';
-import GitHubIcon from '@material-ui/icons/GitHub';
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,15 +37,6 @@ const App = () => {
       <NavBar />
       <Box className={classes.root}>
         <Typography variant="h2" className={classes.title}>Welcome to Data Science</Typography>
-        <Box>
-          <Tooltip title="Navigate to my githug" aria-label="code">
-            <Link href="https://github.com/fwbrandao" target="_blank">
-              <IconButton aria-label="github" >
-                <GitHubIcon color="action" fontSize="large" />
-              </IconButton>
-            </Link>
-          </Tooltip>
-        </Box>
       </Box>
     </Box>
   );
