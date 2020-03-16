@@ -10,7 +10,7 @@ const TextBox = () => {
     return (
         <Box>
             <FormControl fullWidth className={classes.margin} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-amount">Text</InputLabel>
+                <InputLabel htmlFor="outlined-adornment-amount">Text Box</InputLabel>
                 <OutlinedInput
                     id="outlined-adornment-amount"
                     // value={values.amount}
