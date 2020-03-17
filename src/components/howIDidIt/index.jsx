@@ -17,11 +17,12 @@ const useStyles = makeStyles({
     maxWidth: '80%',
     margin: '10px auto',
     paddingTop: '20px',
+
   },
   title: {
     fontSize: 18,
     display: "flex",
-    justifyContent: "center"
+    // justifyContent: "center"
   },
   description: {
     fontSize: 15,

@@ -11,12 +11,15 @@ import {
 }
   from '@material-ui/core';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import grey from '@material-ui/core/colors/grey';
+
 
 const useStyles = makeStyles({
   root: {
     maxWidth: '80%',
     margin: '10px auto',
     paddingTop: '20px',
+    backgroundColor: grey[100]
   },
   title: {
     fontSize: 18,
