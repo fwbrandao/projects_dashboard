@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   }
 });
 
-const AboutProject = ({ title, description, gitHubLink }) => {
+const HowIDidIt = ({ title, description, gitHubLink }) => {
   const classes = useStyles();
 
   return (
@@ -66,4 +66,4 @@ const AboutProject = ({ title, description, gitHubLink }) => {
   );
 }
 
-export default AboutProject;
+export default HowIDidIt;

@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { Box, Button } from '@material-ui/core';
+import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import NavBar from '../../../components/navBar/index';
 import AboutProject from '../../../components/aboutProject/index';
 import TextBox from '../../../components/textBox/index';
 import ControlledExpansionPanels from '../../../components/infoExpansionPanel/index';
+import HowIDidIt from '../../../components/howIDidIt';
+
+const useStyles = makeStyles({
+});
 
 const FakeNewsDetector = () => {
+    const classes = useStyles();
     const [toggled, setToggled] = useState(false);
 
     const handleToggle = () => setToggled(!toggled)
@@ -22,12 +27,16 @@ const FakeNewsDetector = () => {
                 gitHubLink="https://github.com/fwbrandao/Fake_news_detector"
             />
             <Box mt={2} ml={18} mr={18}>
-                <Button
-                    onClick={handleToggle}
-                    variant="contained" color="primary"
-                >
-                    {!toggled ? 'Project info' : 'Close info'}
-                </Button>
+                <Box mb={2}>
+                    <Button
+                        size="small"
+                        onClick={handleToggle}
+                        variant="contained"
+                        color="primary"
+                    >
+                        {!toggled ? 'Project info' : 'Close info'}
+                    </Button>
+                </Box>
                 {toggled ? <ControlledExpansionPanels
                     firstHeader='What is a PassiveAggressiveClassifier?'
                     firstText='Passive Aggressive algorithms are online learning algorithms.
@@ -51,10 +60,29 @@ const FakeNewsDetector = () => {
                 Such news items may contain false and/or exaggerated claims, and may end up being viralized by algorithms,
                 and users may end up in a filter bubble.'
                 /> : null}
+
+                <Box mt={4}>
+                    <Typography
+                        variant="body1"
+                        color="textSecondary"
+                        component="p"
+                    >Try youself by adding any news in the text box then press submit.</Typography>
+                </Box>
                 <Box mt={4} >
                     <TextBox />
-                    <Button>Submit</Button>
+                    <Box mt={2}>
+                        <Button
+                            size="small"
+                            variant="contained"
+                            color="primary"
+                        >
+                            Submit
+                    </Button>
+                    </Box>
                 </Box>
+            </Box>
+            <Box>
+                <HowIDidIt />
             </Box>
         </Box>
     )
