@@ -6,15 +6,26 @@ import TextBox from '../../../components/textBox/index';
 import ControlledExpansionPanels from '../../../components/infoExpansionPanel/index';
 import HowIDidIt from '../../../components/howIDidIt';
 import Steppers from '../../../components/stepper';
+import grey from '@material-ui/core/colors/grey';
 
 const useStyles = makeStyles({
+    howIDidIt: {
+        backgroundColor: grey[100]
+    },
+    trainingModel: {
+        fontSize: 18,
+        display: "flex",
+        justifyContent: "center"
+    }
 });
 
 const FakeNewsDetector = () => {
     const classes = useStyles();
-    const [toggled, setToggled] = useState(false);
+    const [toggledInfo, setToggledInfo] = useState(false);
+    const [toggledSubimit, setToggledSubmit] = useState(false);
 
-    const handleToggle = () => setToggled(!toggled)
+    const handleToggleInfo = () => setToggledInfo(!toggledInfo);
+    const handleToggleSubmit = () => setToggledSubmit(!toggledSubimit);
 
     const link = <Link
         href="https://drive.google.com/file/d/1er9NJTLUA3qnRuyhfzuN0XUsoIC4a-_q/view"
@@ -38,14 +49,14 @@ const FakeNewsDetector = () => {
                 <Box mb={2}>
                     <Button
                         size="small"
-                        onClick={handleToggle}
+                        onClick={handleToggleInfo}
                         variant="contained"
                         color="primary"
                     >
-                        {!toggled ? 'Project info' : 'Close info'}
+                        {!toggledInfo ? 'Project info' : 'Close info'}
                     </Button>
                 </Box>
-                {toggled ? <ControlledExpansionPanels
+                {toggledInfo ? <ControlledExpansionPanels
                     firstHeader='What is a PassiveAggressiveClassifier?'
                     firstText='Passive Aggressive algorithms are online learning algorithms.
                 Such an algorithm remains passive for a correct classification outcome,
@@ -83,18 +94,27 @@ const FakeNewsDetector = () => {
                             size="small"
                             variant="contained"
                             color="primary"
+                            onClick={handleToggleSubmit}
                         >
                             Submit
                     </Button>
                     </Box>
                 </Box>
                 <Box>
-                    <Steppers />
+                    {toggledSubimit ? <Steppers /> : null}
                 </Box>
             </Box>
-            <Box>
+            <Box pt={2} className={classes.howIDidIt}>
+                <Typography
+                    variant="h5"
+                    color="colorPrimary"
+                    gutterBottom
+                    className={classes.trainingModel}
+                >
+                    Training the model
+                </Typography>
                 <HowIDidIt
-                    title="Training the model"
+                    title="The data"
                     description="The dataset we’ll use for this python project- we’ll call it news.csv.
                     This dataset has a shape of 7796×4. The first column identifies the news,
                     the second and third are the title and text,
@@ -105,7 +125,7 @@ const FakeNewsDetector = () => {
                 <HowIDidIt
                     title="Prerequisites"
                     description="You’ll need to install the following libraries with pip and install Jupyter Lab to run your code"
-                    link={link}
+                    description2="pip install numpy pandas sklearn & pip install jupyter lab"
                 />
             </Box>
         </Box>

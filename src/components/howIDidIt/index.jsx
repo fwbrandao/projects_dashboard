@@ -7,6 +7,7 @@ import {
 }
   from '@material-ui/core';
 
+
 const useStyles = makeStyles({
   root: {
     maxWidth: '80%',
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
   }
 });
 
-const HowIDidIt = ({ title, description, link }) => {
+const HowIDidIt = ({ title, description, description2, link }) => {
   const classes = useStyles();
 
   return (
@@ -44,6 +45,14 @@ const HowIDidIt = ({ title, description, link }) => {
           component="p"
         >
           {description}
+        </Typography>
+        <Typography
+          className={classes.description}
+          variant="body2"
+          color="textSecondary"
+          component="p"
+        >
+          {description2}
         </Typography>
         <Typography>{link}</Typography>
       </CardContent>
