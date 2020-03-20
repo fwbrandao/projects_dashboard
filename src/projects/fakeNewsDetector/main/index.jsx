@@ -5,6 +5,7 @@ import AboutProject from '../../../components/aboutProject/index';
 import TextBox from '../../../components/textBox/index';
 import ControlledExpansionPanels from '../../../components/infoExpansionPanel/index';
 import HowIDidIt from '../../../components/howIDidIt';
+import Steppers from '../../../components/stepper';
 
 const useStyles = makeStyles({
 });
@@ -33,7 +34,7 @@ const FakeNewsDetector = () => {
                 the accuracy score and the confusion matrix tell us how well our model fares."
                 gitHubLink="https://github.com/fwbrandao/Fake_news_detector"
             />
-            <Box mt={2} ml={18} mr={18}>
+            <Box mt={2} ml={18} mr={18} mb={2}>
                 <Box mb={2}>
                     <Button
                         size="small"
@@ -68,14 +69,14 @@ const FakeNewsDetector = () => {
                 and users may end up in a filter bubble.'
                 /> : null}
 
-                <Box mt={4}>
+                <Box mt={2}>
                     <Typography
                         variant="body1"
                         color="textSecondary"
                         component="p"
                     >Try youself by adding any news in the text box then press submit.</Typography>
                 </Box>
-                <Box mt={4} >
+                <Box mt={2} >
                     <TextBox />
                     <Box mt={2}>
                         <Button
@@ -87,6 +88,9 @@ const FakeNewsDetector = () => {
                     </Button>
                     </Box>
                 </Box>
+                <Box>
+                    <Steppers />
+                </Box>
             </Box>
             <Box>
                 <HowIDidIt
@@ -96,6 +100,11 @@ const FakeNewsDetector = () => {
                     the second and third are the title and text,
                     and the fourth column has labels denoting whether the news is REAL or FAKE.
                     The dataset takes up 29.2MB of space and you can find in the link bellow."
+                    link={link}
+                />
+                <HowIDidIt
+                    title="Prerequisites"
+                    description="You’ll need to install the following libraries with pip and install Jupyter Lab to run your code"
                     link={link}
                 />
             </Box>

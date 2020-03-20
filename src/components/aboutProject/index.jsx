@@ -18,7 +18,6 @@ const useStyles = makeStyles({
   root: {
     maxWidth: '55%',
     margin: '5px auto',
-    paddingTop: '20px',
     backgroundColor: grey[100]
   },
   title: {
@@ -56,11 +55,11 @@ const AboutProject = ({ title, description, gitHubLink }) => {
           {description}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing ml={20}>
+      <CardActions  ml={20} p={0}>
         <Tooltip title="Navigate to see the code" aria-label="code">
           <Link href={gitHubLink} target="_blank">
             <IconButton aria-label="github" color='primary'>
-              <GitHubIcon color='action' />
+              <GitHubIcon color='action' fontSize='small'/>
             </IconButton>
           </Link>
         </Tooltip>

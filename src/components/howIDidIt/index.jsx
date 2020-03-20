@@ -11,7 +11,6 @@ const useStyles = makeStyles({
   root: {
     maxWidth: '80%',
     margin: '10px auto',
-    paddingTop: '20px',
     display: "flex"
   },
   title: {
