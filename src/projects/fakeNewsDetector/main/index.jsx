@@ -12,16 +12,14 @@ const useStyles = makeStyles({
 const FakeNewsDetector = () => {
     const classes = useStyles();
     const [toggled, setToggled] = useState(false);
-    const preventDefault = event => event.preventDefault();
 
     const handleToggle = () => setToggled(!toggled)
 
     const link = <Link
         href="https://drive.google.com/file/d/1er9NJTLUA3qnRuyhfzuN0XUsoIC4a-_q/view"
         target="_blank"
-        onClick={preventDefault}
     >
-        download it here
+        download the data here
     </Link>
 
     return (
@@ -93,11 +91,12 @@ const FakeNewsDetector = () => {
             <Box>
                 <HowIDidIt
                     title="Training the model"
-                    description={`The dataset we’ll use for this python project- we’ll call it news.csv.
+                    description="The dataset we’ll use for this python project- we’ll call it news.csv.
                     This dataset has a shape of 7796×4. The first column identifies the news,
                     the second and third are the title and text,
                     and the fourth column has labels denoting whether the news is REAL or FAKE.
-                    The dataset takes up 29.2MB of space and you can ${link}.`}
+                    The dataset takes up 29.2MB of space and you can find in the link bellow."
+                    link={link}
                 />
             </Box>
         </Box>

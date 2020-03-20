@@ -3,36 +3,29 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   Card,
   CardContent,
-  CardActions,
-  IconButton,
-  Link,
-  Tooltip,
   Typography
 }
   from '@material-ui/core';
-import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles({
   root: {
     maxWidth: '80%',
     margin: '10px auto',
     paddingTop: '20px',
-
+    display: "flex"
   },
   title: {
     fontSize: 18,
     display: "flex",
-    // justifyContent: "center"
   },
   description: {
     fontSize: 15,
     display: "flex",
     justifyContent: "center",
-    margin: '15px 20px 0px 20px',
   }
 });
 
-const HowIDidIt = ({ title, description, gitHubLink }) => {
+const HowIDidIt = ({ title, description, link }) => {
   const classes = useStyles();
 
   return (
@@ -53,16 +46,8 @@ const HowIDidIt = ({ title, description, gitHubLink }) => {
         >
           {description}
         </Typography>
+        <Typography>{link}</Typography>
       </CardContent>
-      <CardActions disableSpacing ml={20}>
-        <Tooltip title="Navigate to see the code" aria-label="code">
-          <Link href={gitHubLink} target="_blank">
-            <IconButton aria-label="github" color='primary'>
-              <GitHubIcon color='action' />
-            </IconButton>
-          </Link>
-        </Tooltip>
-      </CardActions>
     </Card>
   );
 }

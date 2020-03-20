@@ -16,8 +16,8 @@ import grey from '@material-ui/core/colors/grey';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: '80%',
-    margin: '10px auto',
+    maxWidth: '55%',
+    margin: '5px auto',
     paddingTop: '20px',
     backgroundColor: grey[100]
   },
