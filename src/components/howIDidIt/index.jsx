@@ -22,10 +22,11 @@ const useStyles = makeStyles({
     fontSize: 15,
     display: "flex",
     justifyContent: "center",
+    marginBottom: '5px'
   }
 });
 
-const HowIDidIt = ({ title, description, description2, link }) => {
+const HowIDidIt = ({ title, description, code, code2, code3, code4, code5, code6, code7, link }) => {
   const classes = useStyles();
 
   return (
@@ -47,12 +48,60 @@ const HowIDidIt = ({ title, description, description2, link }) => {
           {description}
         </Typography>
         <Typography
-          className={classes.description}
-          variant="body2"
-          color="textSecondary"
-          component="p"
+          color="error"
+          variant="caption"
+          display="block"
+          gutterBottom
         >
-          {description2}
+          {code}
+        </Typography>
+        <Typography
+          color="error"
+          variant="caption"
+          display="block"
+          gutterBottom
+        >
+          {code2}
+        </Typography>
+        <Typography
+          color="error"
+          variant="caption"
+          display="block"
+          gutterBottom
+        >
+          {code3}
+        </Typography>
+        <Typography
+          color="error"
+          variant="caption"
+          display="block"
+          gutterBottom
+        >
+          {code4}
+        </Typography>
+        <Typography
+          color="error"
+          variant="caption"
+          display="block"
+          gutterBottom
+        >
+          {code5}
+        </Typography>
+        <Typography
+          color="error"
+          variant="caption"
+          display="block"
+          gutterBottom
+        >
+          {code6}
+        </Typography>
+        <Typography
+          color="error"
+          variant="caption"
+          display="block"
+          gutterBottom
+        >
+          {code7}
         </Typography>
         <Typography>{link}</Typography>
       </CardContent>

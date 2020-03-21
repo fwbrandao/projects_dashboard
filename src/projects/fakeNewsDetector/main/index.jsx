@@ -7,6 +7,8 @@ import ControlledExpansionPanels from '../../../components/infoExpansionPanel/in
 import HowIDidIt from '../../../components/howIDidIt';
 import Steppers from '../../../components/stepper';
 import grey from '@material-ui/core/colors/grey';
+import CodeScreenshot from '../../../components/codeScreenshot';
+
 
 const useStyles = makeStyles({
     howIDidIt: {
@@ -125,8 +127,27 @@ const FakeNewsDetector = () => {
                 <HowIDidIt
                     title="Prerequisites"
                     description="You’ll need to install the following libraries with pip and install Jupyter Lab to run your code"
-                    description2="pip install numpy pandas sklearn & pip install jupyter lab"
+                    code="pip install numpy pandas sklearn "
+                    code2="pip install jupyter lab"
                 />
+                <HowIDidIt
+                    title="Make necessary imports:"
+                    code="import numpy as np"
+                    code2="import pandas as pd"
+                    code3="import itertools"
+                    code4="from sklearn.model_selection import train_test_split"
+                    code5="from sklearn.feature_extraction.text import TfidfVectorizer"
+                    code6="from sklearn.linear_model import PassiveAggressiveClassifier"
+                    code7="from sklearn.metrics import accuracy_score, confusion_matrix"
+                />
+                <HowIDidIt
+                    title="Read the data into a DataFrame"
+                    description="Read the data"
+                    code="df=pd.read_csv('./data/news.csv')"
+                    code2="df.shape"
+                    code3="df.head()"
+                />
+                <CodeScreenshot />
             </Box>
         </Box>
     )
