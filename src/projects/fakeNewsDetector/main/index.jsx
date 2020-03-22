@@ -8,7 +8,9 @@ import HowIDidIt from '../../../components/howIDidIt';
 import Steppers from '../../../components/stepper';
 import grey from '@material-ui/core/colors/grey';
 import CodeScreenshot from '../../../components/codeScreenshot';
-
+import Fake_print_head from '../../../images/fake_print_head.jpg';
+import Label from '../../../images/label.jpg';
+import Accuracy from '../../../images/accuracy.jpg'
 
 const useStyles = makeStyles({
     howIDidIt: {
@@ -142,12 +144,57 @@ const FakeNewsDetector = () => {
                 />
                 <HowIDidIt
                     title="Read the data into a DataFrame"
-                    description="Read the data"
                     code="df=pd.read_csv('./data/news.csv')"
                     code2="df.shape"
                     code3="df.head()"
                 />
-                <CodeScreenshot />
+                <CodeScreenshot
+                    image={Fake_print_head}
+                />
+                <HowIDidIt
+                    title="Get the labels from the DataFrame"
+                    code="labels=df.label"
+                    code2="labels.head()"
+                />
+                <CodeScreenshot
+                    image={Label}
+                />
+                <HowIDidIt
+                    title="Split the dataset into training and testing sets."
+                    code="x_train,x_test,y_train,y_test=train_test_split(df['text'], labels, test_size=0.2, random_state=7)"
+                />
+                <HowIDidIt
+                    title="Let’s initialize a TfidfVectorizer with stop words from the English language
+                     and a maximum document frequency of 0.7 (terms with a higher document frequency will be discarded).
+                      Stop words are the most common words in a language that are to be filtered out before processing the natural language data.
+                      And a TfidfVectorizer turns a collection of raw documents into a matrix of TF-IDF features."
+                />
+                <HowIDidIt
+                    title="Now, fit and transform the vectorizer on the train set, and transform the vectorizer on the test set"
+                    code="tfidf_vectorizer=TfidfVectorizer(stop_words='english', max_df=0.7)"
+                    code2="tfidf_train=tfidf_vectorizer.fit_transform(x_train)"
+                    code3="tfidf_test=tfidf_vectorizer.transform(x_test)"
+                />
+                <HowIDidIt
+                    title="Next, we’ll initialize a PassiveAggressiveClassifier. We’ll fit this on tfidf_train and y_train.
+                    Then, we’ll predict on the test set from the TfidfVectorizer
+                    and calculate the accuracy with accuracy_score() from sklearn.metrics."
+                    code="pac=PassiveAggressiveClassifier(max_iter=50)"
+                    code2="pac.fit(tfidf_train,y_train)"
+                    code3="y_pred=pac.predict(tfidf_test)"
+                    code4="score=accuracy_score(y_test,y_pred)"
+                    code5="print(f'Accuracy: {round(score*100,2)}%')"
+                />
+                <HowIDidIt
+                    title="We got an accuracy of 92.82% with this model.
+                    Finally, let’s print out a confusion matrix to gain insight into the number of
+                    false and true negatives and positives."
+                    code="confusion_matrix(y_test,y_pred, labels=['FAKE','REAL'])"
+                />
+                <CodeScreenshot
+                m={10}
+                    image={Accuracy}
+                />
             </Box>
         </Box>
     )
