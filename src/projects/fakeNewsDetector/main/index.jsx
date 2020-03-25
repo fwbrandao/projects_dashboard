@@ -174,7 +174,7 @@ const FakeNewsDetector = () => {
                     code5="print(f'Accuracy: {round(score*100,2)}%')"
                 />
                 <HowIDidIt
-                    title="We got an accuracy of 92.82% with this model.
+                    title="We got an accuracy of 92.74% with this model.
                     Finally, let’s print out a confusion matrix to gain insight into the number of
                     false and true negatives and positives."
                     code="confusion_matrix(y_test,y_pred, labels=['FAKE','REAL'])"

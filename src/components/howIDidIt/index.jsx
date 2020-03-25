@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     marginBottom: '5px'
-  }
+  },
 });
 
 const HowIDidIt = ({ title, description, code, code2, code3, code4, code5, code6, code7, link }) => {
@@ -48,56 +48,49 @@ const HowIDidIt = ({ title, description, code, code2, code3, code4, code5, code6
           {description}
         </Typography>
         <Typography
-          color="error"
-          variant="caption"
+          color="primary"
           display="block"
           gutterBottom
         >
           {code}
         </Typography>
         <Typography
-          color="error"
-          variant="caption"
+          color="primary"
           display="block"
           gutterBottom
         >
           {code2}
         </Typography>
         <Typography
-          color="error"
-          variant="caption"
+          color="primary"
           display="block"
           gutterBottom
         >
           {code3}
         </Typography>
         <Typography
-          color="error"
-          variant="caption"
+          color="primary"
           display="block"
           gutterBottom
         >
           {code4}
         </Typography>
         <Typography
-          color="error"
-          variant="caption"
+          color="primary"
           display="block"
           gutterBottom
         >
           {code5}
         </Typography>
         <Typography
-          color="error"
-          variant="caption"
+          color="primary"
           display="block"
           gutterBottom
         >
           {code6}
         </Typography>
         <Typography
-          color="error"
-          variant="caption"
+          color="primary"
           display="block"
           gutterBottom
         >
