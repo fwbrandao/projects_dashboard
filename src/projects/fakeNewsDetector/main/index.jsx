@@ -26,10 +26,10 @@ const useStyles = makeStyles({
 const FakeNewsDetector = () => {
     const classes = useStyles();
     const [toggledInfo, setToggledInfo] = useState(false);
-    const [toggledSubimit, setToggledSubmit] = useState(false);
+    // const [toggledSubimit, setToggledSubmit] = useState(false);
 
     const handleToggleInfo = () => setToggledInfo(!toggledInfo);
-    const handleToggleSubmit = () => setToggledSubmit(!toggledSubimit);
+    // const handleToggleSubmit = () => setToggledSubmit(!toggledSubimit);
 
     const link = <Link
         href="https://drive.google.com/file/d/1er9NJTLUA3qnRuyhfzuN0XUsoIC4a-_q/view"
@@ -84,28 +84,16 @@ const FakeNewsDetector = () => {
                 and users may end up in a filter bubble.'
                 /> : null}
 
-                <Box mt={2}>
+                <Box mt={6}>
                     <Typography
                         variant="body1"
                         color="textSecondary"
                         component="p"
-                    >Try youself by adding any news in the text box then press submit.</Typography>
+                    >Try youself by adding any news in the text box then press next.</Typography>
                 </Box>
-                <Box mt={2} >
+                <Box mt={2}>
                     <TextBox />
-                    <Box mt={2}>
-                        <Button
-                            size="small"
-                            variant="contained"
-                            color="primary"
-                            onClick={handleToggleSubmit}
-                        >
-                            Submit
-                    </Button>
-                    </Box>
-                </Box>
-                <Box>
-                    {toggledSubimit ? <Steppers /> : null}
+                    <Steppers />
                 </Box>
             </Box>
             <Box pt={2} className={classes.howIDidIt}>

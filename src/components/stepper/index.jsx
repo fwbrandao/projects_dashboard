@@ -1,40 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
+import { makeStyles, withStyles, Stepper, Step, StepLabel, StepConnector, Button, Typography} from '@material-ui/core';
 import Check from '@material-ui/icons/Check';
-import SettingsIcon from '@material-ui/icons/Settings';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
-import StepConnector from '@material-ui/core/StepConnector';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-
-const QontoConnector = withStyles({
-  alternativeLabel: {
-    top: 10,
-    left: 'calc(-50% + 16px)',
-    right: 'calc(50% + 16px)',
-  },
-  active: {
-    '& $line': {
-      borderColor: '#784af4',
-    },
-  },
-  completed: {
-    '& $line': {
-      borderColor: '#784af4',
-    },
-  },
-  line: {
-    borderColor: '#eaeaf0',
-    borderTopWidth: 3,
-    borderRadius: 1,
-  },
-})(StepConnector);
+import PostAddIcon from '@material-ui/icons/PostAdd';
+import ImageSearchIcon from '@material-ui/icons/ImageSearch';
+import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 
 const useQontoStepIconStyles = makeStyles({
   root: {
@@ -131,9 +102,9 @@ function ColorlibStepIcon(props) {
   const { active, completed } = props;
 
   const icons = {
-    1: <SettingsIcon />,
-    2: <GroupAddIcon />,
-    3: <VideoLabelIcon />,
+    1: <PostAddIcon />,
+    2: <ImageSearchIcon />,
+    3: <ThumbsUpDownIcon />,
   };
 
   return (
@@ -168,17 +139,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['Add any News in the text box above', 'Run into the pipeline', 'Generate Results'];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return 'Select campaign settings...';
+      return '';
     case 1:
-      return 'What is an ad group anyways?';
+      return '';
     case 2:
-      return 'This is the bit I really care about!';
+      return '';
     default:
       return 'Unknown step';
   }
@@ -186,7 +157,7 @@ function getStepContent(step) {
 
 export default function Steppers() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(1);
+  const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
   const handleNext = () => {
@@ -213,9 +184,6 @@ export default function Steppers() {
       <div>
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
-            </Typography>
             <Button onClick={handleReset} className={classes.button}>
               Reset
             </Button>
@@ -233,7 +201,7 @@ export default function Steppers() {
                 onClick={handleNext}
                 className={classes.button}
               >
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                {activeStep === steps.length - 1 ? 'Get Results' : 'Next'}
               </Button>
             </div>
           </div>
