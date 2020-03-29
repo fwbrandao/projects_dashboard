@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     fontSize: 15,
     display: "flex",
     justifyContent: "center",
-    marginBottom: '5px'
+    marginBottom: '15px'
   },
 });
 
