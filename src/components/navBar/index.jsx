@@ -39,7 +39,7 @@ const NavBar = () => {
             </Link>
           </Tooltip>
           <Tooltip title="Navigate to my LinkedIn" aria-label="code">
-            <Link href="https://www.linkedin.com/in/fernando-brandao-170060151/" target="_blank">
+            <Link href="https://www.linkedin.com/in/fernando-b-170060151/" target="_blank">
               <IconButton aria-label="LinkedIn" >
                 <LinkedInIcon color="action"/>
               </IconButton>
