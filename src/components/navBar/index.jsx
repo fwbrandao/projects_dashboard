@@ -1,6 +1,7 @@
-import React from 'react';
-import { AppBar, Box, Button, Typography, Toolbar, makeStyles, Tooltip, Link, IconButton }
-  from '@material-ui/core';
+import React, { useState } from 'react';
+import {
+  AppBar, Button, Box, Avatar, Typography, Toolbar, makeStyles, Tooltip, Link, IconButton
+} from '@material-ui/core';
 import CustomizedMenus from '../menu/index';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
@@ -18,11 +19,25 @@ const useStyles = makeStyles(theme => ({
   textBox: {
     display: 'flex',
     alignItems: 'center'
-  }
+  },
+  avatar: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
 }));
 
 const NavBar = () => {
   const classes = useStyles();
+
+  const [open, setOpen] = useState(false);
+
+  const handleAvatarClick = () => {
+    setOpen(open => !open);
+  }
+
+  console.log(open);
   return (
     <Box className={classes.root}>
       <AppBar position="static">
@@ -31,6 +46,9 @@ const NavBar = () => {
           <Typography variant="h6" className={classes.title}>
             Data Science Projects
           </Typography>
+          <Button className={classes.avatar} onClick={handleAvatarClick}>
+            <Avatar alt="Fernando Brandao" src="./images/fwbAvatar.jpg" />
+          </Button>
           <Tooltip title="Navigate to my github" aria-label="code">
             <Link href="https://github.com/fwbrandao" target="_blank">
               <IconButton aria-label="github" >
@@ -45,7 +63,6 @@ const NavBar = () => {
               </IconButton>
             </Link>
           </Tooltip>
-          {/* <Button color="inherit">Login</Button> */}
         </Toolbar>
       </AppBar>
     </Box>

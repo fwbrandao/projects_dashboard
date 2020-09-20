@@ -85,6 +85,15 @@ export default function CustomizedMenus() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
+                <Link to="/" className={classes.link}>
+                    <StyledMenuItem>
+                        <ListItemIcon>
+                            <HomeIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary="Home" />
+                    </StyledMenuItem>
+                </Link>
+                
                 <Link to="/fakeNewsDetector" className={classes.link} >
                     <StyledMenuItem>
                         <ListItemIcon>
@@ -109,15 +118,6 @@ export default function CustomizedMenus() {
                             <InsertEmoticonIcon fontSize="small" />
                         </ListItemIcon>
                         <ListItemText primary="Face Recognition" />
-                    </StyledMenuItem>
-                </Link>
-
-                <Link to="/" className={classes.link}>
-                    <StyledMenuItem>
-                        <ListItemIcon>
-                            <HomeIcon fontSize="small" />
-                        </ListItemIcon>
-                        <ListItemText primary="Home" />
                     </StyledMenuItem>
                 </Link>
             </StyledMenu>
