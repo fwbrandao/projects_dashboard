@@ -5,6 +5,7 @@ import {
 import CustomizedMenus from '../menu/index';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import AvatarImg from '../../images/fwbAvatar.jpg';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,7 +48,7 @@ const NavBar = () => {
             Data Science Projects
           </Typography>
           <Button className={classes.avatar} onClick={handleAvatarClick}>
-            <Avatar alt="Fernando Brandao" src="./images/fwbAvatar.jpg" />
+            <Avatar alt="Fernando Brandao" src={AvatarImg} />
           </Button>
           <Tooltip title="Navigate to my github" aria-label="code">
             <Link href="https://github.com/fwbrandao" target="_blank">

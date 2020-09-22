@@ -36,7 +36,7 @@ const App = () => {
     <Box >
       <NavBar />
       <Box className={classes.root}>
-        <Typography variant="h2" className={classes.title}>Welcome to Data Science</Typography>
+        {/* <Typography variant="h2" className={classes.title}>Welcome to Data Science</Typography> */}
       </Box>
     </Box>
   );
