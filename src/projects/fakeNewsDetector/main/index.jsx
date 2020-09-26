@@ -87,7 +87,7 @@ const FakeNewsDetector = () => {
                 <Box mt={6}>
                     <Typography
                         variant="body1"
-                        color="textSecondary"
+                        color="inherit"
                         component="p"
                     >Try youself by adding any news in the text box then press next.</Typography>
                 </Box>
@@ -99,7 +99,7 @@ const FakeNewsDetector = () => {
             <Box pt={2} className={classes.howIDidIt}>
                 <Typography
                     variant="h5"
-                    color="colorPrimary"
+                    color="inherit"
                     gutterBottom
                     className={classes.trainingModel}
                 >

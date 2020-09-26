@@ -35,62 +35,62 @@ const HowIDidIt = ({ title, description, code, code2, code3, code4, code5, code6
         <Typography
           variant="h2"
           className={classes.title}
-          color="colorPrimary"
+          color="inherit"
           gutterBottom>
           {title}
         </Typography>
         <Typography
           className={classes.description}
           variant="body2"
-          color="textSecondary"
+          color="inherit"
           component="p"
         >
           {description}
         </Typography>
         <Typography
-          color="primary"
+          color="inherit"
           display="block"
           gutterBottom
         >
           {code}
         </Typography>
         <Typography
-          color="primary"
+          color="inherit"
           display="block"
           gutterBottom
         >
           {code2}
         </Typography>
         <Typography
-          color="primary"
+          color="inherit"
           display="block"
           gutterBottom
         >
           {code3}
         </Typography>
         <Typography
-          color="primary"
+          color="inherit"
           display="block"
           gutterBottom
         >
           {code4}
         </Typography>
         <Typography
-          color="primary"
+          color="inherit"
           display="block"
           gutterBottom
         >
           {code5}
         </Typography>
         <Typography
-          color="primary"
+          color="inherit"
           display="block"
           gutterBottom
         >
           {code6}
         </Typography>
         <Typography
-          color="primary"
+          color="inherit"
           display="block"
           gutterBottom
         >

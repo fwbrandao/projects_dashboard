@@ -55,7 +55,7 @@ const StyledMenuItem = withStyles(theme => ({
     },
 }))(MenuItem);
 
-export default function CustomizedMenus() {
+export default function ProjectsMenu() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -93,7 +93,7 @@ export default function CustomizedMenus() {
                         <ListItemText primary="Home" />
                     </StyledMenuItem>
                 </Link>
-                
+
                 <Link to="/fakeNewsDetector" className={classes.link} >
                     <StyledMenuItem>
                         <ListItemIcon>

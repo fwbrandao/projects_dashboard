@@ -15,11 +15,11 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import grey from '@material-ui/core/colors/grey';
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme =>  ({
   root: {
     maxWidth: '55%',
     margin: '15px auto 5px auto',
-    backgroundColor: grey[100]
+    backgroundColor: theme.palette.primary
   },
   title: {
     fontSize: 18,
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     margin: '15px 20px 0px 20px',
   }
-});
+}));
 
 const AboutProject = ({ title, description, gitHubLink }) => {
   const classes = useStyles();
