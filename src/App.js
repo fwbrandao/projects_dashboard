@@ -9,7 +9,8 @@ const useStyles = makeStyles(theme => ({
   root: {
     height: 'calc(100vh - 64px)',
     flexGrow: 1,
-    backgroundImage: `url(${BGImage})`,
+    backgroundColor: theme.palette.secondary.main,
+    // backgroundImage: `url(${BGImage})`,
     backgroundSize: 'cover',
     overflow: 'hidden',
     backgroundRepeat: 'no-repeat',
