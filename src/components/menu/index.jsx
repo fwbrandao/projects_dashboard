@@ -20,7 +20,8 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(2),
     },
     link: {
-        textDecoration: 'none'
+        textDecoration: 'none',
+        color: theme.palette.textPrimary.main
     }
 }));
 

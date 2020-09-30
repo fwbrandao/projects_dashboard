@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Link } from "react-router-dom";
 import clsx from 'clsx';
 import { ThemeContext } from '../../themes/ThemeProvider';
 import ProjectsMenu from '../menu/index';
@@ -58,6 +59,7 @@ const useStyles = makeStyles(theme => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-start',
+    backgroundColor: theme.palette.primary.main
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -75,6 +77,10 @@ const useStyles = makeStyles(theme => ({
       margin: theme.spacing(1),
     },
   },
+  link: {
+    textDecoration: 'none',
+    color: theme.palette.textPrimary.main
+}
 }));
 
 const NavBar = () => {
@@ -106,9 +112,11 @@ const NavBar = () => {
       >
         <Toolbar>
           <ProjectsMenu />
-          <Typography variant="h6" className={classes.title}>
-            Data Science Projects
-          </Typography>
+            <Typography variant="h6" className={classes.title}>
+              <Link to="/" className={classes.link}>
+                  Data Science Projects
+              </Link>
+            </Typography>
           {!open ? (
             <Button
               color="inherit"

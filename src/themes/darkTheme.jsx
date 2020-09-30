@@ -11,6 +11,9 @@ export const darkTheme = createMuiTheme({
     },
     aboutDrawer: {
       main: '#263238'
+    },
+    textPrimary: {
+      main: '#fafafa'
     }
   }
 });
