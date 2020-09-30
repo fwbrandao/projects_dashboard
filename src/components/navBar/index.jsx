@@ -14,16 +14,14 @@ import {
   makeStyles,
   useTheme,
   Tooltip,
-  Link,
   IconButton,
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import NightsStayOutlinedIcon from '@material-ui/icons/NightsStayOutlined';
 import WbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined';
 import AvatarImg from '../../images/fwbAvatar.jpg';
+import AboutMe from '../aboutMe/index';
 
 const drawerWidth = 340;
 
@@ -111,29 +109,17 @@ const NavBar = () => {
           <Typography variant="h6" className={classes.title}>
             Data Science Projects
           </Typography>
-          <Button
-            color="inherit"
-            aria-label="open drawer"
-            edge="end"
-            onClick={handleDrawerOpen}
-            className={clsx(open && classes.hide)}
-            >
-            <Avatar alt="Fernando Brandao" src={AvatarImg} />
-          </Button>
-          <Tooltip title="Navigate to my github" aria-label="code">
-            <Link href="https://github.com/fwbrandao" target="_blank">
-              <IconButton aria-label="github" >
-                <GitHubIcon />
-              </IconButton>
-            </Link>
-          </Tooltip>
-          <Tooltip title="Navigate to my LinkedIn" aria-label="code">
-            <Link href="https://www.linkedin.com/in/fernando-b-170060151/" target="_blank">
-              <IconButton aria-label="LinkedIn" >
-                <LinkedInIcon color="action"/>
-              </IconButton>
-            </Link>
-          </Tooltip>
+          {!open ? (
+            <Button
+              color="inherit"
+              aria-label="open drawer"
+              edge="end"
+              onClick={handleDrawerOpen}
+              className={clsx(open && classes.hide)}
+              >
+              <Avatar alt="Fernando Brandao" src={AvatarImg} />
+            </Button>
+          ) : ''}
           {currentTheme === 'darkTheme' ? (
             <Tooltip title="Light Mode" aria-label="Light Mode">
               <IconButton aria-label="lightTheme" component="span" onClick={() => setThemeName("lightTheme")}>
@@ -164,7 +150,7 @@ const NavBar = () => {
           </IconButton>
         </div>
         <Divider />
-        {/* <AboutMe /> */}
+        <AboutMe />
       </Drawer>
     </Box>
   );

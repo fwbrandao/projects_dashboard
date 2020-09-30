@@ -7,7 +7,10 @@ export const darkTheme = createMuiTheme({
       main: "#263238"
     },
     secondary: {
-        main: '#90a4ae'
+        main: '#bdbdbd'
+    },
+    aboutDrawer: {
+      main: '#263238'
     }
   }
 });

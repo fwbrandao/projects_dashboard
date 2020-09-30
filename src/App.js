@@ -7,7 +7,7 @@ import BGImage from './images/arif-wahid-y3FkHW1cyBE-unsplash.png';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: 'calc(100vh - 64px)',
+    height: '100vh',
     flexGrow: 1,
     backgroundColor: theme.palette.secondary.main,
     // backgroundImage: `url(${BGImage})`,

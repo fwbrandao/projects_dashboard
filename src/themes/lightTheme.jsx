@@ -8,6 +8,9 @@ export const lightTheme = createMuiTheme({
     },
     secondary: {
         main: '#fafafa'
+    },
+    aboutDrawer: {
+      main: '#f5f5f5'
     }
   }
 });
