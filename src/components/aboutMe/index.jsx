@@ -83,19 +83,22 @@ const AboutMe = () => {
       <Typography variant="body2" color="textSecondary" component="p">
         Welcome to my Data Science portfolio.
       </Typography>
+      <Typography variant="body2" color="textSecondary" component="p">
+        This is a space where I share my projects and ideas.
+      </Typography>
     </CardContent>
     <CardActions disableSpacing>
         <Tooltip title="Navigate to my github" aria-label="code">
             <Link href="https://github.com/fwbrandao" target="_blank">
                 <IconButton aria-label="github" >
-                    <GitHubIcon />
+                    <GitHubIcon fontSize="large"/>
                 </IconButton>
             </Link>
             </Tooltip>
             <Tooltip title="Navigate to my LinkedIn" aria-label="code">
             <Link href="https://www.linkedin.com/in/fernando-b-170060151/" target="_blank">
                 <IconButton aria-label="LinkedIn" >
-                    <LinkedInIcon color="action"/>
+                    <LinkedInIcon color="action" fontSize="large"/>
                 </IconButton>
             </Link>
         </Tooltip>
