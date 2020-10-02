@@ -1,16 +1,21 @@
 import React from 'react';
-import { Box, Typography, makeStyles }
-  from '@material-ui/core';
+import {
+  Box,
+  Button,
+  Fab,
+  Typography,
+  makeStyles,
+} from '@material-ui/core';
+import NavigationIcon from '@material-ui/icons/Navigation';
 import NavBar from './components/navBar/index';
-import BGImage from './images/arif-wahid-y3FkHW1cyBE-unsplash.png';
 
 
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
+    width: '100vw',
     flexGrow: 1,
-    backgroundColor: theme.palette.secondary.main,
-    // backgroundImage: `url(${BGImage})`,
+    backgroundColor: theme.palette.backgroundColor.color,
     backgroundSize: 'cover',
     overflow: 'hidden',
     backgroundRepeat: 'no-repeat',
@@ -28,17 +33,41 @@ const useStyles = makeStyles(theme => ({
   textBox: {
     display: 'flex',
     alignItems: 'center'
+  },
+  shadow: {
+    boxShadow: theme.palette.backgroundColor.boxShadow,
+    backgroundColor: theme.palette.backgroundColor.color,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }));
 
 const App = () => {
   const classes = useStyles();
+  const [bgColor, setBgColor] = React.useState('#B3D2E6');
 
   return (
     <Box >
       <NavBar />
-      <Box className={classes.root}>
-        {/* <Typography variant="h2" className={classes.title}>Welcome to Data Science</Typography> */}
+      <Box
+        // p={5}
+        className={classes.root}
+        // bgcolor={bgColor}
+        // width={'100%'}
+        // height={'100%'}
+        display={'flex'}
+        justifyContent={'center'}
+        alignItems={'center'}
+        // flex={1}
+      >
+        <Box className={classes.shadow} borderRadius={16} width='75%' height='65%'>
+        <Fab color="primary" variant="extended">
+          {/* <NavigationIcon  className={classes.extendedIcon} /> */}
+          Convolution Neural Networks
+        </Fab>
+
+        </Box>
       </Box>
     </Box>
   );

@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 const StyledMenu = withStyles({
     paper: {
-        border: '1px solid #d3d4d5',
+        // border: '1px solid #000',
     },
 })(props => (
     <Menu
