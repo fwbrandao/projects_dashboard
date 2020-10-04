@@ -1,11 +1,22 @@
 import React from 'react';
 import {
+  Dialog,
+  AppBar,
+  Toolbar,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  Slide,
+
   Box,
   Button,
   Fab,
   Typography,
   makeStyles,
 } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import NavBar from './components/navBar/index';
 
@@ -40,34 +51,75 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+
+// dialog css
+  appBar: {
+    position: 'relative',
+  },
+  titles: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
 }));
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const App = () => {
   const classes = useStyles();
-  const [bgColor, setBgColor] = React.useState('#B3D2E6');
+  const [openDialog, setDialogOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
 
   return (
     <Box >
       <NavBar />
       <Box
-        // p={5}
         className={classes.root}
-        // bgcolor={bgColor}
-        // width={'100%'}
-        // height={'100%'}
         display={'flex'}
         justifyContent={'center'}
         alignItems={'center'}
-        // flex={1}
       >
         <Box className={classes.shadow} borderRadius={16} width='75%' height='65%'>
-        <Fab color="primary" variant="extended">
-          {/* <NavigationIcon  className={classes.extendedIcon} /> */}
-          Convolution Neural Networks
-        </Fab>
-
+          <Fab color="primary" variant="extended" onClick={handleClickOpen}>
+            {/* <NavigationIcon  className={classes.extendedIcon} /> */}
+            Convolution Neural Networks
+          </Fab>
         </Box>
+
+        <Dialog fullScreen open={openDialog} onClose={handleDialogClose} TransitionComponent={Transition}>
+          <AppBar className={classes.appBar}>
+            <Toolbar>
+              <IconButton edge="start" color="inherit" onClick={handleDialogClose} aria-label="close">
+                <CloseIcon />
+              </IconButton>
+              <Typography variant="h6" className={classes.titles}>
+                Sound
+              </Typography>
+              <Button autoFocus color="inherit" onClick={handleDialogClose}>
+                save
+              </Button>
+            </Toolbar>
+          </AppBar>
+          <List>
+            <ListItem button>
+              <ListItemText primary="Phone ringtone" secondary="Titania" />
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemText primary="Default notification ringtone" secondary="Tethys" />
+            </ListItem>
+          </List>
+        </Dialog>
+
       </Box>
     </Box>
   );

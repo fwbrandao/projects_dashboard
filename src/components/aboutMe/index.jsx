@@ -6,10 +6,12 @@ import {
     CardHeader,
     CardContent,
     CardActions,
+    Chip,
     Collapse,
     Link,
     IconButton,
     makeStyles,
+    Paper,
     Typography,
     Tooltip
 } from '@material-ui/core';
@@ -20,45 +22,57 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AvatarImg from '../../images/fwbAvatar.jpg';
 
 const useStyles = makeStyles((theme) => ({
-    // root: {
-    //     maxWidth: 345,
-    //     },
-        // media: {
-        // height: 0,
-        // paddingTop: '56.25%', // 16:9
-        // },
-        expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-        },
-        expandOpen: {
-        transform: 'rotate(180deg)',
-        },
-        // avatar: {
-        // backgroundColor: red[500],
-        // },
-  root: {
-    maxWidth: 345,
-    // display: 'flex',
-    backgroundColor: theme.palette.aboutDrawer.main,
-    height: '100vh',
-    // justifyContent: 'center',
-    // '& > *': {
-    //   margin: theme.spacing(1),
-    // },
-  },
-  large: {
-    width: theme.spacing(14),
-    height: theme.spacing(14),
-  },
+    expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+    }),
+    },
+    expandOpen: {
+    transform: 'rotate(180deg)',
+    },
+    root: {
+        maxWidth: 345,
+        backgroundColor: theme.palette.aboutDrawer.main,
+        height: '100vh',
+    },
+    large: {
+        width: theme.spacing(14),
+        height: theme.spacing(14),
+    },
+    chipRoot: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        listStyle: 'none',
+        padding: theme.spacing(0.5),
+        margin: 0,
+    },
+    chip: {
+        margin: theme.spacing(0.5),
+    },
 }));
 
 const AboutMe = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+
+  const [chipData, setChipData] = React.useState([
+    { key: 0, label: 'Tensorflow' },
+    { key: 1, label: 'Convolutional Neural Network' },
+    { key: 2, label: 'Artificial Neural Network' },
+    { key: 3, label: 'Deep Learning' },
+    { key: 4, label: 'Backpropagation' },
+    { key: 4, label: 'Python Programming' },
+    { key: 4, label: 'Hyperparameter' },
+    { key: 4, label: 'Hyperparameter Optimization' },
+    { key: 4, label: 'Machine Learning' },
+    { key: 4, label: 'Inductive Transfer' },
+    { key: 4, label: 'Multi-Task Learning' },
+    { key: 4, label: 'Facial Recognition System' },
+    { key: 4, label: 'Keras' },
+  ]);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -81,7 +95,7 @@ const AboutMe = () => {
     />
     <CardContent>
       <Typography variant="body2" color="textSecondary" component="p">
-        Welcome to my Data Science portfolio.
+        Hello and Welcome to my Data Science portfolio.
       </Typography>
       <Typography variant="body2" color="textSecondary" component="p">
         This is a space where I share my projects and ideas.
@@ -115,19 +129,27 @@ const AboutMe = () => {
     </CardActions>
     <Collapse in={expanded} timeout="auto" unmountOnExit>
       <CardContent>
-        <Typography paragraph>Education:</Typography>
-        <Typography paragraph>
-          Info about certification
-        </Typography>
-        <Typography paragraph>
-        Info about certification
-        </Typography>
-        <Typography paragraph>
-        Info about certification
-        </Typography>
-        <Typography>
-        Info about certification
-        </Typography>
+        <Typography paragraph>Skills learned with my projects</Typography>
+            <Paper component="ul" className={classes.chipRoot}>
+                {chipData.map((data) => {
+                    let icon;
+
+                    // if (data.label === 'React') {
+                    // icon = <TagFacesIcon />;
+                    // }
+
+                    return (
+                    <li key={data.key}>
+                        <Chip
+                            icon={icon}
+                            label={data.label}
+                            // onDelete={data.label === 'React' ? undefined : handleDelete(data)}
+                            className={classes.chip}
+                        />
+                    </li>
+                    );
+                })}
+            </Paper>
       </CardContent>
     </Collapse>
   </Card>

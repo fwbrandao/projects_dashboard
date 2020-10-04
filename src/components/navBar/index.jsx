@@ -90,24 +90,24 @@ const NavBar = () => {
   // Get the setter function from context
   const setThemeName = useContext(ThemeContext);
   const currentTheme = localStorage.getItem('appTheme');
-  const [open, setOpen] = useState(false);
+  const [openDrawer, setDrawerOpen] = useState(false);
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setDrawerOpen(true);
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    setDrawerOpen(false);
   };
 
-  console.log(open);
+  console.log(openDrawer);
   return (
     <Box className={classes.root}>
       <AppBar
         color="primary"
         position="fixed"
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
+          [classes.appBarShift]: openDrawer,
         })}
       >
         <Toolbar>
@@ -117,13 +117,13 @@ const NavBar = () => {
                   Data Science Projects
               </Link>
             </Typography>
-          {!open ? (
+          {!openDrawer ? (
             <Button
               color="inherit"
               aria-label="open drawer"
               edge="end"
               onClick={handleDrawerOpen}
-              className={clsx(open && classes.hide)}
+              className={clsx(openDrawer && classes.hide)}
               >
               <Avatar alt="Fernando Brandao" src={AvatarImg} />
             </Button>
@@ -147,7 +147,7 @@ const NavBar = () => {
         className={classes.drawer}
         variant="persistent"
         anchor="right"
-        open={open}
+        open={openDrawer}
         classes={{
           paper: classes.drawerPaper,
         }}
