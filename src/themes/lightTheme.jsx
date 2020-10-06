@@ -1,6 +1,9 @@
 import { createMuiTheme } from '@material-ui/core';
 
 export const lightTheme = createMuiTheme({
+  typography: {
+    "fontFamily": `"Libre Baskerville", "Roboto", "Helvetica", "Arial", sans-serif`,
+  },
   palette: {
     type: 'light',
     primary: {
