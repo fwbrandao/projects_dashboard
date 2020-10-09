@@ -12,8 +12,6 @@ import {
 }
   from '@material-ui/core';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import grey from '@material-ui/core/colors/grey';
-
 
 const useStyles = makeStyles(theme =>  ({
   root: {

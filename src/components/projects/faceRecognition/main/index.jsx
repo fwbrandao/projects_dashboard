@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
-import NavBar from '../../../components/navBar/index';
-import AboutProject from '../../../components/aboutProject/index';
+import NavBar from '../../../../core/navBar/index';
+import AboutProject from '../../../../core/aboutProject/index';
 
 const FaceRecognition = () => {
     return (

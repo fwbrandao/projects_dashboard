@@ -1,24 +1,12 @@
 import React from 'react';
 import {
-  Dialog,
-  AppBar,
-  Toolbar,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-  Slide,
-
   Box,
-  Button,
   Fab,
-  Typography,
   makeStyles,
 } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
 import NavigationIcon from '@material-ui/icons/Navigation';
-import NavBar from './components/navBar/index';
+import NavBar from './core/navBar/index';
+import TopicDialog from './core/topicDialog/index';
 
 
 const useStyles = makeStyles(theme => ({
@@ -52,20 +40,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center'
   },
-
-// dialog css
-  appBar: {
-    position: 'relative',
-  },
-  titles: {
-    marginLeft: theme.spacing(2),
-    flex: 1,
-  },
 }));
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 const App = () => {
   const classes = useStyles();
@@ -90,35 +65,11 @@ const App = () => {
       >
         <Box className={classes.shadow} borderRadius={16} width='75%' height='65%'>
           <Fab color="primary" variant="extended" onClick={handleClickOpen}>
-            {/* <NavigationIcon  className={classes.extendedIcon} /> */}
+            <NavigationIcon  className={classes.extendedIcon} />
             Convolution Neural Networks
           </Fab>
         </Box>
-
-        <Dialog fullScreen open={openDialog} onClose={handleDialogClose} TransitionComponent={Transition}>
-          <AppBar className={classes.appBar}>
-            <Toolbar>
-              <IconButton edge="start" color="inherit" onClick={handleDialogClose} aria-label="close">
-                <CloseIcon />
-              </IconButton>
-              <Typography variant="h6" className={classes.titles}>
-                Sound
-              </Typography>
-              <Button autoFocus color="inherit" onClick={handleDialogClose}>
-                save
-              </Button>
-            </Toolbar>
-          </AppBar>
-          <List>
-            <ListItem button>
-              <ListItemText primary="Phone ringtone" secondary="Titania" />
-            </ListItem>
-            <Divider />
-            <ListItem button>
-              <ListItemText primary="Default notification ringtone" secondary="Tethys" />
-            </ListItem>
-          </List>
-        </Dialog>
+        <TopicDialog open={openDialog} closeDialog={handleDialogClose}/>
 
       </Box>
     </Box>

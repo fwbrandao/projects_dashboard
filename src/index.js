@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ThemeProvider from './themes/ThemeProvider'
 import './index.css';
 
 import App from './App';
-import FakeNewsDetector from './projects/fakeNewsDetector/main/index';
-import DocumentAnalysisNLP from './projects/documentAnalysisNLP/main/index';
-import FaceRecognition from './projects/faceRecognition/main/index';
+import FakeNewsDetector from './components/projects/fakeNewsDetector/main/index';
+import DocumentAnalysisNLP from './components/projects/documentAnalysisNLP/main/index';
+import FaceRecognition from './components/projects/faceRecognition/main/index';
 
 ReactDOM.render(
     <ThemeProvider>

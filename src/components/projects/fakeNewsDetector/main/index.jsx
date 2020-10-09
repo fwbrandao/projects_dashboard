@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Box, Button, makeStyles, Typography, Link } from '@material-ui/core';
-import NavBar from '../../../components/navBar/index';
-import AboutProject from '../../../components/aboutProject/index';
-import TextBox from '../../../components/textBox/index';
-import ControlledExpansionPanels from '../../../components/infoExpansionPanel/index';
-import HowIDidIt from '../../../components/howIDidIt';
-import Steppers from '../../../components/stepper';
+import NavBar from '../../../../core/navBar/index';
+import AboutProject from '../../../../core/aboutProject/index';
+import TextBox from '../../../../core/textBox/index';
+import ControlledExpansionPanels from '../../../../core/infoExpansionPanel/index';
+import HowIDidIt from '../../../../core/howIDidIt';
+import Steppers from '../../../../core/stepper';
 import grey from '@material-ui/core/colors/grey';
-import CodeScreenshot from '../../../components/codeScreenshot';
-import Fake_print_head from '../../../images/fake_print_head.jpg';
-import Label from '../../../images/label.jpg';
-import Accuracy from '../../../images/accuracy.jpg'
+import CodeScreenshot from '../../../../core/codeScreenshot';
+import Fake_print_head from '../../../../images/fake_print_head.jpg';
+import Label from '../../../../images/label.jpg';
+import Accuracy from '../../../../images/accuracy.jpg'
 
 const useStyles = makeStyles({
     howIDidIt: {
