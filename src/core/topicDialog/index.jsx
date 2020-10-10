@@ -29,7 +29,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 
-const TopicDialog = ({ open, closeDialog }) => {
+const TopicDialog = ({ open, closeDialog, topicId, topicTitle }) => {
     const classes = useStyles();
 
     return (
@@ -40,10 +40,10 @@ const TopicDialog = ({ open, closeDialog }) => {
                         <CloseIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.titles}>
-                    Sound
+                        {topicTitle}
                     </Typography>
                     <Button autoFocus color="inherit" onClick={closeDialog}>
-                    save
+                        Close
                     </Button>
                 </Toolbar>
             </AppBar>

@@ -59,7 +59,7 @@ const AboutMe = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  const [chipData, setChipData] = React.useState([
+  const [chipData] = React.useState([
     { key: 0, label: 'Tensorflow' },
     { key: 1, label: 'Convolutional Neural Network' },
     { key: 2, label: 'Artificial Neural Network' },
@@ -84,7 +84,7 @@ const AboutMe = () => {
     <Card className={classes.root}>
     <CardHeader
       avatar={
-        <Avatar alt="Fernando Brandao" variant="body2" src={AvatarImg} className={classes.large}/>
+        <Avatar alt="Fernando Brandao" src={AvatarImg} className={classes.large}/>
       }
       action={
         <IconButton aria-label="settings">

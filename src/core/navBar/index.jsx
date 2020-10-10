@@ -100,7 +100,6 @@ const NavBar = () => {
     setDrawerOpen(false);
   };
 
-  console.log(openDrawer);
   return (
     <Box className={classes.root}>
       <AppBar
