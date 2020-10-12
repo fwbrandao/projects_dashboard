@@ -1,8 +1,10 @@
 import React from 'react';
 import {
+    Box,
     Dialog,
     AppBar,
     Toolbar,
+    Grid,
     IconButton,
     List,
     ListItem,
@@ -14,6 +16,7 @@ import {
     makeStyles,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import ProjectCard from '../projectCard';
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -23,6 +26,14 @@ const useStyles = makeStyles(theme => ({
         marginLeft: theme.spacing(2),
         flex: 1,
       },
+      projectCard: {
+          display: 'flex',
+          flexGrow: 1
+      },
+      gridItem: {
+        display: 'flex',
+        justifyContent: 'center',
+      }
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -36,26 +47,44 @@ const TopicDialog = ({ open, closeDialog, topicId, topicTitle }) => {
         <Dialog fullScreen open={open} onClose={closeDialog} TransitionComponent={Transition}>
             <AppBar className={classes.appBar}>
                 <Toolbar>
-                    <IconButton edge="start" color="inherit" onClick={closeDialog} aria-label="close">
-                        <CloseIcon />
-                    </IconButton>
                     <Typography variant="h6" className={classes.titles}>
                         {topicTitle}
                     </Typography>
-                    <Button autoFocus color="inherit" onClick={closeDialog}>
-                        Close
-                    </Button>
+                    <IconButton edge="start" color="inherit" onClick={closeDialog} aria-label="close">
+                        <CloseIcon />
+                    </IconButton>
                 </Toolbar>
             </AppBar>
             <List>
                 <ListItem button>
-                    <ListItemText primary="Phone ringtone" secondary="Titania" />
+                    <ListItemText >
+                        Thanks to deep learning, computer vision is working far better than just feel years ago,
+                        and this is enabling numerous exciting applications ranging from safe autonomous driving,
+                        to accurate face recognition, to automatic reading of radiology images.
+                    </ListItemText>
                 </ListItem>
                 <Divider />
-                <ListItem button>
-                    <ListItemText primary="Default notification ringtone" secondary="Tethys" />
-                </ListItem>
             </List>
+            <Box className={classes.projectCard}>
+                <Grid container spacing={2}>
+                    <Grid className={classes.gridItem} item xs={6}>
+                        <ProjectCard />
+
+                    </Grid>
+                    <Grid className={classes.gridItem} item xs={6}>
+                        <ProjectCard />
+
+                    </Grid>
+                    <Grid className={classes.gridItem} item xs={6}>
+                        <ProjectCard />
+
+                    </Grid>
+                    <Grid className={classes.gridItem} item xs={6}>
+                        <ProjectCard />
+
+                    </Grid>
+                </Grid>
+            </Box>
         </Dialog>
     )
 }

@@ -7,7 +7,8 @@ export const lightTheme = createMuiTheme({
   palette: {
     type: 'light',
     primary: {
-      main: '#fafafa'
+      main: '#fafafa',
+      heart: '#ef6c00',
     },
     secondary: {
         main: '#4d84f1'

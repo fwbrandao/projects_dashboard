@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   Box,
   Fab,
+  Grid,
   makeStyles,
 } from '@material-ui/core';
 import NavigationIcon from '@material-ui/icons/Navigation';
@@ -11,7 +12,9 @@ import TopicDialog from './core/topicDialog/index';
 const topicInfo = [
   {id: 'CNN', title: 'Convolution Neural Networks'},
   {id: 'NNDL', title: 'Neural Networks and Deep Learning'},
-  {id: 'SM', title: 'Sequence Models'}
+  {id: 'SM', title: 'Sequence Models'},
+  {id: 'ML', title: 'Machine Learning'},
+  {id: 'ML', title: 'Machine Learning'},
 ];
 
 const useStyles = makeStyles(theme => ({
@@ -45,6 +48,9 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  grid: {
+    justifyContent: 'center',
+  }
 }));
 
 const App = () => {
@@ -74,13 +80,17 @@ const App = () => {
         alignItems={'center'}
       >
         <Box className={classes.shadow} borderRadius={16} width='75%' height='65%'>
-          {topicInfo.map(item => (
-            <Fab key={item.id} color="primary" variant="extended" onClick={() => handleClickOpen(item.id, item.title)}>
-              <NavigationIcon  className={classes.extendedIcon} />
-              {item.title}
-            </Fab>
-          ))}
-          </Box>
+          <Grid className={classes.grid} container spacing={3} justifyContent='center'>
+              {topicInfo.map(item => (
+                <Grid item xs={4}>
+                    <Fab key={item.id} color="primary" variant="extended" onClick={() => handleClickOpen(item.id, item.title)}>
+                      <NavigationIcon  className={classes.extendedIcon} />
+                      {item.title}
+                    </Fab>
+                </Grid>
+              ))}
+          </Grid>
+        </Box>
         <TopicDialog
           open={openDialog}
           closeDialog={handleDialogClose}

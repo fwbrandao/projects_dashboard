@@ -8,6 +8,7 @@ import {
     CardActions,
     Chip,
     Collapse,
+    Divider,
     Link,
     IconButton,
     makeStyles,
@@ -52,6 +53,11 @@ const useStyles = makeStyles((theme) => ({
     },
     chip: {
         margin: theme.spacing(0.5),
+    },
+    footer: {
+      bottom: 0,
+      display: 'flex',
+      justifyContent: 'center',
     },
 }));
 
@@ -128,6 +134,9 @@ const AboutMe = () => {
         <ExpandMoreIcon />
       </IconButton>
     </CardActions>
+    <Divider />
+    <Typography className={classes.footer}>Footer</Typography>
+
     <Collapse in={expanded} timeout="auto" unmountOnExit>
       <CardContent>
         <Typography variant="body2" paragraph>Skills learned with my projects</Typography>
