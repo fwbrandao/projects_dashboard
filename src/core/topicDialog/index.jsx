@@ -23,7 +23,6 @@ const useStyles = makeStyles(theme => ({
         position: 'relative',
       },
       titles: {
-        marginLeft: theme.spacing(2),
         flex: 1,
       },
       projectCard: {
@@ -33,6 +32,9 @@ const useStyles = makeStyles(theme => ({
       gridItem: {
         display: 'flex',
         justifyContent: 'center',
+      },
+      intro: {
+        marginLeft: theme.spacing(1)
       }
 }));
 
@@ -55,16 +57,16 @@ const TopicDialog = ({ open, closeDialog, topicId, topicTitle }) => {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <List>
-                <ListItem button>
-                    <ListItemText >
+            <Box mb={2}>
+                <ListItem button p={3}>
+                    <ListItemText className={classes.intro}>
                         Thanks to deep learning, computer vision is working far better than just feel years ago,
                         and this is enabling numerous exciting applications ranging from safe autonomous driving,
                         to accurate face recognition, to automatic reading of radiology images.
                     </ListItemText>
                 </ListItem>
                 <Divider />
-            </List>
+            </Box>
             <Box className={classes.projectCard}>
                 <Grid container spacing={2}>
                     <Grid className={classes.gridItem} item xs={6}>
