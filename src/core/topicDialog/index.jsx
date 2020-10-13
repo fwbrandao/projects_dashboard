@@ -42,7 +42,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 
-const TopicDialog = ({ open, closeDialog, topicId, topicTitle }) => {
+const TopicDialog = ({ open, closeDialog, topicData }) => {
     const classes = useStyles();
 
     return (
@@ -50,7 +50,7 @@ const TopicDialog = ({ open, closeDialog, topicId, topicTitle }) => {
             <AppBar className={classes.appBar}>
                 <Toolbar>
                     <Typography variant="h6" className={classes.titles}>
-                        {topicTitle}
+                        {topicData.topicTitle}
                     </Typography>
                     <IconButton edge="start" color="inherit" onClick={closeDialog} aria-label="close">
                         <CloseIcon />
@@ -60,9 +60,7 @@ const TopicDialog = ({ open, closeDialog, topicId, topicTitle }) => {
             <Box mb={2}>
                 <ListItem button p={3}>
                     <ListItemText className={classes.intro}>
-                        Thanks to deep learning, computer vision is working far better than just feel years ago,
-                        and this is enabling numerous exciting applications ranging from safe autonomous driving,
-                        to accurate face recognition, to automatic reading of radiology images.
+                        {topicData.topicIntro}
                     </ListItemText>
                 </ListItem>
                 <Divider />
@@ -71,7 +69,6 @@ const TopicDialog = ({ open, closeDialog, topicId, topicTitle }) => {
                 <Grid container spacing={2}>
                     <Grid className={classes.gridItem} item xs={6}>
                         <ProjectCard />
-
                     </Grid>
                     <Grid className={classes.gridItem} item xs={6}>
                         <ProjectCard />

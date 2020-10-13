@@ -8,14 +8,7 @@ import {
 import NavigationIcon from '@material-ui/icons/Navigation';
 import NavBar from './core/navBar/index';
 import TopicDialog from './core/topicDialog/index';
-
-const topicInfo = [
-  {id: 'CNN', title: 'Convolution Neural Networks'},
-  {id: 'NNDL', title: 'Neural Networks and Deep Learning'},
-  {id: 'SM', title: 'Sequence Models'},
-  {id: 'ML', title: 'Machine Learning'},
-  {id: 'ML', title: 'Machine Learning'},
-];
+import topicInfo from './assets/topicsInfo'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,19 +49,16 @@ const useStyles = makeStyles(theme => ({
 const App = () => {
   const classes = useStyles();
   const [openDialog, setDialogOpen] = useState(false);
-  const [topicId, setTopicId] = useState('');
-  const [topicTitle, setTopicTitle] = useState('');
+  const [topicData, setTopicData] = useState([])
 
-  const handleClickOpen = (id, title) => {
+  const handleClickOpen = (item) => {
     setDialogOpen(true);
-    setTopicId(id);
-    setTopicTitle(title)
+    setTopicData(item)
   };
 
   const handleDialogClose = () => {
     setDialogOpen(false);
   };
-
 
   return (
     <Box >
@@ -83,9 +73,9 @@ const App = () => {
           <Grid className={classes.grid} container spacing={3} justifyContent='center'>
               {topicInfo.map(item => (
                 <Grid item xs={4}>
-                    <Fab key={item.id} color="primary" variant="extended" onClick={() => handleClickOpen(item.id, item.title)}>
+                    <Fab key={item.id} color="primary" variant="extended" onClick={() => handleClickOpen(item)}>
                       <NavigationIcon  className={classes.extendedIcon} />
-                      {item.title}
+                      {item.topicTitle}
                     </Fab>
                 </Grid>
               ))}
@@ -94,8 +84,7 @@ const App = () => {
         <TopicDialog
           open={openDialog}
           closeDialog={handleDialogClose}
-          topicId={topicId}
-          topicTitle={topicTitle}
+          topicData={topicData}
         />
       </Box>
     </Box>

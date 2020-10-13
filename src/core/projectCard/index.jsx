@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProjectCard = () => {
+const ProjectCard = ({ data }) => {
   const classes = useStyles();
   const [isLiked, setIsLiked] = useState(false);
 
@@ -51,7 +51,7 @@ const ProjectCard = () => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            {/* {data} */}
           </Typography>
           <Typography variant="body2" color="textPrimary" component="p">
             Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
