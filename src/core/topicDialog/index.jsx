@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box,
     Dialog,
@@ -38,12 +38,38 @@ const useStyles = makeStyles(theme => ({
       }
 }));
 
+const projectsCardCNN = [
+    {
+      projectTitle: 'ConvNet & TensorFlow application',
+      projectIntro: 'In this project Ive built and trained a ConvNet in TensorFlow for a classification problem',
+    },
+    {
+      projectTitle: 'ConvNet & TensorFlow application',
+      projectIntro: 'In this project Ive built and trained a ConvNet in TensorFlow for a classification problem',
+    },
+    {
+      projectTitle: 'ConvNet & TensorFlow application',
+      projectIntro: 'In this project Ive built and trained a ConvNet in TensorFlow for a classification problem',
+    },
+    {
+      projectTitle: 'ConvNet & TensorFlow application',
+      projectIntro: 'In this project Ive built and trained a ConvNet in TensorFlow for a classification problem',
+    }
+  ]
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 
 const TopicDialog = ({ open, closeDialog, topicData }) => {
     const classes = useStyles();
+    const [projectCard, setProjectCard] = useState([]);
+
+    useEffect(() => {
+        if (topicData.id === 'CNN') {
+            setProjectCard(projectsCardCNN)
+        }
+    },[projectCard, topicData.id]);
 
     return (
         <Dialog fullScreen open={open} onClose={closeDialog} TransitionComponent={Transition}>
@@ -65,23 +91,13 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
                 </ListItem>
                 <Divider />
             </Box>
-            <Box className={classes.projectCard}>
+            <Box className={classes.projectCard} >
                 <Grid container spacing={2}>
-                    <Grid className={classes.gridItem} item xs={6}>
-                        <ProjectCard />
-                    </Grid>
-                    <Grid className={classes.gridItem} item xs={6}>
-                        <ProjectCard />
-
-                    </Grid>
-                    <Grid className={classes.gridItem} item xs={6}>
-                        <ProjectCard />
-
-                    </Grid>
-                    <Grid className={classes.gridItem} item xs={6}>
-                        <ProjectCard />
-
-                    </Grid>
+                    {projectCard.map(item => (
+                        <Grid className={classes.gridItem} item xs={6}>
+                            <ProjectCard data={item}/>
+                        </Grid>
+                    ))}
                 </Grid>
             </Box>
         </Dialog>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+    Box,
     Button,
     Card,
     CardActionArea,
@@ -42,39 +43,38 @@ const ProjectCard = ({ data }) => {
   }
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {/* {data} */}
-          </Typography>
-          <Typography variant="body2" color="textPrimary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions disableSpacing>
-        <Button size="small" color="primary">
-          View Project
-        </Button>
-        <IconButton
-            className={isLiked ? classes.iconLiked : classes.iconNotLiked}
-            onClick={handleLike}
-            aria-label="add to favorites"
-        >
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="github">
-          <GitHubIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
+      <Card className={classes.root} boxShadow={3}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.media}
+            image="/static/images/cards/contemplative-reptile.jpg"
+            title="Contemplative Reptile"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {data.projectTitle}
+            </Typography>
+            <Typography variant="body2" color="textPrimary" component="p">
+              {data.projectIntro}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions disableSpacing>
+          <Button size="small" color="primary">
+            View Project
+          </Button>
+          <IconButton
+              className={isLiked ? classes.iconLiked : classes.iconNotLiked}
+              onClick={handleLike}
+              aria-label="add to favorites"
+          >
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton aria-label="github">
+            <GitHubIcon />
+          </IconButton>
+        </CardActions>
+      </Card>
   );
 };
 

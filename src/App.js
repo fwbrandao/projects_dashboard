@@ -74,7 +74,7 @@ const App = () => {
               {topicInfo.map(item => (
                 <Grid item xs={4}>
                     <Fab key={item.id} color="primary" variant="extended" onClick={() => handleClickOpen(item)}>
-                      <NavigationIcon  className={classes.extendedIcon} />
+                      {/* <NavigationIcon  className={classes.extendedIcon} /> */}
                       {item.topicTitle}
                     </Fab>
                 </Grid>
