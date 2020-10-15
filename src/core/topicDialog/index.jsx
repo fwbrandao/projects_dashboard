@@ -17,6 +17,9 @@ import {
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import ProjectCard from '../projectCard';
+import CarDetection from '../../images/car-detection.png'
+import ResNets from '../../images/resNets.png'
+
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -41,19 +44,25 @@ const useStyles = makeStyles(theme => ({
 const projectsCardCNN = [
     {
       projectTitle: 'ConvNet & TensorFlow application',
-      projectIntro: 'In this project Ive built and trained a ConvNet in TensorFlow for a classification problem',
+      projectIntro: 'ConvNet in TensorFlow for a classification problem',
+      skills: ['Python', 'TensorFlow']
     },
     {
-      projectTitle: 'ConvNet & TensorFlow application',
-      projectIntro: 'In this project Ive built and trained a ConvNet in TensorFlow for a classification problem',
+      projectTitle: 'Keras introduction',
+      projectIntro: 'Emotion Detection in Images of Faces',
+      skills: ['Keras', 'Python', 'TensorFlow']
     },
     {
-      projectTitle: 'ConvNet & TensorFlow application',
-      projectIntro: 'In this project Ive built and trained a ConvNet in TensorFlow for a classification problem',
+      projectTitle: 'Residual Networks (ResNets)',
+      projectIntro: 'Use ResNets to build very deep CNNs',
+      skills: ['Keras', 'Python', 'TensorFlow'],
+      img: ResNets,
     },
     {
-      projectTitle: 'ConvNet & TensorFlow application',
-      projectIntro: 'In this project Ive built and trained a ConvNet in TensorFlow for a classification problem',
+      projectTitle: 'Autonomous driving - Car detection',
+      projectIntro: 'Object detection using the very powerful YOLO model',
+      skills: ['YOLO'],
+      img: CarDetection
     }
   ]
 
@@ -92,7 +101,7 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
                 <Divider />
             </Box>
             <Box className={classes.projectCard} >
-                <Grid container spacing={2}>
+                <Grid container spacing={3}>
                     {projectCard.map(item => (
                         <Grid className={classes.gridItem} item xs={6}>
                             <ProjectCard data={item}/>

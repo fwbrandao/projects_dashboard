@@ -12,25 +12,27 @@ import {
     Typography,
 } from '@material-ui/core';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 545,
-    maxHeight: 290,
-    backgroundColor: theme.palette.secondary.main,
+    maxWidth: 700,
+    maxHeight: 790,
+    minWidth: 500,
+    minHeight: 290,
+    backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.main
   },
   media: {
-    height: 120,
+    height: 370,
   },
   iconLiked: {
       marginLeft: 'auto',
-      color: theme.palette.primary.heart
+      color: theme.palette.secondary.main
   },
   iconNotLiked: {
     marginLeft: 'auto',
-    color: theme.palette.primary.main
+    // color: theme.palette.secondary.main
   }
 }));
 
@@ -43,15 +45,15 @@ const ProjectCard = ({ data }) => {
   }
 
   return (
-      <Card className={classes.root} boxShadow={3}>
+      <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image="/static/images/cards/contemplative-reptile.jpg"
+            image={data.img}
             title="Contemplative Reptile"
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography gutterBottom variant="h6" color="textPrimary" component="h2">
               {data.projectTitle}
             </Typography>
             <Typography variant="body2" color="textPrimary" component="p">
@@ -60,15 +62,15 @@ const ProjectCard = ({ data }) => {
           </CardContent>
         </CardActionArea>
         <CardActions disableSpacing>
-          <Button size="small" color="primary">
+          <Button size="small">
             View Project
           </Button>
           <IconButton
               className={isLiked ? classes.iconLiked : classes.iconNotLiked}
               onClick={handleLike}
-              aria-label="add to favorites"
+              aria-label="liked"
           >
-            <FavoriteIcon />
+            <ThumbUpOutlinedIcon />
           </IconButton>
           <IconButton aria-label="github">
             <GitHubIcon />
