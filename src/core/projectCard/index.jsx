@@ -45,7 +45,7 @@ const ProjectCard = ({ data }) => {
   }
 
   return (
-      <Card className={classes.root}>
+      <Card className={classes.root} elevation={5}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
