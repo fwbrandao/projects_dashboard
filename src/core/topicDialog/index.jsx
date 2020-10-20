@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import ProjectCard from '../projectCard';
-import CarDetection from '../../images/car-detection.png'
+import CarDetection from '../../images/self-driving-cars.jpg'
 import ResNets from '../../images/resNets.png'
 
 
@@ -43,27 +43,27 @@ const useStyles = makeStyles(theme => ({
 
 const projectsCardCNN = [
     {
-      projectTitle: 'ConvNet & TensorFlow application',
-      projectIntro: 'ConvNet in TensorFlow for a classification problem',
-      skills: ['Python', 'TensorFlow']
+        projectTitle: 'Autonomous driving - Car detection',
+        projectIntro: 'Object detection using the very powerful YOLO model',
+        skills: ['YOLO'],
+        img: CarDetection
     },
     {
-      projectTitle: 'Keras introduction',
-      projectIntro: 'Emotion Detection in Images of Faces',
-      skills: ['Keras', 'Python', 'TensorFlow']
+        projectTitle: 'Residual Networks (ResNets)',
+        projectIntro: 'Use ResNets to build very deep CNNs',
+        skills: ['Keras', 'Python', 'TensorFlow'],
+        img: ResNets,
     },
     {
-      projectTitle: 'Residual Networks (ResNets)',
-      projectIntro: 'Use ResNets to build very deep CNNs',
-      skills: ['Keras', 'Python', 'TensorFlow'],
-      img: ResNets,
+        projectTitle: 'ConvNet & TensorFlow application',
+        projectIntro: 'ConvNet in TensorFlow for a classification problem',
+        skills: ['Python', 'TensorFlow']
     },
     {
-      projectTitle: 'Autonomous driving - Car detection',
-      projectIntro: 'Object detection using the very powerful YOLO model',
-      skills: ['YOLO'],
-      img: CarDetection
-    }
+        projectTitle: 'Keras introduction',
+        projectIntro: 'Emotion Detection in Images of Faces',
+        skills: ['Keras', 'Python', 'TensorFlow']
+    },
   ]
 
 const Transition = React.forwardRef(function Transition(props, ref) {

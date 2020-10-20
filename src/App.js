@@ -43,6 +43,11 @@ const useStyles = makeStyles(theme => ({
   },
   grid: {
     justifyContent: 'center',
+  },
+  gridItem: {
+    flexBasis: '29.333333%',
+    display: 'flex',
+    justifyContent: 'center',
   }
 }));
 
@@ -70,9 +75,9 @@ const App = () => {
         alignItems={'center'}
       >
         <Box className={classes.shadow} borderRadius={16} width='75%' height='65%'>
-          <Grid className={classes.grid} container spacing={3} justifyContent='center'>
+          <Grid className={classes.grid} container spacing={3} dispaly='flex' justifyContent='center'>
               {topicInfo.map(item => (
-                <Grid item xs={4}>
+                <Grid item xs={4} className={classes.gridItem}>
                     <Fab key={item.id} color="primary" variant="extended" onClick={() => handleClickOpen(item)}>
                       {/* <NavigationIcon  className={classes.extendedIcon} /> */}
                       {item.topicTitle}

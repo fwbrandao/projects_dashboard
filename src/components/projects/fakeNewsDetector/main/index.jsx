@@ -12,7 +12,7 @@ import Fake_print_head from '../../../../images/fake_print_head.jpg';
 import Label from '../../../../images/label.jpg';
 import Accuracy from '../../../../images/accuracy.jpg'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     howIDidIt: {
         backgroundColor: grey[100]
     },
@@ -20,8 +20,9 @@ const useStyles = makeStyles({
         fontSize: 18,
         display: "flex",
         justifyContent: "center"
-    }
-});
+    },
+    toolbar: theme.mixins.toolbar
+}));
 
 const FakeNewsDetector = () => {
     const classes = useStyles();
@@ -41,6 +42,7 @@ const FakeNewsDetector = () => {
     return (
         <Box>
             <NavBar />
+            <div className={classes.toolbar} />
             <AboutProject
                 title="Fake News Detector"
                 description="This advanced python project of detecting fake news deals with fake and real news.
