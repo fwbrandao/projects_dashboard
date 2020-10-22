@@ -8,13 +8,18 @@ import {
     ListItemIcon,
     ListItemText,
     IconButton,
-    makeStyles
+    makeStyles,
+    ExpansionPanel,
+    ExpansionPanelDetails,
+    ExpansionPanelSummary,
+    Typography
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
 import DescriptionIcon from '@material-ui/icons/Description';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import HomeIcon from '@material-ui/icons/Home';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -60,6 +65,11 @@ const StyledMenuItem = withStyles(theme => ({
 export default function ProjectsMenu() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpansion = panel => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
     const handleClick = event => {
         setAnchorEl(event.currentTarget);
@@ -69,6 +79,15 @@ export default function ProjectsMenu() {
         setAnchorEl(null);
     };
 
+    const MenuItem = (link, text) => (
+        <Link to={link} className={classes.link} >
+            <StyledMenuItem>
+                <ExpansionPanelDetails>
+                    <Typography>{text}</Typography>
+                </ExpansionPanelDetails>
+            </StyledMenuItem>
+        </Link>
+    )
     return (
         <div>
             <IconButton
@@ -95,6 +114,41 @@ export default function ProjectsMenu() {
                         <ListItemText primary="Home" />
                     </StyledMenuItem>
                 </Link>
+
+                <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleExpansion('panel1')}>
+                    <ExpansionPanelSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography className={classes.heading}>CNN</Typography>
+                    </ExpansionPanelSummary>
+
+                    <Link to="/fakeNewsDetector" className={classes.link} >
+                        <StyledMenuItem>
+                            <ExpansionPanelDetails>
+                                <Typography>Autonomous Driving</Typography>
+                            </ExpansionPanelDetails>
+                        </StyledMenuItem>
+                    </Link>
+
+                    <Link to="/fakeNewsDetector" className={classes.link} >
+                        <StyledMenuItem>
+                            <ExpansionPanelDetails>
+                                <Typography>Residual Networks</Typography>
+                            </ExpansionPanelDetails>
+                        </StyledMenuItem>
+                    </Link>
+
+                    <ExpansionPanelDetails>
+                        <Typography>ConvNet & TensorFlow</Typography>
+                    </ExpansionPanelDetails>
+
+
+                    <ExpansionPanelDetails>
+                        <Typography>Keras Introduction</Typography>
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
 
                 <Link to="/fakeNewsDetector" className={classes.link} >
                     <StyledMenuItem>

@@ -35,13 +35,13 @@ const ControlledExpansionPanels = ({
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleChange = panel => (event, isExpanded) => {
+  const handleExpansion = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   return (
     <div className={classes.root} >
-      <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+      <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleExpansion('panel1')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
@@ -53,7 +53,7 @@ const ControlledExpansionPanels = ({
           <Typography>{firstText}</Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+      <ExpansionPanel expanded={expanded === 'panel2'} onChange={handleExpansion('panel2')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2bh-content"
@@ -65,7 +65,7 @@ const ControlledExpansionPanels = ({
           <Typography>{secondText}</Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+      <ExpansionPanel expanded={expanded === 'panel3'} onChange={handleExpansion('panel3')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3bh-content"
