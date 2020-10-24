@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-
 import {
     withStyles,
     Menu,
@@ -20,6 +19,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import HomeIcon from '@material-ui/icons/Home';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import menuList from './menuList';
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -28,14 +28,15 @@ const useStyles = makeStyles(theme => ({
     link: {
         textDecoration: 'none',
         color: theme.palette.textPrimary.main
-    }
+    },
 }));
 
-const StyledMenu = withStyles({
+const StyledMenu = withStyles(theme => ({
     paper: {
-        // border: '1px solid #000',
+        // border: '0.2px solid #000',
+        backgroundColor: theme.palette.primary.main,
     },
-})(props => (
+}))(props => (
     <Menu
         elevation={0}
         getContentAnchorEl={null}
@@ -79,15 +80,6 @@ export default function ProjectsMenu() {
         setAnchorEl(null);
     };
 
-    const MenuItem = (link, text) => (
-        <Link to={link} className={classes.link} >
-            <StyledMenuItem>
-                <ExpansionPanelDetails>
-                    <Typography>{text}</Typography>
-                </ExpansionPanelDetails>
-            </StyledMenuItem>
-        </Link>
-    )
     return (
         <div>
             <IconButton
@@ -115,40 +107,26 @@ export default function ProjectsMenu() {
                     </StyledMenuItem>
                 </Link>
 
-                <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleExpansion('panel1')}>
-                    <ExpansionPanelSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1bh-content"
-                        id="panel1bh-header"
-                    >
-                        <Typography className={classes.heading}>CNN</Typography>
-                    </ExpansionPanelSummary>
-
-                    <Link to="/fakeNewsDetector" className={classes.link} >
-                        <StyledMenuItem>
-                            <ExpansionPanelDetails>
-                                <Typography>Autonomous Driving</Typography>
-                            </ExpansionPanelDetails>
-                        </StyledMenuItem>
-                    </Link>
-
-                    <Link to="/fakeNewsDetector" className={classes.link} >
-                        <StyledMenuItem>
-                            <ExpansionPanelDetails>
-                                <Typography>Residual Networks</Typography>
-                            </ExpansionPanelDetails>
-                        </StyledMenuItem>
-                    </Link>
-
-                    <ExpansionPanelDetails>
-                        <Typography>ConvNet & TensorFlow</Typography>
-                    </ExpansionPanelDetails>
-
-
-                    <ExpansionPanelDetails>
-                        <Typography>Keras Introduction</Typography>
-                    </ExpansionPanelDetails>
-                </ExpansionPanel>
+                {menuList.map(topic => (
+                    <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleExpansion('panel1')}>
+                        <ExpansionPanelSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1bh-content"
+                            id="panel1bh-header"
+                        >
+                            <Typography className={classes.heading}>{topic.topic}</Typography>
+                        </ExpansionPanelSummary>
+                        {topic.items.map(item => (
+                            <Link to={item.link} className={classes.link} >
+                                <StyledMenuItem>
+                                    <ExpansionPanelDetails>
+                                        <Typography>{item.title}</Typography>
+                                    </ExpansionPanelDetails>
+                                </StyledMenuItem>
+                            </Link>
+                        ))}
+                    </ExpansionPanel>
+                ))}
 
                 <Link to="/fakeNewsDetector" className={classes.link} >
                     <StyledMenuItem>

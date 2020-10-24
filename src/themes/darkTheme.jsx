@@ -7,14 +7,14 @@ export const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
     primary: {
-      main: "#212121",
+      main: "#263238",
       heart: '#ef6c00',
     },
     secondary: {
         main: '#bdbdbd'
     },
     aboutDrawer: {
-      main: '#212121'
+      main: '#263238'
     },
     textPrimary: {
       main: '#fafafa'
