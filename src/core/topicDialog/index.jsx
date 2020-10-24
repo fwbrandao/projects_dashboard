@@ -46,7 +46,9 @@ const projectsCardCNN = [
         projectTitle: 'Autonomous driving - Car detection',
         projectIntro: 'Object detection using the very powerful YOLO model',
         skills: ['YOLO'],
-        img: CarDetection
+        img: CarDetection,
+        link: "/autonomousDriving",
+        gitHub: "https://github.com/fwbrandao/Deep_Learning_Specialization_Coursera/blob/master/Convolutional_Neural_Networks/Week_3/Autonomous_driving_application_Car_detection_v3a.ipynb",
     },
     {
         projectTitle: 'Residual Networks (ResNets)',

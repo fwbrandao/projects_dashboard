@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import {
-    Box,
     Button,
     Card,
     CardActionArea,
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     minWidth: 500,
     minHeight: 290,
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
   },
   media: {
     height: 370,
@@ -32,8 +32,10 @@ const useStyles = makeStyles(theme => ({
   },
   iconNotLiked: {
     marginLeft: 'auto',
-    // color: theme.palette.secondary.main
-  }
+  },
+  link: {
+    textDecoration: 'none',
+  },
 }));
 
 const ProjectCard = ({ data }) => {
@@ -46,37 +48,42 @@ const ProjectCard = ({ data }) => {
 
   return (
       <Card className={classes.root} elevation={5}>
-        <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image={data.img}
-            title="Contemplative Reptile"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h6" color="textPrimary" component="h2">
-              {data.projectTitle}
-            </Typography>
-            <Typography variant="body2" color="textPrimary" component="p">
-              {data.projectIntro}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions disableSpacing>
-          <Button size="small">
-            View Project
-          </Button>
-          <IconButton
-              className={isLiked ? classes.iconLiked : classes.iconNotLiked}
-              onClick={handleLike}
-              aria-label="liked"
-          >
-            <ThumbUpOutlinedIcon />
-          </IconButton>
-          <IconButton aria-label="github">
-            <GitHubIcon />
-          </IconButton>
-        </CardActions>
-      </Card>
+        <Link to={data.link} className={classes.link}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image={data.img}
+              title="Contemplative Reptile"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h6" color="textPrimary" component="h2">
+                {data.projectTitle}
+              </Typography>
+              <Typography variant="body2" color="textPrimary" component="p">
+                {data.projectIntro}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Link>
+
+          <CardActions disableSpacing>
+            <Link to={data.link} className={classes.link}>
+                <Button size="small">
+                  View Project
+                </Button>
+            </Link>
+            <IconButton
+                className={isLiked ? classes.iconLiked : classes.iconNotLiked}
+                onClick={handleLike}
+                aria-label="liked"
+            >
+              <ThumbUpOutlinedIcon />
+            </IconButton>
+            <IconButton aria-label="github" href={data.gitHub} target="_blank">
+              <GitHubIcon />
+            </IconButton>
+          </CardActions>
+        </Card>
   );
 };
 
