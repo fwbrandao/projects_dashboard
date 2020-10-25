@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center',
       },
       intro: {
-        marginLeft: theme.spacing(1)
+        marginLeft: theme.spacing(1),
       }
 }));
 
@@ -47,7 +47,7 @@ const projectsCardCNN = [
         projectIntro: 'Object detection using the very powerful YOLO model',
         skills: ['YOLO'],
         img: CarDetection,
-        link: "/autonomousDriving",
+        link: "/autonomous-driving",
         gitHub: "https://github.com/fwbrandao/Deep_Learning_Specialization_Coursera/blob/master/Convolutional_Neural_Networks/Week_3/Autonomous_driving_application_Car_detection_v3a.ipynb",
     },
     {
@@ -55,16 +55,24 @@ const projectsCardCNN = [
         projectIntro: 'Use ResNets to build very deep CNNs',
         skills: ['Keras', 'Python', 'TensorFlow'],
         img: ResNets,
+        link: "/resnets",
+        gitHub: "https://github.com/fwbrandao/Deep_Learning_Specialization_Coursera/blob/master/Convolutional_Neural_Networks/Week_2/Residual_Networks_v2a.ipynb"
     },
     {
         projectTitle: 'ConvNet & TensorFlow application',
         projectIntro: 'ConvNet in TensorFlow for a classification problem',
-        skills: ['Python', 'TensorFlow']
+        skills: ['Python', 'TensorFlow'],
+        img: CarDetection,
+        link: "/convnet-and-tensorflow",
+        gitHub: "https://github.com/fwbrandao/Deep_Learning_Specialization_Coursera/blob/master/Convolutional_Neural_Networks/Week_1/Convolution_model_Application.ipynb",
     },
     {
         projectTitle: 'Keras introduction',
         projectIntro: 'Emotion Detection in Images of Faces',
-        skills: ['Keras', 'Python', 'TensorFlow']
+        skills: ['Keras', 'Python', 'TensorFlow'],
+        img: CarDetection,
+        link: "/keras-intro",
+        gitHub: "https://github.com/fwbrandao/Deep_Learning_Specialization_Coursera/blob/master/Convolutional_Neural_Networks/Week_2/Keras_Tutorial_v2a.ipynb"
     },
   ]
 
@@ -95,7 +103,7 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
                 </Toolbar>
             </AppBar>
             <Box mb={2}>
-                <ListItem button p={3}>
+                <ListItem p={3}>
                     <ListItemText className={classes.intro}>
                         {topicData.topicIntro}
                     </ListItemText>

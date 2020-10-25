@@ -15,10 +15,10 @@ ReactDOM.render(
         <Router>
             <Route path="/" exact component={App} />
             {/* <Route path="/About" component={About} /> */}
-            <Route path="/autonomousDriving" component={AutonomousDriving} />
-            <Route path="/fakeNewsDetector" component={FakeNewsDetector} />
-            <Route path="/DocumentAnalysisNLP" component={DocumentAnalysisNLP} />
-            <Route path="/FaceRecognition" component={FaceRecognition} />
+            <Route path="/autonomous-driving" component={AutonomousDriving} />
+            <Route path="/fake-news-detector" component={FakeNewsDetector} />
+            <Route path="/document-analysis-NLP" component={DocumentAnalysisNLP} />
+            <Route path="/face-recognition" component={FaceRecognition} />
         </Router>
     </ThemeProvider>
 , document.getElementById('root'));

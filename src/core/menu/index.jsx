@@ -128,7 +128,7 @@ export default function ProjectsMenu() {
                     </ExpansionPanel>
                 ))}
 
-                <Link to="/fakeNewsDetector" className={classes.link} >
+                <Link to="/fake-news-detector" className={classes.link} >
                     <StyledMenuItem>
                         <ListItemIcon>
                             <FindInPageIcon fontSize="small" />

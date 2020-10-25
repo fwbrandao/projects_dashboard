@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.main,
   },
   media: {
-    height: 370,
+    height: 270,
   },
   iconLiked: {
       marginLeft: 'auto',
