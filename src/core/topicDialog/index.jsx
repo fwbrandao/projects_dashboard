@@ -20,6 +20,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import ProjectCard from '../projectCard';
 import { projectsCardCNN } from './projectCardData';
 
+const gitHubCNN = "https://github.com/fwbrandao/Deep_Learning/tree/master/Convolutional_Neural_Networks";
+const gitHubANN = "https://github.com/fwbrandao/Deep_Learning/tree/master/Neural%20Networks%20and%20Deep%20Learning/Week_2";
+
 
 const useStyles = makeStyles(theme => ({
       appBar: {
@@ -53,10 +56,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const TopicDialog = ({ open, closeDialog, topicData }) => {
     const classes = useStyles();
     const [projectCard, setProjectCard] = useState([]);
+    const [gitHubForTopic, setGitHubForTopic] = useState([]);
+
 
     useEffect(() => {
         if (topicData.id === 'CNN') {
-            setProjectCard(projectsCardCNN)
+            setProjectCard(projectsCardCNN);
+            setGitHubForTopic(gitHubCNN);
+        }
+        if (topicData.id === 'ANN') {
+            setProjectCard(projectsCardCNN);
+            setGitHubForTopic(gitHubANN);
         }
     },[projectCard, topicData.id]);
 
@@ -75,7 +85,7 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
             <Box pb={2} className={classes.aboutProject}>
                 <AboutProject
                     description={topicData.topicIntro}
-                    gitHubLink="https://github.com/fwbrandao/Deep_Learning/tree/master/Convolutional_Neural_Networks"
+                    gitHubLink={gitHubForTopic}
                 />
             </Box>
             <Box className={classes.projectCard}>
