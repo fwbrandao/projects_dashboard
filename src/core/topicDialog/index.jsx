@@ -15,21 +15,24 @@ import {
     Typography,
     makeStyles,
 } from '@material-ui/core';
+import AboutProject from '../aboutProject';
 import CloseIcon from '@material-ui/icons/Close';
 import ProjectCard from '../projectCard';
 import { projectsCardCNN } from './projectCardData';
 
 
 const useStyles = makeStyles(theme => ({
-    appBar: {
+      appBar: {
         position: 'relative',
       },
       titles: {
         flex: 1,
       },
       projectCard: {
-          display: 'flex',
-          flexGrow: 1
+        display: 'flex',
+        flexGrow: 1,
+        backgroundColor: theme.palette.backgroundColor.color,
+        paddingBottom: theme.spacing(2),
       },
       gridItem: {
         display: 'flex',
@@ -37,6 +40,9 @@ const useStyles = makeStyles(theme => ({
       },
       intro: {
         marginLeft: theme.spacing(1),
+      },
+      aboutProject: {
+        backgroundColor: theme.palette.backgroundColor.color
       }
 }));
 
@@ -66,15 +72,13 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <Box mb={2}>
-                <ListItem p={3}>
-                    <ListItemText className={classes.intro}>
-                        {topicData.topicIntro}
-                    </ListItemText>
-                </ListItem>
-                <Divider />
+            <Box pb={2} className={classes.aboutProject}>
+                <AboutProject
+                    description={topicData.topicIntro}
+                    gitHubLink="https://github.com/fwbrandao/Deep_Learning/tree/master/Convolutional_Neural_Networks"
+                />
             </Box>
-            <Box className={classes.projectCard} >
+            <Box className={classes.projectCard}>
                 <Grid container spacing={3}>
                     {projectCard.map(item => (
                         <Grid className={classes.gridItem} item xs={6}>

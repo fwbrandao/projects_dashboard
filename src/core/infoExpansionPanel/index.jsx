@@ -11,7 +11,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    marginBottom: '15px'
+    marginBottom: '15px',
+  },
+  expansionPanel: {
+    backgroundColor: theme.palette.primary.main
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -41,7 +44,7 @@ const ControlledExpansionPanels = ({
 
   return (
     <div className={classes.root} >
-      <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleExpansion('panel1')}>
+      <ExpansionPanel className={classes.expansionPanel} expanded={expanded === 'panel1'} onChange={handleExpansion('panel1')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
@@ -53,7 +56,7 @@ const ControlledExpansionPanels = ({
           <Typography>{firstText}</Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel2'} onChange={handleExpansion('panel2')}>
+      <ExpansionPanel className={classes.expansionPanel} expanded={expanded === 'panel2'} onChange={handleExpansion('panel2')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2bh-content"
@@ -65,7 +68,7 @@ const ControlledExpansionPanels = ({
           <Typography>{secondText}</Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel3'} onChange={handleExpansion('panel3')}>
+      <ExpansionPanel className={classes.expansionPanel} expanded={expanded === 'panel3'} onChange={handleExpansion('panel3')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3bh-content"

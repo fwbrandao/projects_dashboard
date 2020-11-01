@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
     flexBasis: '29.333333%',
     display: 'flex',
     justifyContent: 'center',
-  }
+  },
 }));
 
 const App = () => {

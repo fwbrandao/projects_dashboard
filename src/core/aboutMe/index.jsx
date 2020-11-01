@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
         listStyle: 'none',
         padding: theme.spacing(0.5),
         margin: 0,
+        backgroundColor: theme.palette.primary.main,
     },
     chip: {
         margin: theme.spacing(0.5),
@@ -123,7 +124,7 @@ const AboutMe = () => {
                 </IconButton>
             </Link>
         </Tooltip>
-      <IconButton
+      {/* <IconButton
         className={clsx(classes.expand, {
           [classes.expandOpen]: expanded,
         })}
@@ -132,12 +133,12 @@ const AboutMe = () => {
         aria-label="show more"
       >
         <ExpandMoreIcon />
-      </IconButton>
+      </IconButton> */}
     </CardActions>
     <Divider />
-    <Typography className={classes.footer}>Footer</Typography>
+    {/* <Typography className={classes.footer}>Footer</Typography> */}
 
-    <Collapse in={expanded} timeout="auto" unmountOnExit>
+    {/* <Collapse in={expanded} timeout="auto" unmountOnExit> */}
       <CardContent>
         <Typography variant="body2" paragraph>Skills learned with my projects</Typography>
             <Paper component="ul" className={classes.chipRoot}>
@@ -162,7 +163,7 @@ const AboutMe = () => {
                 })}
             </Paper>
       </CardContent>
-    </Collapse>
+    {/* </Collapse> */}
   </Card>
   );
 }

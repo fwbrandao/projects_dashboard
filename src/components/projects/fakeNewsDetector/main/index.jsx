@@ -21,7 +21,10 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center"
     },
-    toolbar: theme.mixins.toolbar
+    toolbar: theme.mixins.toolbar,
+    controlledExpansionPanels: {
+        backgroundColor: theme.palette.primary.main
+    }
 }));
 
 const FakeNewsDetector = () => {
@@ -64,6 +67,7 @@ const FakeNewsDetector = () => {
                     </Button>
                 </Box>
                 {toggledInfo ? <ControlledExpansionPanels
+                    className={classes.controlledExpansionPanels}
                     firstHeader='What is a PassiveAggressiveClassifier?'
                     firstText='Passive Aggressive algorithms are online learning algorithms.
                 Such an algorithm remains passive for a correct classification outcome,

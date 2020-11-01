@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
         textDecoration: 'none',
         color: theme.palette.textPrimary.main
     },
+    expansionPanel: {
+        backgroundColor: theme.palette.primary.main,
+    }
 }));
 
 const StyledMenu = withStyles(theme => ({
@@ -108,7 +111,7 @@ export default function ProjectsMenu() {
                 </Link>
 
                 {menuList.map(topic => (
-                    <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleExpansion('panel1')}>
+                    <ExpansionPanel className={classes.expansionPanel} expanded={expanded === 'panel1'} onChange={handleExpansion('panel1')}>
                         <ExpansionPanelSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1bh-content"
