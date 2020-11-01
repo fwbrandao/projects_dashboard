@@ -16,9 +16,9 @@ import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 700,
+    maxWidth: 600,
     maxHeight: 790,
-    minWidth: 500,
+    minWidth: 600,
     minHeight: 290,
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.main,

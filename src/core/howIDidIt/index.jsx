@@ -8,11 +8,12 @@ import {
   from '@material-ui/core';
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: '80%',
     margin: '10px auto',
-    display: "flex"
+    display: "flex",
+    backgroundColor: theme.palette.primary.main
   },
   title: {
     fontSize: 18,
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
     justifyContent: "center",
     marginBottom: '15px'
   },
-});
+}));
 
 const HowIDidIt = ({ title, description, code, code2, code3, code4, code5, code6, code7, link }) => {
   const classes = useStyles();

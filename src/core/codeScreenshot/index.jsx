@@ -5,7 +5,8 @@ const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: '80%',
     margin: '10px auto',
-    height: '250px'
+    height: '250px',
+    backgroundColor: theme.palette.primary.main
   },
   media: {
     paddingTop: '17.25%',

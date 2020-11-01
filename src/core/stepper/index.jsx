@@ -7,7 +7,7 @@ import PostAddIcon from '@material-ui/icons/PostAdd';
 import ImageSearchIcon from '@material-ui/icons/ImageSearch';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 
-const useQontoStepIconStyles = makeStyles({
+const useQontoStepIconStyles = makeStyles(theme => ({
   root: {
     color: '#eaeaf0',
     display: 'flex',
@@ -28,7 +28,7 @@ const useQontoStepIconStyles = makeStyles({
     zIndex: 1,
     fontSize: 18,
   },
-});
+}));
 
 function QontoStepIcon(props) {
   const classes = useQontoStepIconStyles();
