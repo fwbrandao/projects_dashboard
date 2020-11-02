@@ -35,9 +35,12 @@ const useStyles = makeStyles((theme) => ({
     },
     root: {
         maxWidth: 345,
-        backgroundColor: theme.palette.aboutDrawer.main,
+        backgroundColor: theme.palette.primary.main,
         height: '100vh',
         overflow: 'auto',
+    },
+    avatar: {
+      borderRadius: '52px'
     },
     large: {
         width: theme.spacing(14),
@@ -91,13 +94,15 @@ const AboutMe = () => {
     <Card className={classes.root}>
     <CardHeader
       avatar={
-        <Avatar alt="Fernando Brandao" src={AvatarImg} className={classes.large}/>
+        <Paper elevation={10} className={classes.avatar}>
+          <Avatar alt="Fernando Brandao" src={AvatarImg} className={classes.large}/>
+        </Paper>
       }
-      action={
-        <IconButton aria-label="settings">
-          <MoreVertIcon />
-        </IconButton>
-      }
+      // action={
+      //   <IconButton aria-label="settings">
+      //     <MoreVertIcon />
+      //   </IconButton>
+      // }
       title="Fernando Brandao"
       subheader="Software Engineer & Data Scientist"
     />
@@ -141,7 +146,7 @@ const AboutMe = () => {
     {/* <Collapse in={expanded} timeout="auto" unmountOnExit> */}
       <CardContent>
         <Typography variant="body2" paragraph>Skills learned with my projects</Typography>
-            <Paper component="ul" className={classes.chipRoot}>
+            <Paper component="ul" className={classes.chipRoot} elevation={6}>
                 {chipData.map((data) => {
                     let icon;
 
