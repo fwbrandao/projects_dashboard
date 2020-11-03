@@ -56,13 +56,23 @@ const App = () => {
   const [openDialog, setDialogOpen] = useState(false);
   const [topicData, setTopicData] = useState([])
 
+
+  
+
   const [currentTime, setCurrentTime] = useState(0);
+  const [predict, setPredict] = useState(0);
 
   useEffect(() => {
     fetch('/api/time').then(res => res.json()).then(data => {
       setCurrentTime(data.time)
     })
+    fetch('/api/predict').then(res => res.json()).then(data => {
+      setPredict(data.result)
+    })
   }, []);
+
+
+
 
   const handleClickOpen = (item) => {
     setDialogOpen(true);
@@ -102,6 +112,8 @@ const App = () => {
       </Box>
       <Box>
       <p>The current time is {currentTime}</p>
+      <p>Prediction is  {predict}</p>
+
       </Box>
     </Box>
   );
