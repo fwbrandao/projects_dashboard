@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Fab,
@@ -56,6 +56,14 @@ const App = () => {
   const [openDialog, setDialogOpen] = useState(false);
   const [topicData, setTopicData] = useState([])
 
+  const [currentTime, setCurrentTime] = useState(0);
+
+  useEffect(() => {
+    fetch('/api/time').then(res => res.json()).then(data => {
+      setCurrentTime(data.time)
+    })
+  }, []);
+
   const handleClickOpen = (item) => {
     setDialogOpen(true);
     setTopicData(item)
@@ -91,6 +99,9 @@ const App = () => {
           closeDialog={handleDialogClose}
           topicData={topicData}
         />
+      </Box>
+      <Box>
+      <p>The current time is {currentTime}</p>
       </Box>
     </Box>
   );

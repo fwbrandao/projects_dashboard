@@ -20,7 +20,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    // runs flask server
     "start-server": "cd server && flask run --no-debugger",
     "build": "react-scripts build",
     "test": "react-scripts test",
