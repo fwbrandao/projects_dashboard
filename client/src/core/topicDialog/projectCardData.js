@@ -6,7 +6,7 @@ export const projectsCardCNN = [
     {
         projectTitle: 'Autonomous driving - Car detection',
         projectIntro: 'Autonomous driving and object detection using the very powerful YOLO model',
-        skills: ['YOLO'],
+        skills: ['YOLO model', 'Python'],
         img: CarDetection,
         link: "/autonomous-driving",
         gitHub: "https://github.com/fwbrandao/Deep_Learning/blob/master/Convolutional_Neural_Networks/Week_3/Autonomous_driving_application_Car_detection.ipynb",
@@ -14,7 +14,7 @@ export const projectsCardCNN = [
     {
         projectTitle: 'Abstractive Summarisation',
         projectIntro: 'Facebook Bart CNN Model for Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension',
-        skills: ['Python', 'transformers'],
+        skills: ['Python', 'Transformers'],
         img: TextSummarisation,
         link: "/abstractive-summarisation",
         gitHub: "https://github.com/fwbrandao/Abstractive_Summarisation/blob/main/Bart-CNN%20Abstractive%20Summarisation.ipynb",

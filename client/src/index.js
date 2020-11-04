@@ -6,6 +6,7 @@ import './index.css';
 
 import App from './App';
 import AutonomousDriving from './components/projects/autonomousDriving/main/index';
+import AbstractiveSummarisation from './components/projects/abstractiveSummarisation'
 import FakeNewsDetector from './components/projects/fakeNewsDetector/main/index';
 import DocumentAnalysisNLP from './components/projects/documentAnalysisNLP/main/index';
 import FaceRecognition from './components/projects/faceRecognition/main/index';
@@ -16,6 +17,7 @@ ReactDOM.render(
             <Route path="/" exact component={App} />
             {/* <Route path="/About" component={About} /> */}
             <Route path="/autonomous-driving" component={AutonomousDriving} />
+            <Route path="/abstractive-summarisation" component={AbstractiveSummarisation} />
             <Route path="/fake-news-detector" component={FakeNewsDetector} />
             <Route path="/document-analysis-NLP" component={DocumentAnalysisNLP} />
             <Route path="/face-recognition" component={FaceRecognition} />

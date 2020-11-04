@@ -8,7 +8,7 @@ export const lightTheme = createMuiTheme({
     type: 'light',
     primary: {
       main: '#fafafa',
-      heart: '#ef6c00',
+      heart: '#2196f3',
     },
     secondary: {
         main: '#4d84f1'
