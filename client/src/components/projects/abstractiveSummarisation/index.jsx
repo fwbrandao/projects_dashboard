@@ -9,6 +9,7 @@ import {
 
 import NavBar from '../../../core/navBar';
 import AboutProject from '../../../core/aboutProject/index';
+import abstractiveSummaryData from './abstractiveSummaryData';
 
 const useStyles = makeStyles((theme) => ({
     toolbar: theme.mixins.toolbar,
@@ -23,13 +24,32 @@ const AbstractiveSummarisation = () => {
         <NavBar />
         <div className={classes.toolbar} />
         <AboutProject
-            title="Abstractive Summarisation"
-            description="This advanced python project of detecting fake news deals with fake and real news.
-            Using sklearn, I've built a TfidfVectorizer on a dataset.
-            Then, I initialize a PassiveAggressive Classifier and fit the model. In the end,
-            the accuracy score and the confusion matrix tell us how well our model fares."
-            gitHubLink="https://github.com/fwbrandao/Fake_news_detector"
+            title={abstractiveSummaryData.title}
+            description={abstractiveSummaryData.description}
+            gitHubLink={abstractiveSummaryData.gitHubLink}
         />
+        <code>
+            <span>age                45222 non-null int64
+workclass          45222 non-null object
+education_level    45222 non-null object
+education-num      45222 non-null float64
+marital-status     45222 non-null object
+occupation         45222 non-null object
+relationship       45222 non-null object
+race               45222 non-null object
+sex                45222 non-null object
+capital-gain       45222 non-null float64
+capital-loss       45222 non-null float64
+hours-per-week     45222 non-null float64
+native-country     45222 non-null object
+income             45222 non-null object
+dtypes: float64(4), int64(1), object(9)</span>
+            <span>sdpsdknveprv</span>
+            <span>sdpsdknveprv</span>
+            <span>sdpsdknveprv</span>
+
+
+        </code>
     </Box>
     )}
 

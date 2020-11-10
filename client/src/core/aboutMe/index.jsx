@@ -70,7 +70,6 @@ const AboutMe = () => {
   const [expanded, setExpanded] = React.useState(false);
 
   const [chipData] = React.useState([
-    { key: 0, label: 'Tensorflow' },
     { key: 1, label: 'Convolutional Neural Network' },
     { key: 2, label: 'Artificial Neural Network' },
     { key: 3, label: 'Deep Learning' },
@@ -83,6 +82,7 @@ const AboutMe = () => {
     { key: 4, label: 'Multi-Task Learning' },
     { key: 4, label: 'Facial Recognition System' },
     { key: 4, label: 'Keras' },
+    { key: 0, label: 'Tensorflow' },
   ]);
 
   const handleExpandClick = () => {
@@ -149,18 +149,12 @@ const AboutMe = () => {
             <Paper component="ul" className={classes.chipRoot} elevation={6}>
                 {chipData.map((data) => {
                     let icon;
-
-                    // if (data.label === 'React') {
-                    // icon = <TagFacesIcon />;
-                    // }
-
                     return (
                     <li key={data.key}>
                         <Chip
                             icon={icon}
                             label={data.label}
                             size="small"
-                            // onDelete={data.label === 'React' ? undefined : handleDelete(data)}
                             className={classes.chip}
                         />
                     </li>
