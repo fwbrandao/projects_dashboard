@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     transition: 'all .2s ease-in-out',
     "&:hover": {
-      transform: 'scale(1.03)',
+      transform: 'scale(1.01)',
     }
   },
 }));
@@ -97,7 +97,7 @@ const App = () => {
         alignItems={'center'}
       >
         <Box className={classes.shadow} borderRadius={16} width='75%' height='65%'>
-          <Grid className={classes.grid} container spacing={3} dispaly='flex' justifyContent='center'>
+          <Grid className={classes.grid} container spacing={5} dispaly='flex' justifyContent='center'>
               {topicInfo.map(item => (
                 <Grid item xs={4} className={classes.gridItem}>
                     <Fab key={item.id} color="secondary" variant="extended" onClick={() => handleClickOpen(item)}>
