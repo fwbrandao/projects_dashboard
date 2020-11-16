@@ -4,4 +4,4 @@ const abstractiveSummaryData = {
     gitHubLink: "https://github.com/fwbrandao/Abstractive_Summarisation"
 }
 
-export default abstractiveSummaryData
+export default abstractiveSummaryData;

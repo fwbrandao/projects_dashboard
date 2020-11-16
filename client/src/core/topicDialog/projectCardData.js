@@ -4,7 +4,7 @@ import TextSummarisation from '../../images/text-Summarization.jpg';
 
 export const projectsCardCNN = [
     {
-        projectTitle: 'Autonomous driving - Car detection',
+        projectTitle: 'Autonomous driving - YOLO model',
         projectIntro: 'Autonomous driving and object detection using the very powerful YOLO model',
         skills: ['YOLO model', 'Python'],
         img: CarDetection,
@@ -20,11 +20,11 @@ export const projectsCardCNN = [
         gitHub: "https://github.com/fwbrandao/Abstractive_Summarisation/blob/main/Bart-CNN%20Abstractive%20Summarisation.ipynb",
     },
     {
-        projectTitle: 'Residual Networks (ResNets)',
+        projectTitle: 'Residual Networks - ResNets',
         projectIntro: 'Use ResNets to build very deep CNNs',
         skills: ['Keras', 'Python', 'TensorFlow'],
         img: ResNets,
-        link: "/resnets",
+        link: "/residual-networks",
         gitHub: "https://github.com/fwbrandao/Deep_Learning/blob/master/Convolutional_Neural_Networks/Week_2/Residual_Networks_v2.ipynb"
     },
     {

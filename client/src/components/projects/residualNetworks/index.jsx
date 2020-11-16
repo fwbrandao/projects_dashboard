@@ -8,14 +8,15 @@ import {
 } from '@material-ui/core';
 
 import NavBar from '../../../core/navBar';
-import AboutProject from '../../../core/aboutProject/index';
-import abstractiveSummaryData from './abstractiveSummaryData';
+import AboutProject from '../../../core/aboutProject';
+import residualNetworksData from './residualNetworksData';
 
 const useStyles = makeStyles((theme) => ({
     toolbar: theme.mixins.toolbar,
 }))
 
-const AbstractiveSummarisation = () => {
+
+const ResidualNetworks = () => {
     const classes = useStyles();
 
     return (
@@ -23,11 +24,11 @@ const AbstractiveSummarisation = () => {
         <NavBar />
         <div className={classes.toolbar} />
         <AboutProject
-            title={abstractiveSummaryData.title}
-            description={abstractiveSummaryData.description}
-            gitHubLink={abstractiveSummaryData.gitHubLink}
+            title={residualNetworksData.title}
+            description={residualNetworksData.description}
+            gitHubLink={residualNetworksData.gitHubLink}
         />
     </Box>
     )}
+export default ResidualNetworks;
 
-export default AbstractiveSummarisation;

@@ -48,10 +48,6 @@ const useStyles = makeStyles(theme => ({
     flexBasis: '29.333333%',
     display: 'flex',
     justifyContent: 'center',
-    transition: 'all .2s ease-in-out',
-    "&:hover": {
-      transform: 'scale(1.01)',
-    }
   },
 }));
 
@@ -100,7 +96,7 @@ const App = () => {
           <Grid className={classes.grid} container spacing={5} dispaly='flex' justifyContent='center'>
               {topicInfo.map(item => (
                 <Grid item xs={4} className={classes.gridItem}>
-                    <Fab key={item.id} color="secondary" variant="extended" onClick={() => handleClickOpen(item)}>
+                    <Fab key={item.id} color="primary" variant="extended" onClick={() => handleClickOpen(item)}>
                       {/* <NavigationIcon  className={classes.extendedIcon} /> */}
                       {item.topicTitle}
                     </Fab>
