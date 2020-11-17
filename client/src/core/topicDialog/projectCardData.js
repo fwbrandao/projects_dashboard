@@ -1,6 +1,9 @@
 import CarDetection from '../../images/self-driving-cars.jpg';
 import ResNets from '../../images/resNets.png';
 import TextSummarisation from '../../images/text-Summarization.jpg';
+import FaceEmotionDetection from '../../images/face-emotion-detection.png';
+import Tensorflow from '../../images/tensorflow.png';
+import Covid from '../../images/covid.png';
 
 export const projectsCardCNN = [
     {
@@ -31,7 +34,7 @@ export const projectsCardCNN = [
         projectTitle: 'ConvNet & TensorFlow application',
         projectIntro: 'ConvNet in TensorFlow for a classification problem',
         skills: ['Python', 'TensorFlow'],
-        img: CarDetection,
+        img: Tensorflow,
         link: "/convnet-and-tensorflow",
         gitHub: "https://github.com/fwbrandao/Deep_Learning/blob/master/Convolutional_Neural_Networks/Week_1/Convolution_model_Application_v1a.ipynb",
     },
@@ -39,8 +42,52 @@ export const projectsCardCNN = [
         projectTitle: 'Keras introduction',
         projectIntro: 'Emotion Detection in Images of Faces',
         skills: ['Keras', 'Python', 'TensorFlow'],
-        img: CarDetection,
+        img: FaceEmotionDetection,
         link: "/keras-intro",
         gitHub: "https://github.com/fwbrandao/Deep_Learning/blob/master/Convolutional_Neural_Networks/Week_2/Keras_Tutorial_v2.ipynb"
     },
-  ]
+  ];
+
+export const projectsCardANN = [
+    {
+        projectTitle: '',
+        projectIntro: '',
+        skills: [],
+        // img: CarDetection,
+        link: "",
+        gitHub: "",
+    },
+];
+
+export const projectsCardDEP = [
+    {
+        projectTitle: 'Covid-19 disease exploration, visualization and prediction',
+        projectIntro: 'Exploratory session on a corona virus(Covid-19 disease) dataset.',
+        skills: ['Panda', 'Numpy', 'Python'],
+        img: Covid,
+        link: "/covid",
+        gitHub: "https://github.com/fwbrandao/Covid-19_disease_analysis/blob/master/.ipynb_checkpoints/covid-19_visualization_prediction-checkpoint.ipynb",
+    },  
+];
+
+export const projectsCardSM = [
+    {
+        projectTitle: '',
+        projectIntro: '',
+        skills: [],
+        // img: CarDetection,
+        link: "",
+        gitHub: "",
+    },
+];
+
+export const projectsCardML = [
+    {
+        projectTitle: '',
+        projectIntro: '',
+        skills: [],
+        // img: CarDetection,
+        link: "",
+        gitHub: "",
+    },
+];

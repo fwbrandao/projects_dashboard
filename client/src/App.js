@@ -54,11 +54,7 @@ const useStyles = makeStyles(theme => ({
 const App = () => {
   const classes = useStyles();
   const [openDialog, setDialogOpen] = useState(false);
-  const [topicData, setTopicData] = useState([])
-
-
-
-
+  const [topicData, setTopicData] = useState([]);
   const [currentTime, setCurrentTime] = useState(0);
   const [predict, setPredict] = useState(0);
 
@@ -70,9 +66,6 @@ const App = () => {
       setPredict(data.result)
     })
   }, []);
-
-
-
 
   const handleClickOpen = (item) => {
     setDialogOpen(true);

@@ -18,11 +18,19 @@ import {
 import AboutProject from '../aboutProject';
 import CloseIcon from '@material-ui/icons/Close';
 import ProjectCard from '../projectCard';
-import { projectsCardCNN } from './projectCardData';
+import { 
+    projectsCardCNN ,
+    projectsCardANN,
+    projectsCardDEP,
+    projectsCardSM,
+    projectsCardML,
+} from './projectCardData';
 
 const gitHubCNN = "https://github.com/fwbrandao/Deep_Learning/tree/master/Convolutional_Neural_Networks";
 const gitHubANN = "https://github.com/fwbrandao/Deep_Learning/tree/master/Neural%20Networks%20and%20Deep%20Learning/Week_2";
-
+const gitHubDEP = "https://github.com/fwbrandao/Covid-19_disease_analysis";
+const gitHubSM = '';
+const gitHubML = '';
 
 const useStyles = makeStyles(theme => ({
       appBar: {
@@ -65,8 +73,20 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
             setGitHubForTopic(gitHubCNN);
         }
         if (topicData.id === 'ANN') {
-            setProjectCard(projectsCardCNN);
+            setProjectCard(projectsCardANN);
             setGitHubForTopic(gitHubANN);
+        }
+        if (topicData.id === 'DEP') {
+            setProjectCard(projectsCardDEP);
+            setGitHubForTopic(gitHubDEP);
+        }
+        if (topicData.id === 'SM') {
+            setProjectCard(projectsCardSM);
+            setGitHubForTopic(gitHubSM);
+        }
+        if (topicData.id === 'ML') {
+            setProjectCard(projectsCardML);
+            setGitHubForTopic(gitHubML);
         }
     },[projectCard, topicData.id]);
 
@@ -84,7 +104,7 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
             </AppBar>
             <Box pb={2} className={classes.aboutProject}>
                 <AboutProject
-                    description={topicData.topicIntro}
+                    description={topicData.topicIntro === '' ? 'Comming Soon.' : topicData.topicIntro}
                     gitHubLink={gitHubForTopic}
                 />
             </Box>
