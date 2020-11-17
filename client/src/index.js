@@ -11,6 +11,7 @@ import DocumentAnalysisNLP from './components/projects/documentAnalysisNLP/main/
 import FakeNewsDetector from './components/projects/fakeNewsDetector/main/index';
 import FaceRecognition from './components/projects/faceRecognition/main/index';
 import ResidualNetworks from './components/projects/residualNetworks';
+import Covid from './components/projects/covid';
 
 ReactDOM.render(
     <ThemeProvider>
@@ -18,6 +19,7 @@ ReactDOM.render(
             <Route path="/" exact component={App} />
             {/* <Route path="/About" component={About} /> */}
             <Route path="/residual-networks" component={ResidualNetworks} />
+            <Route path="/covid" component={Covid} />
             <Route path="/autonomous-driving" component={AutonomousDriving} />
             <Route path="/abstractive-summarisation" component={AbstractiveSummarisation} />
             <Route path="/fake-news-detector" component={FakeNewsDetector} />
