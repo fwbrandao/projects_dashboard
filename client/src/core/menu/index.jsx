@@ -19,7 +19,10 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import HomeIcon from '@material-ui/icons/Home';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import menuList from './menuList';
+import { 
+    menuList_CNN,
+    menuList_DEP,
+ } from './menuList';
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -110,12 +113,33 @@ export default function ProjectsMenu() {
                     </StyledMenuItem>
                 </Link>
 
-                {menuList.map(topic => (
+                {menuList_CNN.map(topic => (
                     <ExpansionPanel className={classes.expansionPanel} expanded={expanded === 'panel1'} onChange={handleExpansion('panel1')}>
                         <ExpansionPanelSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1bh-content"
                             id="panel1bh-header"
+                        >
+                            <Typography className={classes.heading}>{topic.topic}</Typography>
+                        </ExpansionPanelSummary>
+                        {topic.items.map(item => (
+                            <Link to={item.link} className={classes.link} >
+                                <StyledMenuItem>
+                                    <ExpansionPanelDetails>
+                                        <Typography>{item.title}</Typography>
+                                    </ExpansionPanelDetails>
+                                </StyledMenuItem>
+                            </Link>
+                        ))}
+                    </ExpansionPanel>
+                ))}
+
+                {menuList_DEP.map(topic => (
+                    <ExpansionPanel className={classes.expansionPanel} expanded={expanded === 'panel2'} onChange={handleExpansion('panel2')}>
+                        <ExpansionPanelSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel2bh-content"
+                            id="panel2bh-header"
                         >
                             <Typography className={classes.heading}>{topic.topic}</Typography>
                         </ExpansionPanelSummary>
