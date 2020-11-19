@@ -5,7 +5,7 @@ import ThemeProvider from './themes/ThemeProvider'
 import './index.css';
 
 import App from './App';
-import AbstractiveSummarisation from './components/projects/abstractiveSummarisation'
+import AbstractiveSummarisation from './components/projects/abstractiveSummarisation/main'
 import AutonomousDriving from './components/projects/autonomousDriving/main/index';
 import DocumentAnalysisNLP from './components/projects/documentAnalysisNLP/main/index';
 import FakeNewsDetector from './components/projects/fakeNewsDetector/main/index';

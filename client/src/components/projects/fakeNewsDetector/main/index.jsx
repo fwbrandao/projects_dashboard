@@ -55,8 +55,8 @@ const FakeNewsDetector = () => {
                 the accuracy score and the confusion matrix tell us how well our model fares."
                 gitHubLink="https://github.com/fwbrandao/Fake_news_detector"
             />
-            <Box mt={2} ml={18} mr={18} mb={2}>
-                <Box mb={2}>
+            <Box mt={4} ml={18} mr={18} mb={2}>
+                {/* <Box mb={2}>
                     <Button
                         size="small"
                         onClick={handleToggleInfo}
@@ -65,8 +65,8 @@ const FakeNewsDetector = () => {
                     >
                         {!toggledInfo ? 'Project info' : 'Close info'}
                     </Button>
-                </Box>
-                {toggledInfo ? <ControlledExpansionPanels
+                </Box> */}
+                <ControlledExpansionPanels
                     className={classes.controlledExpansionPanels}
                     firstHeader='What is a PassiveAggressiveClassifier?'
                     firstText='Passive Aggressive algorithms are online learning algorithms.
@@ -89,7 +89,7 @@ const FakeNewsDetector = () => {
                 This is often done to further or impose certain ideas and is often achieved with political agendas.
                 Such news items may contain false and/or exaggerated claims, and may end up being viralized by algorithms,
                 and users may end up in a filter bubble.'
-                /> : null}
+                />
 
                 <Box mt={6}>
                     <Typography

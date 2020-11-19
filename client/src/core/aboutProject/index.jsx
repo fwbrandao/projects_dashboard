@@ -12,6 +12,7 @@ import {
 }
   from '@material-ui/core';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import MenuBookOutlinedIcon from '@material-ui/icons/MenuBookOutlined';
 
 const useStyles = makeStyles(theme =>  ({
   root: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles(theme =>  ({
   }
 }));
 
-const AboutProject = ({ title, description, gitHubLink }) => {
+const AboutProject = ({ title, description, gitHubLink, originalPaper}) => {
   const classes = useStyles();
 
   return (
@@ -65,6 +66,15 @@ const AboutProject = ({ title, description, gitHubLink }) => {
               </IconButton>
             </Link>
           </Tooltip>
+          {originalPaper ? (
+            <Tooltip title="Original Paper" aria-label="Original Paper">
+              <Link href={originalPaper} target="_blank">
+                <IconButton aria-label="Original Paper" color='primary'>
+                  <MenuBookOutlinedIcon color='action' fontSize='small' />
+                </IconButton>
+              </Link>
+            </Tooltip>
+          ) : ''}
         </CardActions>
       </Box>
     </Card>

@@ -32,18 +32,18 @@ export const projectsCardCNN = [
     },
     {
         projectTitle: 'ConvNet & TensorFlow application',
-        projectIntro: 'ConvNet in TensorFlow for a classification problem',
+        projectIntro: 'Build and train a ConvNet in TensorFlow for a classification problem',
         skills: ['Python', 'TensorFlow'],
         img: Tensorflow,
-        link: "/convnet-and-tensorflow",
+        link: "/convnet-tensorflow",
         gitHub: "https://github.com/fwbrandao/Deep_Learning/blob/master/Convolutional_Neural_Networks/Week_1/Convolution_model_Application_v1a.ipynb",
     },
     {
         projectTitle: 'Keras introduction',
-        projectIntro: 'Emotion Detection in Images of Faces',
+        projectIntro: 'Emotion Detection in images of faces',
         skills: ['Keras', 'Python', 'TensorFlow'],
         img: FaceEmotionDetection,
-        link: "/keras-intro",
+        link: "/keras-introduction",
         gitHub: "https://github.com/fwbrandao/Deep_Learning/blob/master/Convolutional_Neural_Networks/Week_2/Keras_Tutorial_v2.ipynb"
     },
   ];
