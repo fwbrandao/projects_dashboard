@@ -19,3 +19,12 @@ export const menuList_DEP = [
         ]
     }
 ];
+
+export const menuList_NLP = [
+    {
+        topic: 'NLP',
+        items: [
+            {title: "Document Analysis / NLP", link: "/document-analysis-NLP"}
+        ]
+    }
+]

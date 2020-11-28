@@ -22,6 +22,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { 
     menuList_CNN,
     menuList_DEP,
+    menuList_NLP,
  } from './menuList';
 
 const useStyles = makeStyles(theme => ({
@@ -155,21 +156,33 @@ export default function ProjectsMenu() {
                     </ExpansionPanel>
                 ))}
 
+                {menuList_NLP.map(topic => (
+                    <ExpansionPanel className={classes.expansionPanel} expanded={expanded === 'panel3'} onChange={handleExpansion('panel3')}>
+                    <ExpansionPanelSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel3bh-content"
+                        id="panel3bh-header"
+                    >
+                        <Typography className={classes.heading}>{topic.topic}</Typography>
+                    </ExpansionPanelSummary>
+                    {topic.items.map(item => (
+                        <Link to={item.link} className={classes.link} >
+                            <StyledMenuItem>
+                                <ExpansionPanelDetails>
+                                    <Typography>{item.title}</Typography>
+                                </ExpansionPanelDetails>
+                            </StyledMenuItem>
+                        </Link>
+                    ))}
+                </ExpansionPanel>
+                ))}
+
                 <Link to="/fake-news-detector" className={classes.link} >
                     <StyledMenuItem>
                         <ListItemIcon>
                             <FindInPageIcon fontSize="small" />
                         </ListItemIcon>
                         <ListItemText primary="Fake News Detector" />
-                    </StyledMenuItem>
-                </Link>
-
-                <Link to="/DocumentAnalysisNLP" className={classes.link}>
-                    <StyledMenuItem>
-                        <ListItemIcon>
-                            <DescriptionIcon fontSize="small" />
-                        </ListItemIcon>
-                        <ListItemText primary="Document Analysis NLP" />
                     </StyledMenuItem>
                 </Link>
 
