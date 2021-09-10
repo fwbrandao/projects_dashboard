@@ -1,4 +1,6 @@
-React app for Data Science projects. 
+React app for Projects Dashboard. 
+
+This a work in progress dashboard to host some of my Data Science projects.
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
