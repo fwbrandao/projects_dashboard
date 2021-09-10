@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Fab,
   Grid,
   makeStyles,
 } from '@material-ui/core';
-import NavigationIcon from '@material-ui/icons/Navigation';
+// import NavigationIcon from '@material-ui/icons/Navigation';
 import NavBar from './core/navBar/index';
 import TopicDialog from './core/topicDialog/index';
 import topicInfo from './assets/topicsInfo'
