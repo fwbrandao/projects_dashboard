@@ -2,11 +2,11 @@ import { Theme } from "@material-ui/core";
 import { lightTheme } from "./lightTheme";
 import { darkTheme } from "./darkTheme";
 
-export function themeCreator(theme: string): Theme {
+export function themeCreator(theme) {
   return themeMap[theme];
 }
 
-const themeMap: { [key: string]: Theme } = {
+const themeMap = {
   lightTheme,
   darkTheme
 };

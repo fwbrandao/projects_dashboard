@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MuiThemeProvider } from "@material-ui/core";
-import { themeCreator } from './baseTheme';
+import { themeCreator } from './baseTheme.jsx';
 
 
 export const ThemeContext = React.createContext((themeName) => {});

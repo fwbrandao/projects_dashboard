@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import ThemeProvider from './themes/ThemeProvider'
+import ThemeProvider from './themes/themeProvider'
 import './index.css';
 
 import App from './App';
