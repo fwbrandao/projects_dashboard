@@ -113,7 +113,7 @@ const NavBar = () => {
           <ProjectsMenu />
             <Typography variant="h6" className={classes.title}>
               <Link to="/" className={classes.link}>
-                  Data Science Projects
+                  Projects Dashboard
               </Link>
             </Typography>
           {!openDrawer ? (

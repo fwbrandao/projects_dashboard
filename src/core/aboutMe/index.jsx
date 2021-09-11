@@ -95,7 +95,7 @@ const AboutMe = () => {
     <CardHeader
       avatar={
         <Paper elevation={10} className={classes.avatar}>
-          <Avatar alt="Fernando Brandao" src={AvatarImg} className={classes.large}/>
+          <Avatar alt="F Brandao" src={AvatarImg} className={classes.large}/>
         </Paper>
       }
       // action={
@@ -104,14 +104,14 @@ const AboutMe = () => {
       //   </IconButton>
       // }
       title="Fernando Brandao"
-      subheader="Software Engineer & Data Scientist"
+      subheader="Software Engineer"
     />
     <CardContent>
       <Typography variant="body2" color="textSecondary" component="p">
         Hello and Welcome to my Data Science portfolio.
       </Typography>
       <Typography variant="body2" color="textSecondary" component="p">
-        This is a space where I share my projects and ideas.
+        This is a space where I share some of my projects and ideas.
       </Typography>
     </CardContent>
     <CardActions disableSpacing>
@@ -123,7 +123,7 @@ const AboutMe = () => {
             </Link>
             </Tooltip>
             <Tooltip title="Navigate to my LinkedIn" aria-label="code">
-            <Link href="https://www.linkedin.com/in/fernando-b-170060151/" target="_blank">
+            <Link href="https://www.linkedin.com/in/fernando-b-b3b63021b/" target="_blank">
                 <IconButton aria-label="LinkedIn" >
                     <LinkedInIcon color="action" fontSize="large"/>
                 </IconButton>
