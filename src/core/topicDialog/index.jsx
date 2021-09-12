@@ -45,6 +45,11 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.backgroundColor.color,
         paddingBottom: theme.spacing(2),
       },
+      gridContainer: {
+        '@media (max-width: 1224px)': {
+        display: 'table-column-group'
+        }
+      },
       gridItem: {
         display: 'flex',
         justifyContent: 'center',
@@ -109,7 +114,7 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
                 />
             </Box>
             <Box className={classes.projectCard}>
-                <Grid container spacing={3}>
+                <Grid className={classes.gridContainer} container spacing={3}>
                     {projectCard.map(item => (
                         <Grid className={classes.gridItem} item xs={6}>
                             <ProjectCard data={item}/>

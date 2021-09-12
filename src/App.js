@@ -43,6 +43,9 @@ const useStyles = makeStyles(theme => ({
   },
   grid: {
     justifyContent: 'center',
+    '@media (max-width: 1024px)': {
+      display: 'none'
+    }
   },
   gridItem: {
     flexBasis: '29.333333%',
@@ -76,6 +79,8 @@ const App = () => {
     setDialogOpen(false);
   };
 
+  const isMobile = window.screen.width < 600;
+
   return (
     <Box >
       <NavBar />
@@ -91,7 +96,7 @@ const App = () => {
                 <Grid item xs={4} className={classes.gridItem}>
                     <Fab key={item.id} color="primary" variant="extended" onClick={() => handleClickOpen(item)}>
                       {/* <NavigationIcon  className={classes.extendedIcon} /> */}
-                      {item.topicTitle}
+                      <span>{item.topicTitle}</span>
                     </Fab>
                 </Grid>
               ))}
