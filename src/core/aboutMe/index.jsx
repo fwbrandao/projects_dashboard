@@ -103,7 +103,7 @@ const AboutMe = () => {
       //     <MoreVertIcon />
       //   </IconButton>
       // }
-      title="Fernando Brandao"
+      title="FB"
       subheader="Software Engineer"
     />
     <CardContent>
@@ -123,7 +123,7 @@ const AboutMe = () => {
             </Link>
             </Tooltip>
             <Tooltip title="Navigate to my LinkedIn" aria-label="code">
-            <Link href="https://www.linkedin.com/in/fernando-b-b3b63021b/" target="_blank">
+            <Link href="" target="_blank">
                 <IconButton aria-label="LinkedIn" >
                     <LinkedInIcon color="action" fontSize="large"/>
                 </IconButton>

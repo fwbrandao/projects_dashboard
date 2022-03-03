@@ -124,7 +124,7 @@ const NavBar = () => {
               onClick={handleDrawerOpen}
               className={clsx(openDrawer && classes.hide)}
               >
-              <Avatar alt="Fernando Brandao" src={AvatarImg} />
+              <Avatar alt="fb" src={AvatarImg} />
             </Button>
           ) : ''}
           {currentTheme === 'darkTheme' ? (
