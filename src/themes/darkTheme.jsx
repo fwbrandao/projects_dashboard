@@ -1,6 +1,6 @@
-import { createMuiTheme } from "@material-ui/core";
+import { createTheme } from "@material-ui/core/styles";
 
-export const darkTheme = createMuiTheme({
+export const darkTheme = createTheme({
   typography: {
     "fontFamily": `"Libre Baskerville", "Roboto", "Helvetica", "Arial", sans-serif`,
   },

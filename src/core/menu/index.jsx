@@ -8,22 +8,21 @@ import {
     ListItemText,
     IconButton,
     makeStyles,
-    ExpansionPanel,
-    ExpansionPanelDetails,
-    ExpansionPanelSummary,
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
     Typography
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import FindInPageIcon from '@material-ui/icons/FindInPage';
-import DescriptionIcon from '@material-ui/icons/Description';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import HomeIcon from '@material-ui/icons/Home';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { 
+import {
     menuList_CNN,
     menuList_DEP,
     menuList_NLP,
- } from './menuList';
+} from './menuList';
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -40,7 +39,6 @@ const useStyles = makeStyles(theme => ({
 
 const StyledMenu = withStyles(theme => ({
     paper: {
-        // border: '0.2px solid #000',
         backgroundColor: theme.palette.primary.main,
     },
 }))(props => (
@@ -75,9 +73,9 @@ export default function ProjectsMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpansion = panel => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+    const handleExpansion = panel => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
+    };
 
     const handleClick = event => {
         setAnchorEl(event.currentTarget);
@@ -115,66 +113,66 @@ export default function ProjectsMenu() {
                 </Link>
 
                 {menuList_CNN.map(topic => (
-                    <ExpansionPanel className={classes.expansionPanel} expanded={expanded === 'panel1'} onChange={handleExpansion('panel1')}>
-                        <ExpansionPanelSummary
+                    <Accordion key={topic.topic} className={classes.expansionPanel} expanded={expanded === 'panel1'} onChange={handleExpansion('panel1')}>
+                        <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1bh-content"
                             id="panel1bh-header"
                         >
                             <Typography className={classes.heading}>{topic.topic}</Typography>
-                        </ExpansionPanelSummary>
+                        </AccordionSummary>
                         {topic.items.map(item => (
-                            <Link to={item.link} className={classes.link} >
+                            <Link key={item.title} to={item.link} className={classes.link} >
                                 <StyledMenuItem>
-                                    <ExpansionPanelDetails>
+                                    <AccordionDetails>
                                         <Typography>{item.title}</Typography>
-                                    </ExpansionPanelDetails>
+                                    </AccordionDetails>
                                 </StyledMenuItem>
                             </Link>
                         ))}
-                    </ExpansionPanel>
+                    </Accordion>
                 ))}
 
                 {menuList_DEP.map(topic => (
-                    <ExpansionPanel className={classes.expansionPanel} expanded={expanded === 'panel2'} onChange={handleExpansion('panel2')}>
-                        <ExpansionPanelSummary
+                    <Accordion key={topic.topic} className={classes.expansionPanel} expanded={expanded === 'panel2'} onChange={handleExpansion('panel2')}>
+                        <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel2bh-content"
                             id="panel2bh-header"
                         >
                             <Typography className={classes.heading}>{topic.topic}</Typography>
-                        </ExpansionPanelSummary>
+                        </AccordionSummary>
                         {topic.items.map(item => (
-                            <Link to={item.link} className={classes.link} >
+                            <Link key={item.title} to={item.link} className={classes.link} >
                                 <StyledMenuItem>
-                                    <ExpansionPanelDetails>
+                                    <AccordionDetails>
                                         <Typography>{item.title}</Typography>
-                                    </ExpansionPanelDetails>
+                                    </AccordionDetails>
                                 </StyledMenuItem>
                             </Link>
                         ))}
-                    </ExpansionPanel>
+                    </Accordion>
                 ))}
 
                 {menuList_NLP.map(topic => (
-                    <ExpansionPanel className={classes.expansionPanel} expanded={expanded === 'panel3'} onChange={handleExpansion('panel3')}>
-                    <ExpansionPanelSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel3bh-content"
-                        id="panel3bh-header"
-                    >
-                        <Typography className={classes.heading}>{topic.topic}</Typography>
-                    </ExpansionPanelSummary>
-                    {topic.items.map(item => (
-                        <Link to={item.link} className={classes.link} >
-                            <StyledMenuItem>
-                                <ExpansionPanelDetails>
-                                    <Typography>{item.title}</Typography>
-                                </ExpansionPanelDetails>
-                            </StyledMenuItem>
-                        </Link>
-                    ))}
-                </ExpansionPanel>
+                    <Accordion key={topic.topic} className={classes.expansionPanel} expanded={expanded === 'panel3'} onChange={handleExpansion('panel3')}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel3bh-content"
+                            id="panel3bh-header"
+                        >
+                            <Typography className={classes.heading}>{topic.topic}</Typography>
+                        </AccordionSummary>
+                        {topic.items.map(item => (
+                            <Link key={item.title} to={item.link} className={classes.link} >
+                                <StyledMenuItem>
+                                    <AccordionDetails>
+                                        <Typography>{item.title}</Typography>
+                                    </AccordionDetails>
+                                </StyledMenuItem>
+                            </Link>
+                        ))}
+                    </Accordion>
                 ))}
 
                 <Link to="/fake-news-detector" className={classes.link} >

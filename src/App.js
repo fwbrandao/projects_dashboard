@@ -91,9 +91,9 @@ const App = () => {
         alignItems={'center'}
       >
         <Box className={classes.shadow} borderRadius={16} width='75%' height='65%'>
-          <Grid className={classes.grid} container spacing={5} dispaly='flex' justifyContent='center'>
+          <Grid className={classes.grid} container spacing={5} display='flex' justifyContent='center'>
               {topicInfo.map(item => (
-                <Grid item xs={4} className={classes.gridItem}>
+                <Grid key={item.id} item xs={4} className={classes.gridItem}>
                     <Fab key={item.id} color="primary" variant="extended" onClick={() => handleClickOpen(item)}>
                       {/* <NavigationIcon  className={classes.extendedIcon} /> */}
                       <span>{item.topicTitle}</span>

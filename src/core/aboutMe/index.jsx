@@ -74,15 +74,15 @@ const AboutMe = () => {
     { key: 2, label: 'Artificial Neural Network' },
     { key: 3, label: 'Deep Learning' },
     { key: 4, label: 'Backpropagation' },
-    { key: 4, label: 'Python Programming' },
-    { key: 4, label: 'Hyperparameter' },
-    { key: 4, label: 'Hyperparameter Optimization' },
-    { key: 4, label: 'Machine Learning' },
-    { key: 4, label: 'Inductive Transfer' },
-    { key: 4, label: 'Multi-Task Learning' },
-    { key: 4, label: 'Facial Recognition System' },
-    { key: 4, label: 'Keras' },
-    { key: 0, label: 'Tensorflow' },
+    { key: 5, label: 'Python Programming' },
+    { key: 6, label: 'Hyperparameter' },
+    { key: 7, label: 'Hyperparameter Optimization' },
+    { key: 8, label: 'Machine Learning' },
+    { key: 9, label: 'Inductive Transfer' },
+    { key: 10, label: 'Multi-Task Learning' },
+    { key: 11, label: 'Facial Recognition System' },
+    { key: 12, label: 'Keras' },
+    { key: 13, label: 'Tensorflow' },
   ]);
 
   const handleExpandClick = () => {
@@ -108,7 +108,7 @@ const AboutMe = () => {
     />
     <CardContent>
       <Typography variant="body2" color="textSecondary" component="p">
-        Hello and Welcome to my Data Science portfolio.
+        Hello and welcome to my projects portfolio.
       </Typography>
       <Typography variant="body2" color="textSecondary" component="p">
         This is a space where I share some of my projects and ideas.
