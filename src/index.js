@@ -14,12 +14,14 @@ import ResidualNetworks from './components/projects/residualNetworks';
 import ConvNetTensorflow from './components/projects/convNetTensorflow/main/index';
 import KerasIntro from './components/projects/kerasIntro/main/index'
 import Covid from './components/projects/covid';
+import {DataScience }from './components/projects/topicMainPage/index';
 
 ReactDOM.render(
     <ThemeProvider>
         <Router>
             <Route path="/" exact component={App} />
             {/* <Route path="/About" component={About} /> */}
+            <Route path="/data-science" component={DataScience} />
             <Route path="/residual-networks" component={ResidualNetworks} />
             <Route path="/covid" component={Covid} />
             <Route path="/convNet-tensorflow" component={ConvNetTensorflow} />
