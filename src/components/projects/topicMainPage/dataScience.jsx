@@ -70,7 +70,7 @@ const DataScience = () => {
   //   })
   // }, []);
 
-  const handleClickOpen = (item) => {
+  const handleOpen = (item) => {
     setDialogOpen(true);
     setTopicData(item)
   };
@@ -94,7 +94,7 @@ const DataScience = () => {
           <Grid className={classes.grid} container spacing={5} display='flex' justifyContent='center'>
             {topicInfo.map(item => (
               <Grid key={item.id} item xs={4} className={classes.gridItem}>
-                <Fab key={item.id} color="primary" variant="extended" onClick={() => handleClickOpen(item)}>
+                <Fab key={item.id} color="primary" variant="extended" onClick={() => handleOpen(item)}>
                   {/* <NavigationIcon  className={classes.extendedIcon} /> */}
                   <span>{item.topicTitle}</span>
                 </Fab>

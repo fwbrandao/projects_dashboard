@@ -7,6 +7,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import NavBar from './core/navBar/index';
+import TopicDialog from './core/topicDialog/index';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,17 +38,33 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const topics = [
+  { 
+    id: "miniJS", 
+    topicTitle: "Mini JS projects", 
+    topicIntro: 'Here are some small but fun JavaScript projects.'
+  },
+  { id: "dataScience", topicTitle: "Data Science" },
+  { id: "games", topicTitle: "Games" },
+  { id: "react", topicTitle: "React" },
+  { id: "coming", topicTitle: "Coming soon..." },
+];
+
 const App = () => {
   const classes = useStyles();
+  const [openDialog, setDialogOpen] = useState(false);
+  const [topicData, setTopicData] = useState([]);
 
-  const topics = [
-    { id: "miniJS", title: "Mini JS projects" },
-    { id: "data-science", title: "Data Science" },
-    { id: "games", title: "Games" },
-    { id: "react", title: "React" },
-    { id: "coming", title: "Coming soon..." },
 
-  ];
+  const handleOpen = (item) => {
+    if (item.id === "dataScience") return;
+    setTopicData(item);
+    setDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
 
   return (
     <Box className={classes.root}>
@@ -62,15 +79,24 @@ const App = () => {
           <Grid className={classes.grid} container spacing={5} display='flex' justifyContent='center'>
             {topics.map(item => (
               <Grid key={item.id} item xs={4} className={classes.gridItem}>
-                <Fab key={item.id} color="primary" variant="extended">
-                  <Link href='/data-science' className={classes.title}>{item.title}</Link>
+                <Fab key={item.id} color="primary" variant="extended" onClick={() => handleOpen(item)}>
+                  {item.id === "dataScience" ? (
+                    <Link href='/data-science' className={classes.title}>{item.topicTitle}</Link>
+                  ) : (
+                    <Link className={classes.title}>{item.topicTitle}</Link>
+                  )}
                 </Fab>
               </Grid>
             ))}
           </Grid>
         </Box>
+        <TopicDialog
+          open={openDialog}
+          closeDialog={handleDialogClose}
+          topicData={topicData}
+        />
       </Box>
-    </Box>
+    </Box >
   );
 }
 
