@@ -14,7 +14,7 @@ import ResidualNetworks from './components/projects/residualNetworks';
 import ConvNetTensorflow from './components/projects/convNetTensorflow/main/index';
 import KerasIntro from './components/projects/kerasIntro/main/index'
 import Covid from './components/projects/covid';
-import {DataScience }from './components/projects/topicMainPage/index';
+import {DataScience }from './pages/topicMainPage/index';
 
 ReactDOM.render(
     <ThemeProvider>

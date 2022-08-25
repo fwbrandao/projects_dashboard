@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link as LinkReact } from 'react-router-dom';
 import {
   Box,
   Fab,
@@ -8,10 +9,13 @@ import {
 } from '@material-ui/core';
 import NavBar from './core/navBar/index';
 import TopicDialog from './core/topicDialog/index';
+import mainTopicsInfo from './assets/mainTopicsInfo';
+import bgImage from './images/bgImage.jpg';
 
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.backgroundColor.color,
+    // backgroundImage: 'src(bgImage)'
   },
   content: {
     height: '100vh',
@@ -29,6 +33,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
   },
   title: {
+    textDecoration: 'none',
     color: theme.palette.textPrimary.main,
     "&:hover": { textDecoration: "none" }
   },
@@ -37,18 +42,6 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
   }
 }));
-
-const topics = [
-  { 
-    id: "miniJS", 
-    topicTitle: "Mini JS projects", 
-    topicIntro: 'Here are some small but fun JavaScript projects.'
-  },
-  { id: "dataScience", topicTitle: "Data Science" },
-  { id: "games", topicTitle: "Games" },
-  { id: "react", topicTitle: "React" },
-  { id: "coming", topicTitle: "Coming soon..." },
-];
 
 const App = () => {
   const classes = useStyles();
@@ -77,11 +70,11 @@ const App = () => {
       >
         <Box className={classes.topicsContainer} borderRadius={16} width='75%' height='65%'>
           <Grid className={classes.grid} container spacing={5} display='flex' justifyContent='center'>
-            {topics.map(item => (
+            {mainTopicsInfo.map(item => (
               <Grid key={item.id} item xs={4} className={classes.gridItem}>
                 <Fab key={item.id} color="primary" variant="extended" onClick={() => handleOpen(item)}>
                   {item.id === "dataScience" ? (
-                    <Link href='/data-science' className={classes.title}>{item.topicTitle}</Link>
+                    <LinkReact to='/data-science' className={classes.title}>{item.topicTitle}</LinkReact>
                   ) : (
                     <Link className={classes.title}>{item.topicTitle}</Link>
                   )}

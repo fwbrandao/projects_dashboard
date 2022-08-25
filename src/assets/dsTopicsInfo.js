@@ -1,4 +1,5 @@
-const topicsInfo = [
+// TODO - move this to a BE server
+const dsTopicsInfo = [
     {
       id: 'CNN',
       topicTitle: 'Convolution Neural Networks',
@@ -26,4 +27,4 @@ const topicsInfo = [
     },
 ];
 
-export default topicsInfo;
+export default dsTopicsInfo;

@@ -5,6 +5,8 @@ import FaceEmotionDetection from '../../images/face-emotion-detection.png';
 import Tensorflow from '../../images/tensorflow.png';
 import Covid from '../../images/covid.png';
 
+
+// TODO - move this to a BE server
 export const projectsCardCNN = [
     {
         projectTitle: 'Autonomous driving - YOLO model',

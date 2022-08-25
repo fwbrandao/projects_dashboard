@@ -93,6 +93,10 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
             setProjectCard(projectsCardML);
             setGitHubForTopic(gitHubML);
         }
+        if (topicData.id === '') {
+            setProjectCard(projectsCardML);
+            setGitHubForTopic(gitHubML);
+        }
     },[projectCard, topicData.id]);
 
     return (
@@ -109,7 +113,7 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
             </AppBar>
             <Box pb={2} className={classes.aboutProject}>
                 <AboutProject
-                    description={topicData.topicIntro === '' ? 'Comming Soon.' : topicData.topicIntro}
+                    description={topicData.topicIntro === '' ? 'Coming Soon.' : topicData.topicIntro}
                     gitHubLink={gitHubForTopic}
                 />
             </Box>

@@ -6,9 +6,9 @@ import {
   makeStyles,
 } from '@material-ui/core';
 // import NavigationIcon from '@material-ui/icons/Navigation';
-import NavBar from '../../../core/navBar';
-import TopicDialog from '../../../core/topicDialog/index';
-import topicInfo from '../../../assets/topicsInfo';
+import NavBar from '../../core/navBar';
+import TopicDialog from '../../core/topicDialog/index';
+import dsTopicsInfo from '../../assets/dsTopicsInfo';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -92,7 +92,7 @@ const DataScience = () => {
       >
         <Box className={classes.shadow} borderRadius={16} width='75%' height='65%'>
           <Grid className={classes.grid} container spacing={5} display='flex' justifyContent='center'>
-            {topicInfo.map(item => (
+            {dsTopicsInfo.map(item => (
               <Grid key={item.id} item xs={4} className={classes.gridItem}>
                 <Fab key={item.id} color="primary" variant="extended" onClick={() => handleOpen(item)}>
                   {/* <NavigationIcon  className={classes.extendedIcon} /> */}
