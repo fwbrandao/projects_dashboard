@@ -24,6 +24,7 @@ import {
     projectsCardDEP,
     projectsCardSM,
     projectsCardML,
+    projectCardJS30,
 } from './projectCardData';
 
 const gitHubCNN = "https://github.com/fwbrandao/Deep_Learning/tree/master/Convolutional_Neural_Networks";
@@ -71,7 +72,6 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
     const [projectCard, setProjectCard] = useState([]);
     const [gitHubForTopic, setGitHubForTopic] = useState([]);
 
-
     useEffect(() => {
         if (topicData.id === 'CNN') {
             setProjectCard(projectsCardCNN);
@@ -93,8 +93,8 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
             setProjectCard(projectsCardML);
             setGitHubForTopic(gitHubML);
         }
-        if (topicData.id === '') {
-            setProjectCard(projectsCardML);
+        if (topicData.id === 'miniJS') {
+            setProjectCard(projectCardJS30);
             setGitHubForTopic(gitHubML);
         }
     },[projectCard, topicData.id]);
@@ -120,7 +120,7 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
             <Box className={classes.projectCard}>
                 <Grid className={classes.gridContainer} container spacing={3}>
                     {projectCard.map(item => (
-                        <Grid className={classes.gridItem} item xs={6}>
+                        <Grid key={item.projectTitle} className={classes.gridItem} item xs={6}>
                             <ProjectCard data={item}/>
                         </Grid>
                     ))}

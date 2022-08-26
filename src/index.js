@@ -5,6 +5,7 @@ import ThemeProvider from './themes/themeProvider'
 import './index.css';
 
 import App from './App';
+import { JSThirtyProvider } from './context/use-js-thirty-project';
 import AbstractiveSummarisation from './components/projects/abstractiveSummarisation/main'
 import AutonomousDriving from './components/projects/autonomousDriving/main/index';
 import DocumentAnalysisNLP from './components/projects/documentAnalysisNLP/main/index';
@@ -14,24 +15,26 @@ import ResidualNetworks from './components/projects/residualNetworks';
 import ConvNetTensorflow from './components/projects/convNetTensorflow/main/index';
 import KerasIntro from './components/projects/kerasIntro/main/index'
 import Covid from './components/projects/covid';
-import {DataScience }from './pages/topicMainPage/index';
+import { DataScience, JSThirty } from './pages/topicMainPage/index';
 
 ReactDOM.render(
-    <ThemeProvider>
-        <Router>
-            <Route path="/" exact component={App} />
-            {/* <Route path="/About" component={About} /> */}
-            <Route path="/data-science" component={DataScience} />
-            <Route path="/residual-networks" component={ResidualNetworks} />
-            <Route path="/covid" component={Covid} />
-            <Route path="/convNet-tensorflow" component={ConvNetTensorflow} />
-            <Route path="/keras-introduction" component={KerasIntro} />
-            <Route path="/autonomous-driving" component={AutonomousDriving} />
-            <Route path="/abstractive-summarisation" component={AbstractiveSummarisation} />
-            <Route path="/fake-news-detector" component={FakeNewsDetector} />
-            <Route path="/document-analysis-NLP" component={DocumentAnalysisNLP} />
-            <Route path="/face-recognition" component={FaceRecognition} />
-        </Router>
-    </ThemeProvider>
-, document.getElementById('root'));
+    <JSThirtyProvider>
+        <ThemeProvider>
+            <Router>
+                <Route path="/" exact component={App} />
+                <Route path="/data-science" component={DataScience} />
+                <Route path="/js30" component={JSThirty} />
+                <Route path="/residual-networks" component={ResidualNetworks} />
+                <Route path="/covid" component={Covid} />
+                <Route path="/convNet-tensorflow" component={ConvNetTensorflow} />
+                <Route path="/keras-introduction" component={KerasIntro} />
+                <Route path="/autonomous-driving" component={AutonomousDriving} />
+                <Route path="/abstractive-summarisation" component={AbstractiveSummarisation} />
+                <Route path="/fake-news-detector" component={FakeNewsDetector} />
+                <Route path="/document-analysis-NLP" component={DocumentAnalysisNLP} />
+                <Route path="/face-recognition" component={FaceRecognition} />
+            </Router>
+        </ThemeProvider>
+    </JSThirtyProvider>
+    , document.getElementById('root'));
 

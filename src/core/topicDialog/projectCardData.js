@@ -4,6 +4,17 @@ import TextSummarisation from '../../images/text-Summarization.jpg';
 import FaceEmotionDetection from '../../images/face-emotion-detection.png';
 import Tensorflow from '../../images/tensorflow.png';
 import Covid from '../../images/covid.png';
+import Drum from '../../images/drum.jpg';
+import Wall from '../../images/bgImage.jpg';
+
+const comingSoon = {
+    projectTitle: 'Coming soon ...',
+    projectIntro: '',
+    skills: [],
+    img: Wall,
+    link: "",
+    gitHub: "",
+}
 
 
 // TODO - move this to a BE server
@@ -48,17 +59,11 @@ export const projectsCardCNN = [
         link: "/keras-introduction",
         gitHub: "https://github.com/fwbrandao/Deep_Learning/blob/master/Convolutional_Neural_Networks/Week_2/Keras_Tutorial_v2.ipynb"
     },
-  ];
+    comingSoon
+];
 
 export const projectsCardANN = [
-    {
-        projectTitle: '',
-        projectIntro: '',
-        skills: [],
-        // img: CarDetection,
-        link: "",
-        gitHub: "",
-    },
+    comingSoon
 ];
 
 export const projectsCardDEP = [
@@ -69,27 +74,26 @@ export const projectsCardDEP = [
         img: Covid,
         link: "/covid",
         gitHub: "https://github.com/fwbrandao/Covid-19_disease_analysis/blob/master/.ipynb_checkpoints/covid-19_visualization_prediction-checkpoint.ipynb",
-    },  
+    },
+    comingSoon
 ];
 
 export const projectsCardSM = [
-    {
-        projectTitle: '',
-        projectIntro: '',
-        skills: [],
-        // img: CarDetection,
-        link: "",
-        gitHub: "",
-    },
+    comingSoon
 ];
 
 export const projectsCardML = [
-    {
-        projectTitle: '',
-        projectIntro: '',
-        skills: [],
-        // img: CarDetection,
-        link: "",
-        gitHub: "",
-    },
+    comingSoon
 ];
+
+export const projectCardJS30 = [
+    {
+        projectTitle: 'Drum kit',
+        projectIntro: 'Interactive drum kit build with JavaScript',
+        skills: ['DOM & INTERFACE', 'CSS', 'AUDIO + VIDEO'],
+        img: Drum,
+        link: "/js30",
+        gitHub: "https://github.com/fwbrandao/JavaScript-Drum-Kit",
+    },
+    comingSoon
+]
