@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { JSThirtyDispatchContext } from '../../context/use-js-thirty-project';
 import clsx from 'clsx';
@@ -84,9 +84,9 @@ const ProjectCard = ({ data }) => {
     setExpanded(!expanded);
   };
 
-  const handleProjectClick = (projectTitle) => {
+  const handleProjectClick = useCallback((projectTitle) => {
     setProject(projectTitle)
-  };
+  }, [setProject]);
 
   return (
     <Box>

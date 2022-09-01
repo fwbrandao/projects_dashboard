@@ -5,6 +5,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import NavBar from '../../core/navBar/index';
+import { DrumKit } from "../../components/projects/JSThirtyProjects";
 
 const useStyles = makeStyles(theme => ({
 }))
@@ -13,11 +14,19 @@ const JSThirty = () => {
   const classes = useStyles();
   const project = useContext(JSThirtyContext);
 
-  console.log("project", project);
+  const renderComponent = () => {
+    switch (project) {
+      case "Drum kit":
+        return <DrumKit />
+      default:
+        return <DrumKit />
+    };
+  }
+
   return (
     <Box>
       <NavBar />
-      <div>{project}</div>
+      {renderComponent()}
     </Box>
   )
 };

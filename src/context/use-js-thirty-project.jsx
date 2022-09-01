@@ -5,9 +5,7 @@ const JSThirtyContext = createContext();
 const JSThirtyDispatchContext = createContext();
 
 function JSThirtyProvider({ children }) {
-  const [project, setProject] = useState({
-    projectName: ""
-  })
+  const [project, setProject] = useState("")
 
 
   return (
