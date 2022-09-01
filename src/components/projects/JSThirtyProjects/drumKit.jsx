@@ -75,12 +75,9 @@ const DrumKit = () => {
   //   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
 
   function playSound(e) {
-    console.log("click")
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-    console.log("audio", audio)
 
     // const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-    // console.log("key", key)
     if (!audio) return; //stop function 
 
     audio.currentTime = 0; //rewind to the start
