@@ -84,9 +84,9 @@ const ProjectCard = ({ data }) => {
     setExpanded(!expanded);
   };
 
-  const handleProjectClick = useCallback((projectTitle) => {
+  const handleProjectClick = (projectTitle) => {
     setProject(projectTitle)
-  }, [setProject]);
+  };
 
   return (
     <Box>

@@ -7,7 +7,7 @@ import {
 import NavBar from '../../core/navBar/index';
 import { DrumKit } from "../../components/projects/JSThirtyProjects";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
 }))
 
 const JSThirty = () => {
@@ -19,7 +19,7 @@ const JSThirty = () => {
       case "Drum kit":
         return <DrumKit />
       default:
-        return <DrumKit />
+        return <></>
     };
   }
 

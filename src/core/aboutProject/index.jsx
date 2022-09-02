@@ -43,7 +43,6 @@ const AboutProject = ({ title, description, gitHubLink, originalPaper}) => {
           <Typography
             variant="h2"
             className={classes.title}
-            color="colorPrimary"
             gutterBottom>
             {title}
           </Typography>
