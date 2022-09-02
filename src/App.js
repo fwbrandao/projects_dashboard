@@ -10,12 +10,10 @@ import {
 import NavBar from './core/navBar/index';
 import TopicDialog from './core/topicDialog/index';
 import mainTopicsInfo from './assets/mainTopicsInfo';
-import bgImage from './images/bgImage.jpg';
 
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.backgroundColor.color,
-    // backgroundImage: 'src(bgImage)'
   },
   content: {
     height: '100vh',
@@ -24,7 +22,8 @@ const useStyles = makeStyles(theme => ({
   grid: {
     justifyContent: 'center',
     '@media (max-width: 1024px)': {
-      display: 'none'
+      display: 'block',
+      margin: 'auto',
     }
   },
   gridItem: {

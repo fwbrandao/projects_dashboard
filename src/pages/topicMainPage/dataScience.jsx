@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   grid: {
     justifyContent: 'center',
     '@media (max-width: 1024px)': {
-      display: 'none'
+      display: 'block'
     }
   },
   gridItem: {
@@ -52,6 +52,11 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
   },
+  fab: {
+    '@media (max-width: 1024px)': {
+      height: 'auto'
+    }
+  }
 }));
 
 const DataScience = () => {
@@ -94,7 +99,7 @@ const DataScience = () => {
           <Grid className={classes.grid} container spacing={5} display='flex' justifyContent='center'>
             {dsTopicsInfo.map(item => (
               <Grid key={item.id} item xs={4} className={classes.gridItem}>
-                <Fab key={item.id} color="primary" variant="extended" onClick={() => handleOpen(item)}>
+                <Fab className={classes.fab} key={item.id} color="primary" variant="extended" onClick={() => handleOpen(item)}>
                   {/* <NavigationIcon  className={classes.extendedIcon} /> */}
                   <span>{item.topicTitle}</span>
                 </Fab>
