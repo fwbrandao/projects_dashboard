@@ -21,7 +21,7 @@ module.exports = {
                 test: /\.wav$/,
                 loader: 'file-loader'
             },
-            {test: /\.(png|svg|jpg)$/, loader: 'url-loader?limit=100000'},
+            // {test: /\.(png|svg|jpg)$/, loader: 'url-loader?limit=100000'},
         ]
     },
     output: {
