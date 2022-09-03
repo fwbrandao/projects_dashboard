@@ -39,18 +39,28 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.backgroundColor.color,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    '@media (max-width: 1024px)': {
+      boxShadow: 'none',
+
+    }
   },
   grid: {
     justifyContent: 'center',
     '@media (max-width: 1024px)': {
-      display: 'block'
+      display: 'block',
+      margin: 'auto',
+      width: 'min-content',
+      height: 'inherit'
     }
   },
   gridItem: {
     flexBasis: '29.333333%',
     display: 'flex',
     justifyContent: 'center',
+    '@media (max-width: 1024px)': {
+      display: 'block',
+    }
   },
   fab: {
     '@media (max-width: 1024px)': {

@@ -24,12 +24,17 @@ const useStyles = makeStyles(theme => ({
     '@media (max-width: 1024px)': {
       display: 'block',
       margin: 'auto',
+      width: 'min-content',
+      height: 'inherit'
     }
   },
   gridItem: {
     flexBasis: '29.333333%',
     display: 'flex',
     justifyContent: 'center',
+    '@media (max-width: 1024px)': {
+      display: 'block',
+    }
   },
   title: {
     textDecoration: 'none',
