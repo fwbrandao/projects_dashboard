@@ -17,7 +17,11 @@ module.exports = {
                 }
             },
             { test: /\.css$/, use: ['style-loader', 'css-loader']},
-            {test: /\.(png|svg|jpg)$/, loader: 'url-loader?limit=100000'}
+            {test: /\.(png|svg|jpg)$/, loader: 'url-loader?limit=100000'},
+            {
+                test: /\.wav$/,
+                loader: 'file-loader'
+            }
         ]
     },
     output: {
