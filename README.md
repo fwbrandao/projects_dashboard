@@ -2,8 +2,7 @@ React app for Projects Dashboard.
 
 Live view - https://projects-dashboard-fb.netlify.app/
 
-This a work in progress dashboard to host some of my Data Science projects.
-
+This a work in progress dashboard to host some of my projects.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

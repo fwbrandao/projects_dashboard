@@ -78,14 +78,12 @@ const AboutMe = () => {
     { key: 6, label: 'Deep Learning' },
     { key: 7, label: 'Python Programming' },
     { key: 8, label: 'Machine Learning' },
-    { key: 9, label: 'Inductive Transfer' },
-    { key: 10, label: 'Multi-Task Learning' },
-    { key: 11, label: 'Facial Recognition System' },
-    { key: 12, label: 'Keras' },
-    { key: 13, label: 'Tensorflow' },
-    { key: 14, label: 'Backpropagation' },
-    { key: 15, label: 'Hyperparameter' },
-    { key: 16, label: 'Hyperparameter Optimization' },
+    { key: 9, label: 'Facial Recognition System' },
+    { key: 10, label: 'Keras' },
+    { key: 11, label: 'Tensorflow' },
+    { key: 12, label: 'Backpropagation' },
+    { key: 13, label: 'Hyperparameter' },
+    { key: 14, label: 'Hyperparameter Optimization' },
   ]);
 
   const handleExpandClick = () => {
