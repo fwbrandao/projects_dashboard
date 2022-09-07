@@ -95,5 +95,5 @@ export const projectCardJS30 = [
         link: "/js30",
         gitHub: "https://github.com/fwbrandao/JavaScript-Drum-Kit",
     },
-    // comingSoon
+    comingSoon
 ]

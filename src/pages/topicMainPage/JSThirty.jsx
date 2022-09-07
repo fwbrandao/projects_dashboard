@@ -1,21 +1,19 @@
-import React from "react";
-import {
-  Box,
-  makeStyles,
-} from '@material-ui/core';
+import React, { useContext } from "react";
+import { Box } from '@material-ui/core';
 import NavBar from '../../core/navBar/index';
 import { DrumKit } from "../../components/projects/JSThirtyProjects";
-
-const useStyles = makeStyles(() => ({
-}))
+import { JsProjectContext } from '../../context/use-current-project';
 
 const JSThirty = () => {
-  const classes = useStyles();
+  const { currentProject } = useContext(JsProjectContext);
 
   const renderComponent = () => {
-    return(
-      <DrumKit />
-    )
+    switch (currentProject) {
+      case "Drum kit":
+        return <DrumKit />;
+      default:
+        return <></>
+    }
   }
 
   return (

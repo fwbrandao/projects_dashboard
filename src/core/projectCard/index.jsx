@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { JsProjectContext } from '../../context/use-current-project';
 import clsx from 'clsx';
 import {
   Box,
@@ -71,8 +72,15 @@ const useStyles = makeStyles(theme => ({
 
 const ProjectCard = ({ data }) => {
   const classes = useStyles();
+  const { setProject } = useContext(JsProjectContext)
   const [isLiked, setIsLiked] = useState(false);
   const [expanded, setExpanded] = React.useState(false);
+
+  const { link, img, gitHub, projectTitle, projectIntro, skills } = data;
+
+  const handleProjectClick = useCallback(() => {
+    setProject(projectTitle);
+  }, [projectTitle, setProject]);
 
   const handleLike = () => {
     setIsLiked(!isLiked)
@@ -82,32 +90,29 @@ const ProjectCard = ({ data }) => {
     setExpanded(!expanded);
   };
 
-  const handleProjectClick = (projectTitle) => {
-  };
-
   return (
     <Box>
       <Card className={classes.root} elevation={5}>
-        <Link to={data.link} className={classes.link} onClick={handleProjectClick(data.projectTitle)}>
+        <Link to={link} className={classes.link} onClick={handleProjectClick}>
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image={data.img}
-              title={data.projectTitle}
+              image={img}
+              title={projectTitle}
             />
             <CardContent>
               <Typography gutterBottom variant="h6" color="textPrimary" component="h2">
-                {data.projectTitle}
+                {projectTitle}
               </Typography>
               <Typography variant="body2" color="textPrimary" component="p">
-                {data.projectIntro}
+                {projectIntro}
               </Typography>
             </CardContent>
           </CardActionArea>
         </Link>
 
         <CardActions disableSpacing>
-          <Link to={data.link} className={classes.link}>
+          <Link to={link} className={classes.link}>
             <Button size="small">
               View Project
             </Button>
@@ -119,7 +124,7 @@ const ProjectCard = ({ data }) => {
           >
             <ThumbUpOutlinedIcon />
           </IconButton>
-          <IconButton aria-label="github" href={data.gitHub} target="_blank">
+          <IconButton aria-label="github" href={gitHub} target="_blank">
             <GitHubIcon />
           </IconButton>
           <Tooltip title="Technologies used" aria-label="Technologies used">
@@ -139,7 +144,7 @@ const ProjectCard = ({ data }) => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Paper component="ul" className={classes.chipRoot} elevation={6}>
-            {data.skills.map(skill => {
+            {skills.map(skill => {
               let icon;
 
               // if (data.label === 'React') {

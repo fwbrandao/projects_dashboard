@@ -6,20 +6,15 @@ import {
     Toolbar,
     Grid,
     IconButton,
-    List,
-    ListItem,
-    ListItemText,
-    Divider,
     Slide,
-    Button,
     Typography,
     makeStyles,
 } from '@material-ui/core';
 import AboutProject from '../aboutProject';
 import CloseIcon from '@material-ui/icons/Close';
 import ProjectCard from '../projectCard';
-import { 
-    projectsCardCNN ,
+import {
+    projectsCardCNN,
     projectsCardANN,
     projectsCardDEP,
     projectsCardSM,
@@ -34,70 +29,77 @@ const gitHubSM = '';
 const gitHubML = '';
 
 const useStyles = makeStyles(theme => ({
-      appBar: {
+    appBar: {
         position: 'relative',
-      },
-      titles: {
+    },
+    titles: {
         flex: 1,
-      },
-      projectCard: {
+    },
+    projectCard: {
         display: 'flex',
         flexGrow: 1,
         backgroundColor: theme.palette.backgroundColor.color,
         paddingBottom: theme.spacing(2),
-      },
-      gridContainer: {
+    },
+    gridContainer: {
         '@media (max-width: 1224px)': {
-        display: 'table-column-group'
+            display: 'table-column-group'
         }
-      },
-      gridItem: {
+    },
+    gridItem: {
         display: 'flex',
         justifyContent: 'center',
-      },
-      intro: {
+    },
+    intro: {
         marginLeft: theme.spacing(1),
-      },
-      aboutProject: {
+    },
+    aboutProject: {
         backgroundColor: theme.palette.backgroundColor.color
-      }
+    }
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
-  });
+});
 
 const TopicDialog = ({ open, closeDialog, topicData }) => {
     const classes = useStyles();
     const [projectCard, setProjectCard] = useState([]);
     const [gitHubForTopic, setGitHubForTopic] = useState([]);
 
+    // TODO - refactor this logic
     useEffect(() => {
         if (topicData.id === 'CNN') {
             setProjectCard(projectsCardCNN);
             setGitHubForTopic(gitHubCNN);
+            return;
         }
         if (topicData.id === 'ANN') {
             setProjectCard(projectsCardANN);
             setGitHubForTopic(gitHubANN);
+            return;
         }
         if (topicData.id === 'DEP') {
             setProjectCard(projectsCardDEP);
             setGitHubForTopic(gitHubDEP);
+            return;
         }
         if (topicData.id === 'SM') {
             setProjectCard(projectsCardSM);
             setGitHubForTopic(gitHubSM);
+            return;
         }
         if (topicData.id === 'ML') {
             setProjectCard(projectsCardML);
             setGitHubForTopic(gitHubML);
+            return;
         }
         if (topicData.id === 'miniJS') {
             setProjectCard(projectCardJS30);
             setGitHubForTopic(gitHubML);
+            return;
         }
-    },[projectCard, topicData.id]);
+    }, [topicData.id]);
 
     return (
         <Dialog fullScreen open={open} onClose={closeDialog} TransitionComponent={Transition}>
@@ -121,7 +123,7 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
                 <Grid className={classes.gridContainer} container spacing={3}>
                     {projectCard.map(item => (
                         <Grid key={item.projectTitle} className={classes.gridItem} item xs={6}>
-                            <ProjectCard data={item}/>
+                            <ProjectCard data={item} />
                         </Grid>
                     ))}
                 </Grid>
