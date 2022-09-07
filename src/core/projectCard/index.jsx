@@ -1,6 +1,5 @@
-import React, { useState, useContext, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { JSThirtyDispatchContext } from '../../context/use-js-thirty-project';
 import clsx from 'clsx';
 import {
   Box,
@@ -72,7 +71,6 @@ const useStyles = makeStyles(theme => ({
 
 const ProjectCard = ({ data }) => {
   const classes = useStyles();
-  const setProject = useContext(JSThirtyDispatchContext);
   const [isLiked, setIsLiked] = useState(false);
   const [expanded, setExpanded] = React.useState(false);
 
@@ -85,7 +83,6 @@ const ProjectCard = ({ data }) => {
   };
 
   const handleProjectClick = (projectTitle) => {
-    setProject(projectTitle)
   };
 
   return (

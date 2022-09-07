@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { JSThirtyContext } from '../../context/use-js-thirty-project';
+import React from "react";
 import {
   Box,
   makeStyles,
@@ -12,15 +11,11 @@ const useStyles = makeStyles(() => ({
 
 const JSThirty = () => {
   const classes = useStyles();
-  const project = useContext(JSThirtyContext);
 
   const renderComponent = () => {
-    switch (project) {
-      case "Drum kit":
-        return <DrumKit />
-      default:
-        return <></>
-    };
+    return(
+      <DrumKit />
+    )
   }
 
   return (
