@@ -18,15 +18,19 @@ const useStyles = makeStyles(theme => ({
   content: {
     height: '100vh',
     width: '100vw',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '@media (max-width: 1024px)': {
+      display: 'grid',
+    }
   },
   grid: {
+    display: 'flex',
     justifyContent: 'center',
     '@media (max-width: 1024px)': {
       display: 'grid',
       justifyItems: 'center',
-      margin: 'auto',
-      width: 'min-content',
-      height: 'inherit'
     }
   },
   gridItem: {
@@ -46,6 +50,8 @@ const useStyles = makeStyles(theme => ({
   topicsContainer: {
     display: "flex",
     alignItems: "center",
+    width: '100vw',
+    height: '65%',
   }
 }));
 
@@ -70,12 +76,10 @@ const App = () => {
       <NavBar />
       <Box
         className={classes.content}
-        display={'flex'}
-        justifyContent={'center'}
-        alignItems={'center'}
+
       >
-        <Box className={classes.topicsContainer} borderRadius={16} width='75%' height='65%'>
-          <Grid className={classes.grid} container spacing={5} display='flex' justifyContent='center'>
+        <Box className={classes.topicsContainer} borderRadius={16}>
+          <Grid className={classes.grid} container spacing={5}>
             {mainTopicsInfo.map(item => (
               <Grid key={item.id} item xs={4} className={classes.gridItem}>
                 <Fab key={item.id} color="primary" variant="extended" onClick={() => handleOpen(item)}>
