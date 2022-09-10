@@ -16,7 +16,7 @@ const DocumentAnalysisNLP = () => {
             <div className={classes.toolbar} />
             <AboutProject
                 title="Document Analysis NLP"
-                description="This is the description of this project"
+                description=""
                 gitHubLink=""
             />
         </Box>

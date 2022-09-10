@@ -9,7 +9,7 @@ const FaceRecognition = () => {
             <NavBar />
             <AboutProject
                 title="Face Recognition"
-                description="This is the description of this project"
+                description=""
             />
         </Box>
     )
