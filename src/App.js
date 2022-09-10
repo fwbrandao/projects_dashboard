@@ -22,7 +22,8 @@ const useStyles = makeStyles(theme => ({
   grid: {
     justifyContent: 'center',
     '@media (max-width: 1024px)': {
-      display: 'block',
+      display: 'grid',
+      justifyItems: 'center',
       margin: 'auto',
       width: 'min-content',
       height: 'inherit'
@@ -33,7 +34,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     '@media (max-width: 1024px)': {
-      display: 'block',
+      display: 'grid',
+      width: '100vh',
     }
   },
   title: {

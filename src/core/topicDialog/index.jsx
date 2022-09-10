@@ -43,7 +43,8 @@ const useStyles = makeStyles(theme => ({
     },
     gridContainer: {
         '@media (max-width: 1224px)': {
-            display: 'table-column-group'
+            display: 'grid',
+            justifyItems: 'center',
         }
     },
     gridItem: {
