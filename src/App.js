@@ -50,8 +50,11 @@ const useStyles = makeStyles(theme => ({
   topicsContainer: {
     display: "flex",
     alignItems: "center",
-    width: '100vw',
+    width: '75%',
     height: '65%',
+    '@media (max-width: 1024px)': {
+      width: '100vw',
+    }
   }
 }));
 
