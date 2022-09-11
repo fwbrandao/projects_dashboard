@@ -20,7 +20,7 @@ import {
     projectsCardSM,
     projectsCardML,
     projectCardJS30,
-} from './projectCardData';
+} from '../../assets/projectCardData';
 
 const gitHubCNN = "https://github.com/fwbrandao/Deep_Learning/tree/master/Convolutional_Neural_Networks";
 const gitHubANN = "https://github.com/fwbrandao/Deep_Learning/tree/master/Neural%20Networks%20and%20Deep%20Learning/Week_2";

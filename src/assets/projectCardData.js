@@ -1,15 +1,15 @@
-import CarDetection from '../../images/self-driving-cars.jpg';
-import ResNets from '../../images/resNets.png';
-import TextSummarisation from '../../images/text-Summarization.jpg';
-import FaceEmotionDetection from '../../images/face-emotion-detection.png';
-import Tensorflow from '../../images/tensorflow.png';
-import Covid from '../../images/covid.png';
-import Drum from '../../images/drum.jpg';
-import Wall from '../../images/bgImage.jpg';
+import CarDetection from '../images/self-driving-cars.jpg';
+import ResNets from '../images/resNets.png';
+import TextSummarisation from '../images/text-Summarization.jpg';
+import FaceEmotionDetection from '../images/face-emotion-detection.png';
+import Tensorflow from '../images/tensorflow.png';
+import Covid from '../images/covid.png';
+import Wall from '../images/bgImage.jpg';
+import Drum from '../images/drum.png';
 
 const comingSoon = {
     projectTitle: 'Coming soon ...',
-    projectIntro: '',
+    projectIntro: 'New project',
     skills: [],
     img: Wall,
     link: "",
@@ -94,6 +94,14 @@ export const projectCardJS30 = [
         img: Drum,
         link: "/js30",
         gitHub: "https://github.com/fwbrandao/JavaScript-Drum-Kit",
+    },
+    {
+        projectTitle: 'CSS + JS Clock',
+        projectIntro: 'JavaScrip Cool Clock.',
+        skills: ['FUNDAMENTALS', 'CSS'],
+        img: Drum,
+        link: "/js30",
+        gitHub: "https://github.com/fwbrandao/JavaScript-clock",
     },
     comingSoon
 ]
