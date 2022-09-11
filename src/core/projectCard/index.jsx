@@ -31,7 +31,10 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.main,
     transition: 'all .2s ease-in-out',
-    "&:hover": { transform: 'scale(1.01)' }
+    "&:hover": { transform: 'scale(1.01)' },
+    '@media (max-width: 1024px)': {
+      minWidth: 360,
+    }
   },
   media: {
     height: 270,

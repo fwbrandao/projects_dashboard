@@ -31,6 +31,8 @@ const useStyles = makeStyles(theme => ({
     '@media (max-width: 1024px)': {
       display: 'grid',
       justifyItems: 'center',
+      width: '100%',
+      margin: 'auto',
     }
   },
   gridItem: {
