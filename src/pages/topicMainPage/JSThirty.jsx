@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Box } from '@material-ui/core';
 import NavBar from '../../core/navBar/index';
-import { DrumKit } from "../../components/projects/JSThirtyProjects";
+import { DrumKit, JSClock } from "../../components/projects/JSThirtyProjects";
 import { JsProjectContext } from '../../context/use-current-project';
 
 const JSThirty = () => {
@@ -11,6 +11,8 @@ const JSThirty = () => {
     switch (currentProject) {
       case "Drum kit":
         return <DrumKit />;
+      case "CSS + JS Clock":
+        return <JSClock />;
       default:
         return <></>
     }

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import {
   Box,
   makeStyles,
@@ -60,31 +60,17 @@ const useStyles = makeStyles(() => ({
 
 const DrumKit = () => {
   const classes = useStyles();
-  const ref = useRef();
 
   window.addEventListener('keydown', playSound);
-
-//   function removeTransition(e) {
-//     if (e.propertyName !== 'transform') return;
-//     console.log(e.propertyName);
-    
-//     this.classList.remove('playing');
-// }
-
-  // const keys = Array.from(document.querySelectorAll('.key'));
-  //   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
 
   function playSound(e) {
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
 
-    // const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
     if (!audio) return; //stop function 
 
     audio.currentTime = 0; //rewind to the start
 
     audio.play();
-
-    // ref.current.className("playing");
 
   }
 
@@ -92,7 +78,7 @@ const DrumKit = () => {
     <Box className={classes.root}>
       <div className={classes.keys}>
         <div data-key="65" className={classes.key}>
-          <kbd ref={ref} className={classes.kbd}>A</kbd>
+          <kbd className={classes.kbd}>A</kbd>
           <span className={classes.sound}>clap</span>
         </div>
         <div data-key="83" className={classes.key}>

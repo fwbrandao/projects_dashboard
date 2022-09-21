@@ -6,6 +6,8 @@ import Tensorflow from '../images/tensorflow.png';
 import Covid from '../images/covid.png';
 import Wall from '../images/bgImage.jpg';
 import Drum from '../images/drum.png';
+import Clock from '../images/clock.png';
+
 
 const comingSoon = {
     projectTitle: 'Coming soon ...',
@@ -98,8 +100,8 @@ export const projectCardJS30 = [
     {
         projectTitle: 'CSS + JS Clock',
         projectIntro: 'JavaScrip Cool Clock.',
-        skills: ['FUNDAMENTALS', 'CSS'],
-        img: Drum,
+        skills: ['FUNDAMENTALS', 'CSS', 'useRef'],
+        img: Clock,
         link: "/js30",
         gitHub: "https://github.com/fwbrandao/JavaScript-clock",
     },
