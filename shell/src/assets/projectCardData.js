@@ -5,9 +5,9 @@ import FaceEmotionDetection from '../images/face-emotion-detection.png';
 import Tensorflow from '../images/tensorflow.png';
 import Covid from '../images/covid.png';
 import Wall from '../images/bgImage.jpg';
-import Drum from '../images/drum.png';
-import Clock from '../images/clock.png';
-
+import Drum from '../images/JSThirty/drum.png';
+import Clock from '../images/JSThirty/clock.png';
+import microfrontend from '../images/react/microfrontend.png';
 
 const comingSoon = {
     projectTitle: 'Coming soon ...',
@@ -104,6 +104,19 @@ export const projectCardJS30 = [
         img: Clock,
         link: "/js30",
         gitHub: "https://github.com/fwbrandao/JavaScript-clock",
+    },
+    comingSoon
+]
+
+export const react = [
+    {
+        projectTitle: 'Microfrontend App',
+        projectIntro: 'Scalable app with microfrontend architecture and module federation. The app has webpack configuration with a full CI/CD pipeline. Its also deployed on Amazon Web Services using CloudFront.',
+        skills: ['Microfrontend', 'Webpack', 'AWS CloudFront'],
+        img: microfrontend,
+        link: "",
+        gitHub: "https://github.com/fwbrandao/Microfrontend",
+        externalURL: "https://d39m468i9aqsvj.cloudfront.net",
     },
     comingSoon
 ]

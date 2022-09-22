@@ -79,7 +79,7 @@ const ProjectCard = ({ data }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [expanded, setExpanded] = React.useState(false);
 
-  const { link, img, gitHub, projectTitle, projectIntro, skills } = data;
+  const { link, img, gitHub, projectTitle, projectIntro, skills, externalURL } = data;
 
   const handleProjectClick = useCallback(() => {
     setProject(projectTitle);
@@ -115,11 +115,17 @@ const ProjectCard = ({ data }) => {
         </Link>
 
         <CardActions disableSpacing>
-          <Link to={link} className={classes.link}>
-            <Button size="small">
+          {link ? (
+            <Link to={link} className={classes.link}>
+              <Button size="small">
+                View Project
+              </Button>
+            </Link>
+          ) : (
+            <Button href={externalURL} target="_blank" size="small">
               View Project
             </Button>
-          </Link>
+          )}
           <IconButton
             className={isLiked ? classes.iconLiked : classes.iconNotLiked}
             onClick={handleLike}

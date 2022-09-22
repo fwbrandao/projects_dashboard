@@ -7,6 +7,8 @@ import { JsProjectContext } from '../../context/use-current-project';
 const JSThirty = () => {
   const { currentProject } = useContext(JsProjectContext);
 
+  console.log("currentProject", currentProject)
+
   const renderComponent = () => {
     switch (currentProject) {
       case "Drum kit":

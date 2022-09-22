@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { JsProjectContext } from '../../context/use-current-project';
 import {
     withStyles,
     Menu,
@@ -22,6 +23,7 @@ import {
     menuList_CNN,
     menuList_DEP,
     menuList_NLP,
+    menuList_JSThirty,
 } from './menuList';
 
 const useStyles = makeStyles(theme => ({
@@ -70,6 +72,7 @@ const StyledMenuItem = withStyles(theme => ({
 
 export default function ProjectsMenu() {
     const classes = useStyles();
+    const { setProject } = useContext(JsProjectContext)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [expanded, setExpanded] = React.useState(false);
 
@@ -84,6 +87,10 @@ export default function ProjectsMenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleOpen = useCallback((id) => {
+        setProject(id);
+    }, [setProject]);
 
     return (
         <div>
@@ -111,6 +118,29 @@ export default function ProjectsMenu() {
                         <ListItemText primary="Home" />
                     </StyledMenuItem>
                 </Link>
+
+
+
+                {menuList_JSThirty.map(topic => (
+                    <Accordion key={topic.topic} className={classes.expansionPanel} expanded={expanded === 'panel4'} onChange={handleExpansion('panel4')}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel4bh-content"
+                            id="panel4bh-header"
+                        >
+                            <Typography className={classes.heading}>{topic.topic}</Typography>
+                        </AccordionSummary>
+                        {topic.items.map(item => (
+                            <Link key={item.title} to={item.link} className={classes.link} onClick={() => handleOpen(item.projectId)}>
+                                <StyledMenuItem>
+                                    <AccordionDetails>
+                                        <Typography>{item.title}</Typography>
+                                    </AccordionDetails>
+                                </StyledMenuItem>
+                            </Link>
+                        ))}
+                    </Accordion>
+                ))}
 
                 {menuList_CNN.map(topic => (
                     <Accordion key={topic.topic} className={classes.expansionPanel} expanded={expanded === 'panel1'} onChange={handleExpansion('panel1')}>

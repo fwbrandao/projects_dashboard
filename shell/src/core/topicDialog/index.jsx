@@ -20,6 +20,7 @@ import {
     projectsCardSM,
     projectsCardML,
     projectCardJS30,
+    react,
 } from '../../assets/projectCardData';
 
 const gitHubCNN = "https://github.com/fwbrandao/Deep_Learning/tree/master/Convolutional_Neural_Networks";
@@ -97,6 +98,11 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
         }
         if (topicData.id === 'miniJS') {
             setProjectCard(projectCardJS30);
+            setGitHubForTopic(gitHubML);
+            return;
+        }
+        if (topicData.id === 'react') {
+            setProjectCard(react);
             setGitHubForTopic(gitHubML);
             return;
         }

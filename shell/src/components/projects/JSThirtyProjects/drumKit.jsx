@@ -3,7 +3,7 @@ import {
   Box,
   makeStyles,
 } from '@material-ui/core';
-import image from '../../../images/drum.jpg';
+import image from '../../../images/JSThirty/drum.jpg';
 import clap from './sounds/clap.wav';
 import boom from './sounds/boom.wav';
 import hihat from './sounds/hihat.wav';

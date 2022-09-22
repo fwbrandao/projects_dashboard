@@ -1,3 +1,13 @@
+export const menuList_JSThirty = [
+    {
+        topic: "MiniJS Projects",
+        items: [
+            {title: "Drum kit", link: "/js30", projectId: "Drum kit"},
+            {title: "JS clock", link: "/js30", projectId: "CSS + JS Clock"},
+        ]
+    }
+]
+
 export const menuList_CNN = [
     {
         topic: "CNN",
