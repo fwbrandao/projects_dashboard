@@ -7,9 +7,9 @@ import {
   Grid,
   makeStyles,
 } from '@material-ui/core';
-import NavBar from './core/navBar/index.jsx';
-// import TopicDialog from './core/topicDialog/index';
-// import mainTopicsInfo from './assets/mainTopicsInfo';
+import NavBar from './core/navBar/index';
+import TopicDialog from './core/topicDialog/index';
+import mainTopicsInfo from './assets/mainTopicsInfo';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -79,7 +79,7 @@ const App = () => {
   return (
     <Box className={classes.root}>
       <NavBar />
-      {/* <Box
+      <Box
         className={classes.content}
 
       >
@@ -103,7 +103,7 @@ const App = () => {
           closeDialog={handleDialogClose}
           topicData={topicData}
         />
-      </Box> */}
+      </Box>
     </Box >
   );
 }

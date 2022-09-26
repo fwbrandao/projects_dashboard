@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom'
 import clsx from 'clsx';
 import { ThemeContext } from '../../themes/themeProvider';
-import ProjectsMenu from '../menu/index.jsx';
+import ProjectsMenu from '../menu/index';
 import {
   Avatar,
   AppBar,
@@ -22,7 +22,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import NightsStayOutlinedIcon from '@material-ui/icons/NightsStayOutlined';
 import WbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined';
 import AvatarImg from '../../images/fwbAvatar.jpg';
-import AboutMe from '../aboutMe/index.jsx';
+import AboutMe from '../aboutMe/index';
 
 const drawerWidth = 340;
 
@@ -80,7 +80,7 @@ const useStyles = makeStyles(theme => ({
   link: {
     textDecoration: 'none',
     color: theme.palette.textPrimary.main
-  }
+}
 }));
 
 const NavBar = () => {
@@ -111,11 +111,11 @@ const NavBar = () => {
       >
         <Toolbar>
           <ProjectsMenu />
-          <Typography variant="h6" className={classes.title}>
-            <Link to="/" className={classes.link}>
-              Projects Dashboard
-            </Link>
-          </Typography>
+            <Typography variant="h6" className={classes.title}>
+              <Link to="/" className={classes.link}>
+                  Projects Dashboard
+              </Link>
+            </Typography>
           {!openDrawer ? (
             <Button
               color="inherit"
@@ -123,7 +123,7 @@ const NavBar = () => {
               edge="end"
               onClick={handleDrawerOpen}
               className={clsx(openDrawer && classes.hide)}
-            >
+              >
               <Avatar alt="fb" src={AvatarImg} />
             </Button>
           ) : ''}

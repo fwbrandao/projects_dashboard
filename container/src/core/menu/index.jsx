@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { Link } from 'react-router-dom';
-// import { JsProjectContext } from '../../context/use-current-project';
+import { JsProjectContext } from '../../context/use-current-project';
 import {
     withStyles,
     Menu,
@@ -72,7 +72,7 @@ const StyledMenuItem = withStyles(theme => ({
 
 export default function ProjectsMenu() {
     const classes = useStyles();
-    // const { setProject } = useContext(JsProjectContext);
+    const { setProject } = useContext(JsProjectContext)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [expanded, setExpanded] = React.useState(false);
 
@@ -88,9 +88,9 @@ export default function ProjectsMenu() {
         setAnchorEl(null);
     };
 
-    // const handleOpen = useCallback((id) => {
-    //     setProject(id);
-    // }, [setProject]);
+    const handleOpen = useCallback((id) => {
+        setProject(id);
+    }, [setProject]);
 
     return (
         <div>
@@ -131,9 +131,7 @@ export default function ProjectsMenu() {
                             <Typography className={classes.heading}>{topic.topic}</Typography>
                         </AccordionSummary>
                         {topic.items.map(item => (
-                            <Link key={item.title} to={item.link} className={classes.link}
-                            // onClick={() => handleOpen(item.projectId)}
-                            >
+                            <Link key={item.title} to={item.link} className={classes.link} onClick={() => handleOpen(item.projectId)}>
                                 <StyledMenuItem>
                                     <AccordionDetails>
                                         <Typography>{item.title}</Typography>
