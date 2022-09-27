@@ -24,7 +24,7 @@ module.exports = {
         }
       },
       {
-        test: /\.wav$/,
+        test: /\.m?wav$|gif$/,
         use: {
           loader: 'file-loader'
         },
@@ -33,7 +33,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
+      favicon: './src/images/favicon.gif',
     }),
   ],
 }

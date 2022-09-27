@@ -7,7 +7,6 @@ import {
   Grid,
   makeStyles,
 } from '@material-ui/core';
-import NavBar from '../core/navBar/index.jsx';
 import TopicDialog from '../core/topicDialog/index.jsx';
 import mainTopicsInfo from '../assets/mainTopicsInfo.js';
 
@@ -78,7 +77,6 @@ const LandingPage = () => {
 
   return (
     <Box className={classes.root}>
-      {/* <NavBar /> */}
       <Box
         className={classes.content}
       >
