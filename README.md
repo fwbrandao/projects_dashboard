@@ -1,7 +1,5 @@
 Projects Dashboard. 
 
-Live view - https://projects-dashboard-fb.netlify.app/
-
 This is a work in progress dashboard to host projects and technologies I've learned.
 
 This is a scalable app with microfrontend architecture and module federation. The app has webpack configuration with a full CI/CD pipeline. It's also deployed on Amazon Web Services using CloudFront.
