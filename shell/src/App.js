@@ -47,7 +47,7 @@ export default () => {
           <StylesProvider generateClassName={createClassName}>
             <div>
               <NavBar />
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<div>Loading....</div>}>
                 <Switch>
                   {/* <Route path='/auth'>
                 <AuthLazy onSignIn={() => setIsSignedIn(true)}/>
