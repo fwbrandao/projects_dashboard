@@ -1,111 +1,79 @@
-import React, { useState } from 'react';
-import { Link as LinkReact } from 'react-router-dom';
-import {
-  Box,
-  Fab,
-  Link,
-  Grid,
-  makeStyles,
-} from '@material-ui/core';
-import NavBar from './core/navBar/index.jsx';
-// import TopicDialog from './core/topicDialog/index';
-// import mainTopicsInfo from './assets/mainTopicsInfo';
+import React, { lazy, Suspense, useState, useEffect } from "react";
+import { StylesProvider, createGenerateClassName } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: theme.palette.backgroundColor.color,
-  },
-  content: {
-    height: '100vh',
-    width: '100vw',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    '@media (max-width: 1024px)': {
-      display: 'grid',
-    }
-  },
-  grid: {
-    display: 'flex',
-    justifyContent: 'center',
-    '@media (max-width: 1024px)': {
-      display: 'grid',
-      justifyItems: 'center',
-      width: '100%',
-      margin: 'auto',
-    }
-  },
-  gridItem: {
-    flexBasis: '29.333333%',
-    display: 'flex',
-    justifyContent: 'center',
-    '@media (max-width: 1024px)': {
-      display: 'grid',
-      width: '100vh',
-    }
-  },
-  title: {
-    textDecoration: 'none',
-    color: theme.palette.textPrimary.main,
-    "&:hover": { textDecoration: "none" }
-  },
-  topicsContainer: {
-    display: "flex",
-    alignItems: "center",
-    width: '75%',
-    height: '65%',
-    '@media (max-width: 1024px)': {
-      width: '100vw',
-    }
-  }
-}));
+import ThemeProvider from './themes/themeProvider';
+import JsProjectProvider from './context/use-current-project';
 
-const App = () => {
-  const classes = useStyles();
-  const [openDialog, setDialogOpen] = useState(false);
-  const [topicData, setTopicData] = useState([]);
+import { Router, Route, Switch, Redirect } from "react-router-dom";
+import LandingPage from "./pages/landingPage.jsx";
+import { createBrowserHistory } from 'history';
+import NavBar from "./core/navBar/index.jsx";
 
+import AbstractiveSummarisation from './components/projects/abstractiveSummarisation/main/index.jsx'
+import AutonomousDriving from './components/projects/autonomousDriving/main/index.jsx';
+import DocumentAnalysisNLP from './components/projects/documentAnalysisNLP/main/index.jsx';
+import FakeNewsDetector from './components/projects/fakeNewsDetector/main/index.jsx';
+import FaceRecognition from './components/projects/faceRecognition/main/index.jsx';
+import ResidualNetworks from './components/projects/residualNetworks/index.jsx';
+import ConvNetTensorflow from './components/projects/convNetTensorflow/main/index.jsx';
+import KerasIntro from './components/projects/kerasIntro/main/index.jsx'
+import Covid from './components/projects/covid/index.jsx';
+import { DataScience, JSThirty } from './pages/topicMainPage/index.js';
 
-  const handleOpen = (item) => {
-    if (item.id === "dataScience") return;
-    setTopicData(item);
-    setDialogOpen(true);
-  };
+const createClassName = createGenerateClassName({
+  productionPrefix: "shell",
+})
 
-  const handleDialogClose = () => {
-    setDialogOpen(false);
-  };
+// Only loads the component if needed
+// const AuthLazy = lazy(() => import('./components/AuthApp'));
+// const MarketingLazy = lazy(() => import('./components/MarketingApp'));
+// const DashboardLazy = lazy(() => import('./components/DashboardApp'));
+
+const history = createBrowserHistory();
+
+export default () => {
+  // const [isSignedIn, setIsSignedIn] = useState(false);
+
+  // useEffect(() => {
+  //   if (isSignedIn) {
+  //     history.push('/dashboard');
+  //   }
+  // }, [isSignedIn]);
 
   return (
-    <Box className={classes.root}>
-      <NavBar />
-      {/* <Box
-        className={classes.content}
-
-      >
-        <Box className={classes.topicsContainer} borderRadius={16}>
-          <Grid className={classes.grid} container spacing={5}>
-            {mainTopicsInfo.map(item => (
-              <Grid key={item.id} item xs={4} className={classes.gridItem}>
-                <Fab key={item.id} color="primary" variant="extended" onClick={() => handleOpen(item)}>
-                  {item.id === "dataScience" ? (
-                    <LinkReact to='/data-science' className={classes.title}>{item.topicTitle}</LinkReact>
-                  ) : (
-                    <Link className={classes.title}>{item.topicTitle}</Link>
-                  )}
-                </Fab>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-        <TopicDialog
-          open={openDialog}
-          closeDialog={handleDialogClose}
-          topicData={topicData}
-        />
-      </Box> */}
-    </Box >
-  );
+    <ThemeProvider>
+      <JsProjectProvider>
+        <Router history={history}>
+          <StylesProvider generateClassName={createClassName}>
+            <div>
+              <NavBar />
+              <Suspense fallback={<div>Loading...</div>}>
+                <Switch>
+                  {/* <Route path='/auth'>
+                <AuthLazy onSignIn={() => setIsSignedIn(true)}/>
+              </Route>
+              <Route path='/dashboard'>
+                {!isSignedIn && <Redirect to="/"/>}
+                <DashboardLazy /> 
+              </Route> */}
+                  <Route path='/data-science' component={DataScience} />
+                  <Route path="/js30" component={JSThirty} />
+                  <Route path="/residual-networks" component={ResidualNetworks} />
+                  <Route path="/covid" component={Covid} />
+                  <Route path="/convNet-tensorflow" component={ConvNetTensorflow} />
+                  <Route path="/keras-introduction" component={KerasIntro} />
+                  <Route path="/autonomous-driving" component={AutonomousDriving} />
+                  <Route path="/abstractive-summarisation" component={AbstractiveSummarisation} />
+                  <Route path="/fake-news-detector" component={FakeNewsDetector} />
+                  <Route path="/document-analysis-NLP" component={DocumentAnalysisNLP} />
+                  <Route path="/face-recognition" component={FaceRecognition} />
+                  <Route path='/' component={LandingPage} />
+                </Switch>
+              </Suspense>
+            </div>
+          </StylesProvider>
+        </Router>
+      </JsProjectProvider>
+    </ThemeProvider>
+  )
 }
-
-export default App;

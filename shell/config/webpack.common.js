@@ -23,6 +23,12 @@ module.exports = {
           }
         }
       },
+      {
+        test: /\.wav$/,
+        use: {
+          loader: 'file-loader'
+        },
+      },
     ]
   },
   plugins: [
