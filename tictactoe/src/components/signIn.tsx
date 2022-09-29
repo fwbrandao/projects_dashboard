@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box } from '@material-ui/core';
 import NavBar from '../core/navBar/navBar';
-import SignUpGame from '../components/signUpGame/signUpGame';
+import SignUpGame from './signUpGame/signUpGame';
 
 const SignIn = () => {
 

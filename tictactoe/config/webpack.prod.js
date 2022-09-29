@@ -14,7 +14,7 @@ const prodConfig = {
       name: 'tictactoe',
       filename: 'remoteEntry.js',
       exposes: {
-        './TictactoeAPP': './src/bootstrap',
+        './TictactoeApp': './src/bootstrap',
       },
       shared: packageJson.dependencies,
     })
