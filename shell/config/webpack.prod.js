@@ -16,8 +16,6 @@ const prodConfig = {
       name: 'shell',
       remotes: {
         tictactoe: `tictactoe@${domain}/tictactoe/latest/remoteEntry.js`,
-        // auth: `auth@${domain}/auth/latest/remoteEntry.js`,
-        // dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`,
       },
       shared: packageJson.dependencies
     })
