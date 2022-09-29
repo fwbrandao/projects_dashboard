@@ -21,6 +21,7 @@ import {
     projectsCardML,
     projectCardJS30,
     react,
+    games,
 } from '../../assets/projectCardData';
 
 const gitHubCNN = "https://github.com/fwbrandao/Deep_Learning/tree/master/Convolutional_Neural_Networks";
@@ -28,6 +29,8 @@ const gitHubANN = "https://github.com/fwbrandao/Deep_Learning/tree/master/Neural
 const gitHubDEP = "https://github.com/fwbrandao/Covid-19_disease_analysis";
 const gitHubSM = '';
 const gitHubML = '';
+const gitHubMicrofrontends = "https://github.com/fwbrandao/Microfrontend";
+const gitHubTTT = "https://github.com/fwbrandao/Tic-Tac-Toe";
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -98,12 +101,17 @@ const TopicDialog = ({ open, closeDialog, topicData }) => {
         }
         if (topicData.id === 'miniJS') {
             setProjectCard(projectCardJS30);
-            setGitHubForTopic(gitHubML);
+            setGitHubForTopic("");
             return;
         }
         if (topicData.id === 'react') {
             setProjectCard(react);
-            setGitHubForTopic(gitHubML);
+            setGitHubForTopic(gitHubMicrofrontends);
+            return;
+        }
+        if (topicData.id === 'games') {
+            setProjectCard(games);
+            setGitHubForTopic(gitHubTTT);
             return;
         }
     }, [topicData.id]);

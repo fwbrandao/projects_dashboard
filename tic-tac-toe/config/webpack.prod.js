@@ -3,25 +3,22 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('./webpack.common');
 const packageJson = require('../package.json');
 
-const domain = process.env.PRODUCTION_DOMAIN;
-
 const prodConfig = {
-  mode: 'production',
+  mode: "production",
   output: {
     filename: '[name].[contenthash].js',
-    publicPath: '/shell/latest/'
+    publicPath: '/tictactoe/latest/',
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'shell',
-      remotes: {
-        tictactoe: `tictactoe@${domain}/tictactoe/latest/remoteEntry.js`,
-        // auth: `auth@${domain}/auth/latest/remoteEntry.js`,
-        // dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`,
+      name: 'tictactoe',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './TictactoeAPP': './src/bootstrap',
       },
-      shared: packageJson.dependencies
+      shared: packageJson.dependencies,
     })
-  ],
+  ]
 };
 
 module.exports = merge(commonConfig, prodConfig);

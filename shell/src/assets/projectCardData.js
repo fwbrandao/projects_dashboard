@@ -8,6 +8,7 @@ import Wall from '../images/bgImage.jpg';
 import Drum from '../images/JSThirty/drum.png';
 import Clock from '../images/JSThirty/clock.png';
 import microfrontend from '../images/react/microfrontend.png';
+import TicTacToe from '../images/games/tic-tac-toe.png';
 
 const comingSoon = {
     projectTitle: 'Coming soon ...',
@@ -117,6 +118,18 @@ export const react = [
         link: "",
         gitHub: "https://github.com/fwbrandao/Microfrontend",
         externalURL: "https://d39m468i9aqsvj.cloudfront.net",
+    },
+    comingSoon
+]
+
+export const games = [
+    {
+        projectTitle: 'Tic Tac Toe Game',
+        projectIntro: 'Tic tac toe game built with react and typeScrypt.',
+        skills: ['React', 'TypeScrypt'],
+        img: TicTacToe,
+        link: "/tic-tac-toe",
+        gitHub: "https://github.com/fwbrandao/Tic-Tac-Toe",
     },
     comingSoon
 ]

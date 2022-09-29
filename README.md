@@ -1,8 +1,8 @@
-Projects Dashboard. 
-
-This is a work in progress dashboard to host projects and technologies I've learned.
+Projects Dashboard.
 
 This is a scalable app with microfrontend architecture and module federation. The app has webpack configuration with a full CI/CD pipeline. It's also deployed on Amazon Web Services using CloudFront.
+
+Work in progress dashboard to host projects and technologies I've learned.
 
 Live at: https://d1j9462wmwsk33.cloudfront.net/
 

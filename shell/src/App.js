@@ -25,21 +25,13 @@ const createClassName = createGenerateClassName({
 })
 
 // Only loads the component if needed
+const TicTacToeLazy = lazy(() => import('./components/projects/ticTacToe/TictactoeApp'));
 // const AuthLazy = lazy(() => import('./components/AuthApp'));
-// const MarketingLazy = lazy(() => import('./components/MarketingApp'));
 // const DashboardLazy = lazy(() => import('./components/DashboardApp'));
 
 const history = createBrowserHistory();
 
 export default () => {
-  // const [isSignedIn, setIsSignedIn] = useState(false);
-
-  // useEffect(() => {
-  //   if (isSignedIn) {
-  //     history.push('/dashboard');
-  //   }
-  // }, [isSignedIn]);
-
   return (
     <ThemeProvider>
       <JsProjectProvider>
@@ -49,13 +41,9 @@ export default () => {
               <NavBar />
               <Suspense fallback={<div>Loading....</div>}>
                 <Switch>
-                  {/* <Route path='/auth'>
-                <AuthLazy onSignIn={() => setIsSignedIn(true)}/>
-              </Route>
-              <Route path='/dashboard'>
-                {!isSignedIn && <Redirect to="/"/>}
-                <DashboardLazy /> 
-              </Route> */}
+                  <Route path='/tic-tac-toe'>
+                    <TicTacToeLazy />
+                  </Route>
                   <Route path='/data-science' component={DataScience} />
                   <Route path="/js30" component={JSThirty} />
                   <Route path="/residual-networks" component={ResidualNetworks} />
