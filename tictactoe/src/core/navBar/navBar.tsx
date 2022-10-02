@@ -30,7 +30,7 @@ const NavBar: FC<OwnProps> = ({ setGameHasPlayers }) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="primary">
         <Toolbar variant="dense">
           <Typography className={classes.title} variant="h6" color="inherit">
             Tic-Tac-Toe

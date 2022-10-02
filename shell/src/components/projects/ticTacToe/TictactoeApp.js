@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { mount } from "tictactoe/TictactoeApp";
 import { useHistory } from 'react-router-dom';
+import ThemeProvider from '../../../themes/themeProvider';
 
 export default () => {
   const ref = useRef(null);
@@ -9,6 +10,7 @@ export default () => {
   useEffect(() => {
     const { onParentNavigate } = mount(ref.current, {
       initialPath: history.location.pathname,
+      themeProvider: ThemeProvider,
       onNavigate: ({ pathname: nextPathname }) => {
         const { pathname } = history.location;
 

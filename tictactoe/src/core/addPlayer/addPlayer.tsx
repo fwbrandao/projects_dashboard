@@ -12,7 +12,7 @@ interface Users {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    margin: {
+    wrapper: {
       margin: theme.spacing(1),
     },
   }),
@@ -23,32 +23,32 @@ const AddPlayers: FC<Users> = ({ playerOne, playerTwo, getPlayerName }) => {
 
   return (
     <div>
-      <div className={classes.margin}>
+      <div className={classes.wrapper}>
         <Grid container spacing={1} alignItems="flex-end">
           <Grid item>
             <AccountCircle />
           </Grid>
           <Grid item>
             <TextField 
-              role="textFieldUserOne"
               id="input-with-icon-grid" 
               label="Add player #1" 
+              role="textFieldUserOne"
               value={playerOne}
               onChange={(e) => getPlayerName('playerOne', e.target.value)}
             />
           </Grid>
         </Grid>
       </div>
-      <div className={classes.margin}>
+      <div className={classes.wrapper}>
         <Grid container spacing={1} alignItems="flex-end">
           <Grid item>
             <AccountCircle />
           </Grid>
           <Grid item>
             <TextField 
-              role="textFieldUserTwo"
-              id="input-with-icon-grid" 
+              id="input-with-icon-grid"
               label="Add player #2" 
+              role="textFieldUserTwo"
               value={playerTwo}
               onChange={(e) => getPlayerName('playerTwo', e.target.value)}
             />

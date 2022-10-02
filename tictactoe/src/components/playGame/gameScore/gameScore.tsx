@@ -7,7 +7,7 @@ interface Winner {
   nextToPlay: boolean
   playerOne: string | null
   playerTwo: string | null
-  reasetGame: any
+  resetGame: any
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -30,47 +30,53 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
       alignItems: 'start',
     },
+    text: {
+      display: "grid",
+      justifyContent: 'center',
+    }
   }),
 );
-const GameScoreBoard: FC<Winner> = ({ 
-  winner, 
-  nextToPlay, 
-  playerOne, 
-  playerTwo, 
-  reasetGame 
+const GameScoreBoard: FC<Winner> = ({
+  winner,
+  nextToPlay,
+  playerOne,
+  playerTwo,
+  resetGame
 }) => {
-const classes = useStyles();
+  const classes = useStyles();
 
-let currentWinner = null;
+  let currentWinner = null;
 
-if(winner === 'X') {
-  currentWinner = playerOne;
-} 
-if(winner === 'O') {
-  currentWinner = playerTwo
-}
+  if (winner === 'X') {
+    currentWinner = playerOne;
+  }
+  if (winner === 'O') {
+    currentWinner = playerTwo
+  }
 
 
 
-return (
-  <Box className={classes.root}>
-    <Paper className={classes.scoreBoard}>
-      <Typography>
-        {winner ? `Winner is ${currentWinner}` : null}
-      </Typography>
-      <Typography>
-        Next to play: {nextToPlay === true ? playerOne : playerTwo}
-      </Typography>
-      <Button 
-        variant="outlined" 
-        color="primary"
-        onClick={reasetGame}
+  return (
+    <Box className={classes.root}>
+      <Paper className={classes.scoreBoard}>
+        <Box className={classes.text}>
+          <Typography>
+            {winner ? `Winner is ${currentWinner}` : null}
+          </Typography>
+          <Typography>
+            Next to play: {nextToPlay === true ? playerOne : playerTwo}
+          </Typography>
+        </Box>
+        <Button
+          variant="outlined"
+          color="inherit"
+          onClick={resetGame}
         >
           Restart Game
-      </Button>
-    </Paper>
-  </Box>
-)
+        </Button>
+      </Paper>
+    </Box>
+  )
 }
 
 export default GameScoreBoard;

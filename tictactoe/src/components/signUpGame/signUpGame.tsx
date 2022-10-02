@@ -9,7 +9,7 @@ interface GamaPLayers {
   setGameHasPlayers: any
 }
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       display: 'flex',
@@ -65,7 +65,7 @@ const SignUpGame: FC<GamaPLayers> = ({ gameHasPlayers, setGameHasPlayers }) => {
           <Box className={classes.startButton}>
             <Button 
               variant="outlined" 
-              color="primary"
+              color="inherit"
               onClick={handleGameStart}
             >
               Start Game

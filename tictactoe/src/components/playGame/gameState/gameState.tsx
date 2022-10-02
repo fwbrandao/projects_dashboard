@@ -58,7 +58,7 @@ export function useGameState() {
     });
   }
 
-  const reasetGame = () => {
+  const resetGame = () => {
     setGameState({
       history: [createBoardState()],
       step: 0,
@@ -71,6 +71,6 @@ export function useGameState() {
     current,
     nextToPlay,
     handleCellClick,
-    reasetGame
+    resetGame
   };
 }

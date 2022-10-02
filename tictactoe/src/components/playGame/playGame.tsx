@@ -33,7 +33,7 @@ const PlayGame: FC<Users> = ({ playerOne, playerTwo }) => {
   const classes = useStyles();
 
   const {
-    reasetGame,
+    resetGame,
     current,
     nextToPlay,
     winner,
@@ -51,7 +51,7 @@ const PlayGame: FC<Users> = ({ playerOne, playerTwo }) => {
       </Paper>
       <Box data-testid="gameScoreBoardId">
         <GameScoreBoard 
-          reasetGame={reasetGame}
+          resetGame={resetGame}
           nextToPlay={nextToPlay}
           winner={winner}
           playerOne={playerOne}

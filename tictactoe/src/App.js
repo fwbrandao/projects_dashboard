@@ -8,16 +8,18 @@ const createClassName = createGenerateClassName({
   productionPrefix: "ttt",
 })
 
-export default ({ history }) => {
+export default ({ history, ThemeProvider }) => {
   return (
     <div>
-      <StylesProvider generateClassName={createClassName}>
-        <Router history={history}>
-          <Switch>
-            <Route path="/" component={SignIn} />
-          </Switch>
-        </Router>
-      </StylesProvider>
+      <ThemeProvider>
+        <StylesProvider generateClassName={createClassName}>
+          <Router history={history}>
+            <Switch>
+              <Route path="/" component={SignIn} />
+            </Switch>
+          </Router>
+        </StylesProvider>
+      </ThemeProvider>
     </div>
   )
 }
