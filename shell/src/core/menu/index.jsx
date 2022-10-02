@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { JsProjectContext } from '../../context/use-current-project';
 import {
+    Button,
     withStyles,
     Menu,
     MenuItem,
@@ -24,6 +25,8 @@ import {
     menuList_DEP,
     menuList_NLP,
     menuList_JSThirty,
+    menuList_Games,
+    menuList_React
 } from './menuList';
 
 const useStyles = makeStyles(theme => ({
@@ -36,6 +39,10 @@ const useStyles = makeStyles(theme => ({
     },
     expansionPanel: {
         backgroundColor: theme.palette.primary.main,
+    },
+    buttonMicroUI: {
+        display: "flex",
+        padding: "15px"
     }
 }));
 
@@ -63,9 +70,6 @@ const StyledMenuItem = withStyles(theme => ({
     root: {
         '&:focus': {
             backgroundColor: theme.palette.primary.main,
-            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                color: theme.palette.common.white,
-            },
         },
     },
 }))(MenuItem);
@@ -205,6 +209,54 @@ export default function ProjectsMenu() {
                     </Accordion>
                 ))}
 
+                {menuList_Games.map(topic => (
+                    <Accordion key={topic.topic} className={classes.expansionPanel} expanded={expanded === 'panel5'} onChange={handleExpansion('panel5')}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel5bh-content"
+                            id="panel3bh-header"
+                        >
+                            <Typography className={classes.heading}>{topic.topic}</Typography>
+                        </AccordionSummary>
+                        {topic.items.map(item => (
+                            <Link key={item.title} to={item.link} className={classes.link} >
+                                <StyledMenuItem>
+                                    <AccordionDetails>
+                                        <Typography>{item.title}</Typography>
+                                    </AccordionDetails>
+                                </StyledMenuItem>
+                            </Link>
+                        ))}
+                    </Accordion>
+                ))}
+
+                {menuList_React.map(topic => (
+                    <Accordion key={topic.topic} className={classes.expansionPanel} expanded={expanded === 'panel6'} onChange={handleExpansion('panel6')}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel6bh-content"
+                            id="panel3bh-header"
+                        >
+                            <Typography className={classes.heading}>{topic.topic}</Typography>
+                        </AccordionSummary>
+                        {topic.items.map(item => (
+                            <div key={item.title}>
+                                {item.link ? (
+                                    <Link to={item.link} className={classes.link} >
+                                        <StyledMenuItem>
+                                            <AccordionDetails>
+                                                <Typography>{item.title}</Typography>
+                                            </AccordionDetails>
+                                        </StyledMenuItem>
+                                    </Link>
+                                ) : <Button className={classes.buttonMicroUI} href={item.externalURL} target="_blank">{item.title}</Button>}
+                            </div>
+                        ))}
+                    </Accordion>
+                ))}
+
+
+
                 <Link to="/fake-news-detector" className={classes.link} >
                     <StyledMenuItem>
                         <ListItemIcon>
@@ -214,14 +266,14 @@ export default function ProjectsMenu() {
                     </StyledMenuItem>
                 </Link>
 
-                <Link to="/FaceRecognition" className={classes.link}>
+                {/* <Link to="/FaceRecognition" className={classes.link}>
                     <StyledMenuItem>
                         <ListItemIcon>
                             <InsertEmoticonIcon fontSize="small" />
                         </ListItemIcon>
                         <ListItemText primary="Face Recognition" />
                     </StyledMenuItem>
-                </Link>
+                </Link> */}
             </StyledMenu>
         </div>
     );
