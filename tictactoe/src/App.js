@@ -9,13 +9,15 @@ const createClassName = createGenerateClassName({
 })
 
 export default ({ history }) => {
-  return <div>
-    <StylesProvider generateClassName={createClassName}>
-      <Router history={history}>
-        <Switch>
-          <Route path="/" component={SignIn} />
-        </Switch>
-      </Router>
-    </StylesProvider>
-  </div>
+  return (
+    <div>
+      <StylesProvider generateClassName={createClassName}>
+        <Router history={history}>
+          <Switch>
+            <Route path="/" component={SignIn} />
+          </Switch>
+        </Router>
+      </StylesProvider>
+    </div>
+  )
 }

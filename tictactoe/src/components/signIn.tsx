@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Box } from '@material-ui/core';
 import NavBar from '../core/navBar/navBar';
-import SignUpGame from './signUpGame/signUpGame';
+import SignUpGame from '../components/signUpGame/signUpGame';
 
 const SignIn = () => {
-
   const [gameHasPlayers, setGameHasPlayers] = useState(false);
 
   return (
