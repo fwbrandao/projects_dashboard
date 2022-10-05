@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 
 import AboutProject from '../../../../core/aboutProject/index.jsx';
-import autonomousDrivingData from './autonomousDrivingData';
+import autonomousDrivingData from '../autonomousDrivingData';
 
 import Image1 from "../../../../images/YOLO/1.png";
 import Image2 from "../../../../images/YOLO/2.png";
