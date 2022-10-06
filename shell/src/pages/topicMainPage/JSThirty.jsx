@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Box } from '@material-ui/core';
-import NavBar from '../../core/navBar/index.jsx';
-import { DrumKit, JSClock } from "../../components/projects/JSThirtyProjects";
+import { DrumKit, JSClock, CitySearch } from "../../components/projects/JSThirtyProjects";
 import { JsProjectContext } from '../../context/use-current-project';
 
 const JSThirty = () => {
@@ -15,6 +14,8 @@ const JSThirty = () => {
         return <DrumKit />;
       case "CSS + JS Clock":
         return <JSClock />;
+      case "City search":
+        return <CitySearch />;
       default:
         return <></>
     }
@@ -22,7 +23,6 @@ const JSThirty = () => {
 
   return (
     <Box>
-      {/* <NavBar /> */}
       {renderComponent()}
     </Box>
   )

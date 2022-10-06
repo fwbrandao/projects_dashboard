@@ -116,7 +116,7 @@ const ProjectCard = ({ data }) => {
 
         <CardActions disableSpacing>
           {link ? (
-            <Link to={link} className={classes.link}>
+            <Link to={link} className={classes.link} onClick={handleProjectClick}>
               <Button size="small">
                 View Project
               </Button>
