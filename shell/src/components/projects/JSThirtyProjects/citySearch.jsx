@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   Box,
   makeStyles,
 } from '@material-ui/core';
 import City from "../../../images/city.jpg";
-import { useCallback } from "react";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -98,7 +97,7 @@ const CitySearch = () => {
 
   const displayMatches = useCallback(() => {
     if (!cityValue) return;
-    
+
     const matchArray = findMatches(cityValue, cities);
     const html = matchArray.map((place, index)=> {
       const regex = new RegExp(cityValue, 'gi');

@@ -7,7 +7,7 @@ import Covid from '../images/covid.png';
 import Wall from '../images/bgImage.jpg';
 import Drum from '../images/JSThirty/drum.png';
 import Clock from '../images/JSThirty/clock.png';
-import City from '../images/JSThirty/clock.png';
+import CitySearch from '../images/JSThirty/CitySearch.png';
 import microfrontend from '../images/react/microfrontend.png';
 import TicTacToe from '../images/games/tic-tac-toe.png';
 
@@ -92,6 +92,14 @@ export const projectsCardML = [
 
 export const projectCardJS30 = [
     {
+        projectTitle: 'City search',
+        projectIntro: 'Search for cities and its population.',
+        skills: ['DOM', 'Interface'],
+        img: CitySearch,
+        link: "/js30",
+        gitHub: "https://github.com/fwbrandao/JavaScript-City-Searcher",
+    },
+    {
         projectTitle: 'Drum kit',
         projectIntro: 'Interactive drum kit build with JavaScript',
         skills: ['DOM & INTERFACE', 'CSS', 'AUDIO + VIDEO'],
@@ -106,14 +114,6 @@ export const projectCardJS30 = [
         img: Clock,
         link: "/js30",
         gitHub: "https://github.com/fwbrandao/JavaScript-clock",
-    },
-    {
-        projectTitle: 'City search',
-        projectIntro: 'Search for cities and its population.',
-        skills: ['DOM', 'Interface'],
-        img: City,
-        link: "/js30",
-        gitHub: "https://github.com/fwbrandao/JavaScript-City-Searcher",
     },
     comingSoon
 ]
