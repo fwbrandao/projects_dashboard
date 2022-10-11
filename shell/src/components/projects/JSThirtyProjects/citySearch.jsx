@@ -15,7 +15,8 @@ const useStyles = makeStyles(() => ({
     fontSize: "20px",
     fontWeight: "200",
     backgroundImage: `url(${City})`,
-    backgroundSize: "cover"
+    backgroundSize: "cover",
+    overflow: "hidden"
   },
   search: {
     width: "100%",
@@ -36,11 +37,16 @@ const useStyles = makeStyles(() => ({
   searchForm: {
     maxWidth: "400px",
     margin: "50px auto",
+    '@media (max-width: 1024px)': {
+      maxWidth: "300px",
+    }
   },
   suggestions: {
     margin: 0,
     padding: 0,
     position: "relative",
+    height: "100vh",
+    overflow: "scroll",
     "& li": {
       background: "white",
       listStyle: "none",
