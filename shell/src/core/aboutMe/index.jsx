@@ -16,9 +16,8 @@ import {
   Tooltip
 } from '@material-ui/core';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { skillsData, linkedInURL, gitHubURL } from '../../assets/aboutMe';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';;
 import AvatarImg from '../../images/fwbAvatar.jpg';
 
 const useStyles = makeStyles((theme) => ({
@@ -68,34 +67,12 @@ const AboutMe = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  const [chipData] = React.useState([
-    { key: 1, label: 'JavaScript' },
-    { key: 2, label: 'ReactJS' },
-    { key: 3, label: 'Typescript' },
-    { key: 4, label: 'Convolutional Neural Network' },
-    { key: 5, label: 'Artificial Neural Network' },
-    { key: 6, label: 'Deep Learning' },
-    { key: 7, label: 'Python Programming' },
-    { key: 8, label: 'Machine Learning' },
-    { key: 9, label: 'Facial Recognition System' },
-    { key: 10, label: 'Keras' },
-    { key: 11, label: 'Tensorflow' },
-    { key: 12, label: 'Backpropagation' },
-    { key: 13, label: 'Hyperparameter' },
-    { key: 14, label: 'Hyperparameter Optimization' },
-  ]);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
           <Paper elevation={10} className={classes.avatar}>
-            <Avatar alt="F Brandao" src={AvatarImg} className={classes.large}/>
+            <Avatar alt="F Brandao" src={AvatarImg} className={classes.large} />
           </Paper>
         }
         title="FB"
@@ -111,14 +88,14 @@ const AboutMe = () => {
       </CardContent>
       <CardActions disableSpacing>
         <Tooltip title="Navigate to my github" aria-label="code">
-          <Link href="https://github.com/fwbrandao" target="_blank">
+          <Link href={gitHubURL} target="_blank">
             <IconButton aria-label="github" >
               <GitHubIcon fontSize="large" />
             </IconButton>
           </Link>
         </Tooltip>
         <Tooltip title="Navigate to my LinkedIn" aria-label="code">
-          <Link href="" target="_blank">
+          <Link href={linkedInURL} target="_blank">
             <IconButton aria-label="LinkedIn" >
               <LinkedInIcon color="action" fontSize="large" />
             </IconButton>
@@ -131,13 +108,13 @@ const AboutMe = () => {
       <CardContent>
         <Typography variant="body2" paragraph>Skills learned with my projects</Typography>
         <Paper component="ul" className={classes.chipRoot} elevation={6}>
-          {chipData.map((data) => {
+          {skillsData.map((item, index) => {
             let icon;
             return (
-              <li key={data.key}>
+              <li key={index}>
                 <Chip
                   icon={icon}
-                  label={data.label}
+                  label={item}
                   size="small"
                   className={classes.chip}
                 />

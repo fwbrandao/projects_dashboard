@@ -117,15 +117,17 @@ const NavBar = () => {
             </Link>
           </Typography>
           {!openDrawer ? (
-            <Button
-              color="inherit"
-              aria-label="open drawer"
-              edge="end"
-              onClick={handleDrawerOpen}
-              className={clsx(openDrawer && classes.hide)}
-            >
-              <Avatar alt="fb" src={AvatarImg} />
-            </Button>
+            <Tooltip title="About me" aria-label="About me">
+              <Button
+                color="inherit"
+                aria-label="open drawer"
+                edge="end"
+                onClick={handleDrawerOpen}
+                className={clsx(openDrawer && classes.hide)}
+              >
+                <Avatar alt="fb" src={AvatarImg} />
+              </Button>
+            </Tooltip>
           ) : ''}
           {currentTheme === 'darkTheme' ? (
             <Tooltip title="Light Mode" aria-label="Light Mode">

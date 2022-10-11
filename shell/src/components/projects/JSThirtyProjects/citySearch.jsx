@@ -4,6 +4,9 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import City from "../../../images/city.jpg";
+import CityNight from "../../../images/cityNight.jpg";
+
+const currentTheme = localStorage.getItem('appTheme');
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -14,7 +17,7 @@ const useStyles = makeStyles(() => ({
     fontFamily: "helvetica neue",
     fontSize: "20px",
     fontWeight: "200",
-    backgroundImage: `url(${City})`,
+    backgroundImage: `url(${currentTheme === "darkTheme" ? CityNight : City})`,
     backgroundSize: "cover",
     overflow: "hidden"
   },
@@ -105,7 +108,7 @@ const CitySearch = () => {
     if (!cityValue) return;
 
     const matchArray = findMatches(cityValue, cities);
-    const html = matchArray.map((place, index)=> {
+    const html = matchArray.map((place, index) => {
       const regex = new RegExp(cityValue, 'gi');
       const cityName = place.city.replace(regex, cityValue);
       const stateName = place.state.replace(regex, cityValue);
