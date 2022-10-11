@@ -7,7 +7,7 @@ import Covid from '../images/covid.png';
 import Wall from '../images/bgImage.jpg';
 import Drum from '../images/JSThirty/drum.png';
 import Clock from '../images/JSThirty/clock.png';
-import CitySearch from '../images/JSThirty/CitySearch.png';
+import CitySearch from '../images/JSThirty/citySearch.png';
 import microfrontend from '../images/react/microfrontend.png';
 import TicTacToe from '../images/games/tic-tac-toe.png';
 
