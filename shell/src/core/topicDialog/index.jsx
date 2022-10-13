@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
         paddingBottom: theme.spacing(2),
     },
     gridContainer: {
+        margin: "20px 0px",
         '@media (max-width: 1224px)': {
             display: 'grid',
             justifyItems: 'center',

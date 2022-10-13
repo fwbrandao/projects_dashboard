@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
     outline: 0,
     border: "10px solid #F7F7F7",
     width: "120%",
-    left: "-17%",
+    left: "-20%",
     position: "relative",
     top: "10px",
     zIndex: 2,
@@ -48,7 +48,7 @@ const useStyles = makeStyles(() => ({
     margin: 0,
     padding: 0,
     position: "relative",
-    height: "100vh",
+    height: "60vh",
     overflow: "scroll",
     "& li": {
       background: "white",
