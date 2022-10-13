@@ -18,7 +18,10 @@ const useStyles = makeStyles(theme =>  ({
   root: {
     maxWidth: '55%',
     margin: '15px auto 5px auto',
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.main,
+    '@media (max-width: 1224px)': {
+      maxWidth: '90%',
+    }
   },
   title: {
     fontSize: 18,
