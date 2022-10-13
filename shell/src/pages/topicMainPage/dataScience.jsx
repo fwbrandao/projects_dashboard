@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     '@media (max-width: 1024px)': {
       boxShadow: 'none',
-
+      marginTop: "-100px",
     }
   },
   grid: {

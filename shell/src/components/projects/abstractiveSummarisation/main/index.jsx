@@ -3,7 +3,6 @@ import {
     Box,
     makeStyles,
     Typography,
-    Grid,
 } from '@material-ui/core';
 
 import AboutProject from '../../../../core/aboutProject/index.jsx';
@@ -28,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
             display: 'grid',
         }
     },
+    controlledExpansionRoot: {
+        margin: "32px 200px 32px",
+        '@media (max-width: 1024px)': {
+            margin: "32px 60px 32px",
+        }
+    }
 }))
 
 const AbstractiveSummarisation = () => {
@@ -42,7 +47,7 @@ const AbstractiveSummarisation = () => {
                 gitHubLink={abstractiveSummaryData.gitHubLink}
                 originalPaper={abstractiveSummaryData.literactureLink}
             />
-            <Box mt={4} ml={18} mr={18} mb={2}>
+            <Box className={classes.controlledExpansionRoot}>
                 <ControlledExpansionPanels
                     className={classes.controlledExpansionPanels}
                     firstHeader={abstractiveSummaryData.infoExpantion.firstHeader}
