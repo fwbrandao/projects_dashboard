@@ -97,7 +97,7 @@ const AboutMe = () => {
         <Tooltip title="Navigate to my LinkedIn" aria-label="code">
           <Link href={linkedInURL} target="_blank">
             <IconButton aria-label="LinkedIn" >
-              <LinkedInIcon color="action" fontSize="large" />
+              <LinkedInIcon fontSize="large" />
             </IconButton>
           </Link>
         </Tooltip>
