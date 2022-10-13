@@ -75,7 +75,7 @@ const AboutMe = () => {
             <Avatar alt="F Brandao" src={AvatarImg} className={classes.large} />
           </Paper>
         }
-        title="FB"
+        title="Fernando Brandao"
         subheader="Software Engineer"
       />
       <CardContent>

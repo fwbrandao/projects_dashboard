@@ -24,6 +24,12 @@ const useStyles = makeStyles((theme) => ({
     toolbar: theme.mixins.toolbar,
     controlledExpansionPanels: {
         backgroundColor: theme.palette.primary.main
+    },
+    controlledExpansionRoot: {
+        margin: "32px 200px 32px",
+        '@media (max-width: 1024px)': {
+            margin: "32px 60px 32px",
+        }
     }
 }));
 
@@ -55,7 +61,7 @@ const FakeNewsDetector = () => {
                 the accuracy score and the confusion matrix tell us how well our model fares."
                 gitHubLink="https://github.com/fwbrandao/Fake_news_detector"
             />
-            <Box mt={4} ml={18} mr={18} mb={2}>
+            <Box className={classes.controlledExpansionRoot}>
                 {/* <Box mb={2}>
                     <Button
                         size="small"

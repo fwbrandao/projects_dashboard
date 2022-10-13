@@ -2,6 +2,8 @@ export const skillsData = [
   'JavaScript',
   'ReactJS',
   'Typescript',
+  'GraphQL',
+  'Styled-components',
   'Convolutional Neural Network',
   'Artificial Neural Network',
   'Deep Learning',
@@ -13,6 +15,10 @@ export const skillsData = [
   'Backpropagation',
   'Hyperparameter',
   'Hyperparameter Optimization',
+  'Git',
+  'CI/CD',
+  'Agile Methodologies',
+
 ];
 
 export const linkedInURL = 'https://www.linkedin.com/in/fernando-b-b3b63021b/';
