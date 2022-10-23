@@ -100,6 +100,14 @@ export const projectCardJS30 = [
         gitHub: "https://github.com/fwbrandao/JavaScript-City-Searcher",
     },
     {
+        projectTitle: 'Flex panel',
+        projectIntro: 'Animated photo panel.',
+        skills: ['CSS', 'DOM & INTERFACE'],
+        img: Clock,
+        link: "/js30",
+        gitHub: "https://github.com/fwbrandao/Flex-Panel-Gallery",
+    },
+    {
         projectTitle: 'Drum kit',
         projectIntro: 'Interactive drum kit build with JavaScript',
         skills: ['DOM & INTERFACE', 'CSS', 'AUDIO + VIDEO'],

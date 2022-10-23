@@ -2,9 +2,10 @@ export const menuList_JSThirty = [
     {
         topic: "MiniJS Projects",
         items: [
+            { title: "City Search", link: "/js30", projectId: "City search" },
+            { title: "Flex panel", link: "/js30", projectId: "Flex panel" },
             { title: "Drum kit", link: "/js30", projectId: "Drum kit" },
             { title: "JS clock", link: "/js30", projectId: "CSS + JS Clock" },
-            { title: "City Search", link: "/js30", projectId: "City search" },
         ]
     }
 ]
