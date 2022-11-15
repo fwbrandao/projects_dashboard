@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useRef} from "react";
 import {
   Box,
   makeStyles,
 } from '@material-ui/core';
-import clsx from  'clsx';
+import clsx from 'clsx';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -37,9 +37,33 @@ const useStyles = makeStyles(() => ({
     alignContent: "center",
     display: "flex",
     flexDirection: "column",
+    "& > *": {
+      margin: 0,
+      width: "100%",
+      transition: "transform 0.5s",
+      flex: "1 0 auto",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    "& p": {
+      textTransform: "uppercase",
+      fontFamily: "'Amatic SC', cursive",
+      textShadow: "0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45)",
+      fontSize: "2em",
+    },
+    "& p:nth-child(2)": {
+      fontSize: "4em",
+    },
+    "& *:first-child": { transform: "translateY(-100%)" },
+    "& *:last-child": { transform: "translateY(100%)" }
   },
   panel1: {
     backgroundImage: "url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500)",
+    // "& open": {
+    //   flex: 5,
+    //   fontSize: "40px",
+    // }
   },
   panel2: {
     backgroundImage: "url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500)",
@@ -57,15 +81,23 @@ const useStyles = makeStyles(() => ({
 
 const FlexPanel = () => {
   const classes = useStyles();
+  const panel1Ref = useRef();
+
+  const handleClick = () => {
+    const panel1El = panel1Ref.current;
+    console.log("panel1El", panel1El.style)
+    panel1El.style.flex = 5;
+    panel1El.style.fontSize = "40px";
+  }
 
   return (
     <Box className={classes.root}>
       <div className={classes.panels}>
-        <div className={clsx(classes.panel, classes.panel1)}>
+        <button ref={panel1Ref} className={clsx(classes.panel, classes.panel1)} onClick={() => handleClick()}>
           <p>Let's</p>
           <p>Code</p>
           <p>Guys</p>
-        </div>
+        </button>
         <div className={clsx(classes.panel, classes.panel2)}>
           <p>It</p>
           <p>Is</p>
