@@ -1,0 +1,21 @@
+# Netlify configuration for the redesigned dashboard.
+# The app lives in dashboard-v2/ and is built with pnpm (not yarn).
+# File-based config here takes precedence over the Netlify UI build settings.
+
+[build]
+  base = "dashboard-v2"      # cd into the app folder (where package.json is)
+  command = "pnpm build"     # build with pnpm
+  publish = "dist"           # output, relative to base -> dashboard-v2/dist
+
+[build.environment]
+  NODE_VERSION = "22"        # ships Corepack; pnpm 11 needs Node >= 18
+
+# Corepack reads the pinned "packageManager": "pnpm@11.5.0" from package.json,
+# so the 7-day minimumReleaseAge safeguard in pnpm-workspace.yaml still applies.
+
+# SPA fallback: serve the app shell for client-side routes
+# (e.g. /projects/tic-tac-toe, /about) so deep links and refreshes work.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
