@@ -1,0 +1,27 @@
+allowBuilds:
+  esbuild: false
+
+# pnpm settings (pnpm reads project config from here).
+#
+# Supply-chain safeguard: never install a package version until it has been
+# public for at least 7 days. This blunts attacks where a compromised version
+# is published and pulled within hours, since pnpm will resolve to the newest
+# version that is already older than the cooldown. Applies to ALL dependencies,
+# including transitive ones.
+#
+# 7 days = 7 * 24 * 60 = 10080 minutes.
+minimumReleaseAge: 10080
+
+# Packages exempted from the cooldown (resolve to newest immediately).
+# Type-only packages carry no executable risk; add an emergency-fix package
+# here temporarily if you ever need a same-day security patch.
+minimumReleaseAgeExclude:
+  - '@types/*'
+
+# pnpm 10+ blocks dependency install/build scripts by default — a second
+# supply-chain safeguard (a malicious postinstall can't run on `pnpm install`).
+# This project needs none, so the allowlist is intentionally empty. If a future
+# dependency legitimately requires its build script, add it here after review:
+#   onlyBuiltDependencies:
+#     - some-package
+onlyBuiltDependencies: []
