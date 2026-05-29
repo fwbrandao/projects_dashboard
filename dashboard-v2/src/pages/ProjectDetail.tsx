@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import { getProjectById, getCategoryById, getProjectsByCategory } from '../data/projects'
 import ProjectCard from '../components/ProjectCard'
 import NotFound from './NotFound'
+import { demos } from '../demos'
 
 export default function ProjectDetail() {
   const { id } = useParams()
@@ -9,6 +10,7 @@ export default function ProjectDetail() {
   if (!project) return <NotFound />
 
   const category = getCategoryById(project.category)
+  const Demo = demos[project.id]
   const related = getProjectsByCategory(project.category)
     .filter((p) => p.id !== project.id)
     .slice(0, 3)
@@ -50,13 +52,13 @@ export default function ProjectDetail() {
                 View source
               </a>
             )}
-            {project.demo && (
+            {Demo && (
               <a
-                href={project.demo}
+                href="#demo"
                 className="glass inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-semibold text-text no-underline transition-transform hover:scale-[1.03]"
               >
                 <span className="material-symbols-rounded text-[18px]">play_arrow</span>
-                Open demo
+                Try it live
               </a>
             )}
           </div>
@@ -65,6 +67,19 @@ export default function ProjectDetail() {
           <img src={project.thumbnail} alt={`${project.title} preview`} className="aspect-[16/10] w-full object-cover" />
         </div>
       </header>
+
+      {/* Live demo */}
+      {Demo && (
+        <section id="demo" className="mt-12 scroll-mt-20">
+          <div className="mb-4 flex items-center gap-2">
+            <span className="material-symbols-rounded text-primary">play_circle</span>
+            <h2 className="font-display text-xl font-bold text-text">Try it live</h2>
+          </div>
+          <div className="glass rounded-lg p-6 sm:p-10">
+            <Demo />
+          </div>
+        </section>
+      )}
 
       {/* Body */}
       <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_18rem]">

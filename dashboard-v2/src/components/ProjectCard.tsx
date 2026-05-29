@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import type { Project } from '../data/projects'
 import { getCategoryById } from '../data/projects'
+import { hasDemo } from '../demos'
 
 export default function ProjectCard({ project }: { project: Project }) {
   const category = getCategoryById(project.category)
+  const playable = hasDemo(project.id)
   return (
     <Link
       to={`/projects/${project.id}`}
@@ -20,6 +22,12 @@ export default function ProjectCard({ project }: { project: Project }) {
           <span className="material-symbols-rounded text-[13px] text-primary">{category?.icon}</span>
           {category?.short}
         </span>
+        {playable && (
+          <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-bg">
+            <span className="material-symbols-rounded text-[13px]">play_circle</span>
+            Live demo
+          </span>
+        )}
       </div>
       <div className="flex flex-1 flex-col p-5">
         <h3 className="font-display text-base font-bold leading-snug text-text transition-colors group-hover:text-primary">

@@ -49,8 +49,6 @@ export interface Project {
   stack: string[]
   /** External source link (GitHub etc.). */
   repo?: string
-  /** Optional external demo / notebook. */
-  demo?: string
   /** Highlights for the detail page (what was actually built/learned). */
   highlights: string[]
 }
@@ -219,7 +217,6 @@ export const projects: Project[] = [
     thumbnail: ticTacToe,
     year: 2022,
     stack: ['React', 'TypeScript'],
-    demo: '/projects/tic-tac-toe',
     highlights: ['Immutable board state and history.', 'Win-condition detection.', 'Time-travel between moves.'],
   },
   {
