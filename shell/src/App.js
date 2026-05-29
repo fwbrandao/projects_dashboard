@@ -1,10 +1,10 @@
-import React, { lazy, Suspense, useState, useEffect } from "react";
+import React, { lazy, Suspense } from "react";
 import { StylesProvider, createGenerateClassName } from '@material-ui/core/styles';
 
 import ThemeProvider from './themes/themeProvider';
 import JsProjectProvider from './context/use-current-project';
 
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import LandingPage from "./pages/landingPage.jsx";
 import { createBrowserHistory } from 'history';
 import NavBar from "./core/navBar/index.jsx";
@@ -20,14 +20,14 @@ import KerasIntro from './components/projects/kerasIntro/main/index.jsx'
 import Covid from './components/projects/covid/index.jsx';
 import { DataScience, JSThirty } from './pages/topicMainPage/index.js';
 
+import './index.css';
+
 const createClassName = createGenerateClassName({
   productionPrefix: "shell",
 })
 
 // Only loads the component if needed
 const TicTacToeLazy = lazy(() => import('./components/projects/ticTacToe/TictactoeApp'));
-// const AuthLazy = lazy(() => import('./components/AuthApp'));
-// const DashboardLazy = lazy(() => import('./components/DashboardApp'));
 
 const history = createBrowserHistory();
 
@@ -37,9 +37,16 @@ export default () => {
       <JsProjectProvider>
         <Router history={history}>
           <StylesProvider generateClassName={createClassName}>
-            <div>
+            <div className="min-h-screen bg-background text-on-surface">
               <NavBar />
-              <Suspense fallback={<div>Loading....</div>}>
+              <Suspense fallback={
+                <div className="h-screen flex items-center justify-center">
+                  <div className="flex items-center gap-3">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                    <span className="text-xs uppercase tracking-widest text-on-surface-variant font-label">Loading system...</span>
+                  </div>
+                </div>
+              }>
                 <Switch>
                   <Route path='/tic-tac-toe'>
                     <TicTacToeLazy />
