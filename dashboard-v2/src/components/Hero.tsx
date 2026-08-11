@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../data/projects'
 import DotGlobe from './DotGlobe'
+import SmokeWaveCanvas from './SmokeWaveCanvas'
 import './heroMotion.css'
 
 const TRUST = ['AI / ML', 'Front-end', 'GCP'] as const
@@ -38,16 +39,17 @@ export default function Hero() {
   return (
     <section className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 px-2 pt-20 sm:px-4 sm:pt-24">
       <div className="relative isolate overflow-hidden rounded-3xl border border-border shadow-lift">
-        {/* Ambient gradient wave (CSS — dashboard cyan → violet → magenta) */}
-        <div aria-hidden className="hero-wave absolute inset-0 -z-10" />
-        {/* Interactive dotted globe (cobe) — drag to rotate; behind copy */}
+        {/* Smoke / liquid wave (WebGL + CSS fallback) — full bleed behind globe */}
+        <SmokeWaveCanvas className="-z-10" />
+        {/* Interactive dotted globe (cobe) — drag to rotate; in front of smoke */}
         <DotGlobe />
+        {/* Soft scrim — text legibility without killing smoke + globe depth */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 z-[1] opacity-50"
+          className="pointer-events-none absolute inset-0 z-[1] opacity-40"
           style={{
             background:
-              'radial-gradient(ellipse at 50% 120%, transparent 20%, color-mix(in srgb, var(--bg) 88%, transparent) 75%)',
+              'radial-gradient(ellipse at 50% 120%, transparent 25%, color-mix(in srgb, var(--bg) 82%, transparent) 78%)',
           }}
         />
 
