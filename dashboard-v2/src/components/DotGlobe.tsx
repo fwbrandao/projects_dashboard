@@ -113,8 +113,6 @@ export default function DotGlobe() {
         markers: [
           // Brazil (São Paulo-ish)
           { location: [-23.55, -46.63], size: 0.06 },
-          // Remote / global marker (SF bay — common remote hub)
-          { location: [37.77, -122.42], size: 0.04 },
         ],
         onRender: (state) => {
           if (destroyed) return
