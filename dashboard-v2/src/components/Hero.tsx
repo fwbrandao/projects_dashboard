@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../data/projects'
+import DotGlobe from './DotGlobe'
 import './heroMotion.css'
 
 const TRUST = ['AI / ML', 'Front-end', 'GCP'] as const
@@ -39,16 +40,19 @@ export default function Hero() {
       <div className="relative isolate overflow-hidden rounded-3xl border border-border shadow-lift">
         {/* Ambient gradient wave (CSS — dashboard cyan → violet → magenta) */}
         <div aria-hidden className="hero-wave absolute inset-0 -z-10" />
+        {/* Interactive dotted globe (cobe) — drag to rotate; behind copy */}
+        <DotGlobe />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10 opacity-60"
+          className="pointer-events-none absolute inset-0 z-[1] opacity-50"
           style={{
             background:
               'radial-gradient(ellipse at 50% 120%, transparent 20%, color-mix(in srgb, var(--bg) 88%, transparent) 75%)',
           }}
         />
 
-        <div className="mx-auto flex max-w-4xl flex-col items-center px-5 pb-14 pt-14 text-center sm:px-8 sm:pb-20 sm:pt-20">
+        {/* pointer-events-none so drag reaches globe; restore on interactive children */}
+        <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pb-14 pt-14 text-center pointer-events-none sm:px-8 sm:pb-20 sm:pt-20">
           {/* Pill badge + live ping */}
           <span
             className="hero-fade glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold text-text"
@@ -80,7 +84,7 @@ export default function Hero() {
 
           {/* CTAs */}
           <div
-            className="hero-fade mt-9 flex flex-wrap items-center justify-center gap-3"
+            className="hero-fade mt-9 flex flex-wrap items-center justify-center gap-3 pointer-events-auto"
             style={{ ['--fade-delay' as string]: '0.7s' }}
           >
             <a
@@ -122,7 +126,7 @@ export default function Hero() {
 
           {/* Glass skill strip (portfolio vignette — not a chat clone) */}
           <div
-            className="hero-fade relative mx-auto mt-12 w-full max-w-xl"
+            className="hero-fade relative mx-auto mt-12 w-full max-w-xl pointer-events-auto"
             style={{ ['--fade-delay' as string]: '1s' }}
           >
             <div className="glass rounded-2xl p-4 text-left shadow-lift sm:p-5">
@@ -156,7 +160,7 @@ export default function Hero() {
           {/* Scroll cue */}
           <a
             href="#work"
-            className="hero-fade mt-10 inline-flex flex-col items-center gap-1 text-xs font-semibold uppercase tracking-wider text-faint no-underline transition-colors hover:text-muted"
+            className="hero-fade mt-10 inline-flex flex-col items-center gap-1 text-xs font-semibold uppercase tracking-wider text-faint no-underline transition-colors hover:text-muted pointer-events-auto"
             style={{ ['--fade-delay' as string]: '1.1s' }}
           >
             See work
