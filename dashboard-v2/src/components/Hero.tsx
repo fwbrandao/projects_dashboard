@@ -67,13 +67,17 @@ export default function Hero() {
             AI / Software Engineer
           </span>
 
-          {/* Oversized headline */}
+          {/* Oversized headline — name solid ink; tagline cyan→sky gradient */}
           <h1 className="mt-8 max-w-4xl text-balance font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-            <span className="block">
-              <CascadeWords text="Hi, I'm Brandao." className="gradient-text" />
+            <span className="block text-[#0a0a0a] dark:text-text">
+              <CascadeWords text="Hi, I'm Brandao." />
             </span>
-            <span className="mt-2 block text-text sm:mt-3">
-              <CascadeWords text="I build AI systems that ship." baseDelay={0.32} />
+            <span className="mt-2 block sm:mt-3">
+              <CascadeWords
+                text="I build AI systems that ship."
+                baseDelay={0.32}
+                className="gradient-text-sky"
+              />
             </span>
           </h1>
 
