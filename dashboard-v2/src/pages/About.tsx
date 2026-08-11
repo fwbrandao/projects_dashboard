@@ -13,13 +13,14 @@ export default function About() {
         <div>
           <p className="eyebrow text-primary">About</p>
           <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight text-text">Brandao</h1>
-          <p className="mt-1 text-muted">AI Engineer · Front-end &amp; GCP</p>
+          <p className="mt-1 text-muted">AI / Software Engineer</p>
         </div>
       </div>
 
       <div className="mt-10 space-y-4 leading-relaxed text-muted">
         <p>
-          I&apos;m an AI Engineer with substantial front-end experience and hands-on GCP delivery.
+          I&apos;m an AI / Software Engineer with substantial front-end experience and hands-on GCP
+          delivery.
           I care about systems that train and ship — models for vision and language, and the product
           interfaces that make them usable.
         </p>

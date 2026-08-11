@@ -64,13 +64,15 @@ export default function Hero() {
               <span className="hero-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
-            AI Engineer · FE · GCP
+            AI / Software Engineer
           </span>
 
           {/* Oversized headline */}
-          <h1 className="mt-8 max-w-4xl text-balance font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-text sm:text-6xl md:text-7xl">
-            <CascadeWords text="Hi, I'm Brandao." />
-            <span className="mt-2 block gradient-text sm:mt-3">
+          <h1 className="mt-8 max-w-4xl text-balance font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
+            <span className="block">
+              <CascadeWords text="Hi, I'm Brandao." className="gradient-text" />
+            </span>
+            <span className="mt-2 block text-text sm:mt-3">
               <CascadeWords text="I build AI systems that ship." baseDelay={0.32} />
             </span>
           </h1>
@@ -80,8 +82,8 @@ export default function Hero() {
             className="hero-fade mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-muted sm:text-lg"
             style={{ ['--fade-delay' as string]: '0.55s' }}
           >
-            AI Engineer with deep front-end craft and GCP delivery — a working portfolio of {count}{' '}
-            projects across vision, NLP, data, and the web.
+            AI / Software Engineer with deep front-end craft and GCP delivery — a working portfolio of{' '}
+            {count} projects across vision, NLP, data, and the web.
           </p>
 
           {/* CTAs */}

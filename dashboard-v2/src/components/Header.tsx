@@ -12,7 +12,7 @@ function Icon({ name, className = '' }: { name: string; className?: string }) {
 }
 
 export default function Header() {
-  const { theme, toggle } = useTheme()
+  const { theme, toggle, followsSystem } = useTheme()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
@@ -75,7 +75,12 @@ export default function Header() {
         <div className="flex items-center gap-1">
           <button
             onClick={toggle}
-            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            aria-label={
+              followsSystem
+                ? `Theme follows system (${theme}). Click to switch to ${theme === 'dark' ? 'light' : 'dark'} mode`
+                : `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`
+            }
+            title={followsSystem ? `System · ${theme}` : theme}
             className="grid h-10 w-10 place-items-center rounded-full text-muted transition-colors hover:bg-surface hover:text-text"
           >
             <Icon name={theme === 'dark' ? 'light_mode' : 'dark_mode'} className="text-[20px]" />
