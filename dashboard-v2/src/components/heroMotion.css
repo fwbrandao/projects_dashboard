@@ -1,0 +1,129 @@
+/* Hero motion — cascade + fade. Reduced-motion: resting state only. */
+.hero-word {
+  display: inline-block;
+}
+
+.hero-fade {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-word {
+    opacity: 0;
+    transform: translateY(110%) rotate(1.5deg);
+    animation: hero-word-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--word-delay, 0s);
+  }
+
+  .hero-fade {
+    opacity: 0;
+    animation: hero-fade-up 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--fade-delay, 0.45s);
+  }
+}
+
+@keyframes hero-word-in {
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-ping {
+    animation: hero-ping 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+}
+
+/* Liquid smoke backdrop (CSS fallback when WebGL fails / under canvas) */
+@keyframes hero-smoke-shift {
+  0% {
+    background-position: 0% 40%, 100% 60%, 50% 0%, 10% 80%, 0 0;
+  }
+  50% {
+    background-position: 80% 55%, 15% 35%, 45% 85%, 70% 20%, 0 0;
+  }
+  100% {
+    background-position: 0% 40%, 100% 60%, 50% 0%, 10% 80%, 0 0;
+  }
+}
+
+.hero-smoke {
+  background-color: #0d0b21;
+  background-image:
+    radial-gradient(ellipse 90% 70% at 18% 28%, rgba(47, 246, 246, 0.42), transparent 58%),
+    radial-gradient(ellipse 80% 65% at 82% 18%, rgba(166, 140, 255, 0.48), transparent 55%),
+    radial-gradient(ellipse 100% 75% at 58% 92%, rgba(255, 92, 247, 0.36), transparent 58%),
+    radial-gradient(ellipse 60% 50% at 40% 55%, rgba(47, 246, 246, 0.14), transparent 60%),
+    linear-gradient(145deg, #0d0b21 0%, #16123a 38%, #1a1040 68%, #120e2c 100%);
+  background-size: 160% 160%, 160% 160%, 160% 160%, 140% 140%, 100% 100%;
+  background-position: 0% 40%, 100% 60%, 50% 0%, 10% 80%, 0 0;
+  filter: saturate(1.15);
+}
+
+.light .hero-smoke {
+  background-color: #d8d4f0;
+  background-image:
+    radial-gradient(ellipse 90% 70% at 18% 28%, rgba(10, 138, 138, 0.45), transparent 58%),
+    radial-gradient(ellipse 80% 65% at 82% 18%, rgba(109, 75, 219, 0.42), transparent 55%),
+    radial-gradient(ellipse 100% 75% at 58% 92%, rgba(192, 26, 184, 0.32), transparent 58%),
+    radial-gradient(ellipse 60% 50% at 40% 55%, rgba(10, 138, 138, 0.16), transparent 60%),
+    linear-gradient(145deg, #e4e0f6 0%, #cfc8ec 42%, #ddd6f2 100%);
+  background-size: 160% 160%, 160% 160%, 160% 160%, 140% 140%, 100% 100%;
+  filter: saturate(1.05);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-smoke {
+    animation: hero-smoke-shift 14s ease-in-out infinite;
+  }
+}
+
+/* Legacy class name kept for any leftover references */
+.hero-wave {
+  background-color: #0d0b21;
+  background-image:
+    radial-gradient(ellipse 90% 70% at 18% 28%, rgba(47, 246, 246, 0.42), transparent 58%),
+    radial-gradient(ellipse 80% 65% at 82% 18%, rgba(166, 140, 255, 0.48), transparent 55%),
+    radial-gradient(ellipse 100% 75% at 58% 92%, rgba(255, 92, 247, 0.36), transparent 58%),
+    radial-gradient(ellipse 60% 50% at 40% 55%, rgba(47, 246, 246, 0.14), transparent 60%),
+    linear-gradient(145deg, #0d0b21 0%, #16123a 38%, #1a1040 68%, #120e2c 100%);
+  background-size: 160% 160%, 160% 160%, 160% 160%, 140% 140%, 100% 100%;
+  background-position: 0% 40%, 100% 60%, 50% 0%, 10% 80%, 0 0;
+}
+
+.light .hero-wave {
+  background-color: #d8d4f0;
+  background-image:
+    radial-gradient(ellipse 90% 70% at 18% 28%, rgba(10, 138, 138, 0.45), transparent 58%),
+    radial-gradient(ellipse 80% 65% at 82% 18%, rgba(109, 75, 219, 0.42), transparent 55%),
+    radial-gradient(ellipse 100% 75% at 58% 92%, rgba(192, 26, 184, 0.32), transparent 58%),
+    radial-gradient(ellipse 60% 50% at 40% 55%, rgba(10, 138, 138, 0.16), transparent 60%),
+    linear-gradient(145deg, #e4e0f6 0%, #cfc8ec 42%, #ddd6f2 100%);
+  background-size: 160% 160%, 160% 160%, 160% 160%, 140% 140%, 100% 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-wave {
+    animation: hero-smoke-shift 14s ease-in-out infinite;
+  }
+}

@@ -27,12 +27,16 @@ export type CategoryId =
   | 'mini-js'
   | 'react'
 
+/** Top-level home grouping: AI/ML first, everything else below. */
+export type ProjectSection = 'ai' | 'other'
+
 export interface Category {
   id: CategoryId
   title: string
   short: string
   blurb: string
   icon: string
+  section: ProjectSection
 }
 
 export interface Project {
@@ -54,13 +58,20 @@ export interface Project {
 }
 
 export const categories: Category[] = [
-  { id: 'cnn', title: 'Computer Vision', short: 'Vision', blurb: 'Convolutional networks for detection, recognition, and classification.', icon: 'visibility' },
-  { id: 'nlp', title: 'Natural Language', short: 'NLP', blurb: 'Models for understanding, classifying, and generating text.', icon: 'translate' },
-  { id: 'data', title: 'Data & Prediction', short: 'Data', blurb: 'Exploratory analysis, visualization, and predictive modeling.', icon: 'analytics' },
-  { id: 'games', title: 'Games', short: 'Games', blurb: 'Interactive projects exercising state and real-time logic.', icon: 'sports_esports' },
-  { id: 'mini-js', title: 'Mini JS', short: 'JS', blurb: 'Small vanilla-JavaScript builds — DOM, events, and the Web APIs.', icon: 'code' },
-  { id: 'react', title: 'Web & React', short: 'Web', blurb: 'Front-end engineering and modular web architecture.', icon: 'web' },
+  { id: 'cnn', title: 'Computer Vision', short: 'Vision', blurb: 'Convolutional networks for detection, recognition, and classification.', icon: 'visibility', section: 'ai' },
+  { id: 'nlp', title: 'Natural Language', short: 'NLP', blurb: 'Models for understanding, classifying, and generating text.', icon: 'translate', section: 'ai' },
+  { id: 'data', title: 'Data & Prediction', short: 'Data', blurb: 'Exploratory analysis, visualization, and predictive modeling.', icon: 'analytics', section: 'ai' },
+  { id: 'games', title: 'Games', short: 'Games', blurb: 'Interactive projects exercising state and real-time logic.', icon: 'sports_esports', section: 'other' },
+  { id: 'mini-js', title: 'Mini JS', short: 'JS', blurb: 'Small vanilla-JavaScript builds — DOM, events, and the Web APIs.', icon: 'code', section: 'other' },
+  { id: 'react', title: 'Web & React', short: 'Web', blurb: 'Front-end engineering and modular web architecture.', icon: 'web', section: 'other' },
 ]
+
+const categorySection = Object.fromEntries(
+  categories.map((c) => [c.id, c.section]),
+) as Record<CategoryId, ProjectSection>
+
+export const getCategorySection = (id: CategoryId): ProjectSection =>
+  categorySection[id]
 
 export const projects: Project[] = [
   {
@@ -265,6 +276,9 @@ export const projects: Project[] = [
 
 export const getProjectsByCategory = (id: CategoryId) =>
   projects.filter((p) => p.category === id)
+
+export const getProjectsBySection = (section: ProjectSection) =>
+  projects.filter((p) => categorySection[p.category] === section)
 
 export const getProjectById = (id: string) =>
   projects.find((p) => p.id === id)

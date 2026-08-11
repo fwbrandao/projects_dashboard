@@ -13,19 +13,22 @@ export default function About() {
         <div>
           <p className="eyebrow text-primary">About</p>
           <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight text-text">Brandao</h1>
-          <p className="mt-1 text-muted">Machine learning &amp; front-end engineer</p>
+          <p className="mt-1 text-muted">AI / Software Engineer</p>
         </div>
       </div>
 
       <div className="mt-10 space-y-4 leading-relaxed text-muted">
         <p>
-          I build software across the stack — from deep-learning models for vision and language to
-          the front-ends that make them usable. This site collects {projects.length} projects spanning{' '}
-          {categories.map((c) => c.title).join(', ')}.
+          I&apos;m an AI / Software Engineer with substantial front-end experience and hands-on GCP
+          delivery.
+          I care about systems that train and ship — models for vision and language, and the product
+          interfaces that make them usable.
         </p>
         <p>
-          The work ranges from foundational notebooks (CNNs, ResNets, sequence-to-sequence models)
-          to interactive web builds. Each project links to its source so you can see how it's put together.
+          This site is an honest portfolio of {projects.length} projects spanning{' '}
+          {categories.map((c) => c.title).join(', ')}. Work ranges from foundational notebooks
+          (CNNs, ResNets, sequence-to-sequence models) to interactive web builds. Each project links
+          to its source so you can see how it&apos;s put together.
         </p>
       </div>
 
@@ -38,6 +41,15 @@ export default function About() {
         >
           <span className="material-symbols-rounded text-[18px]">code</span>
           GitHub
+        </a>
+        <a
+          href="https://www.linkedin.com/in/fernando-b-b3b63021b/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="glass inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-semibold text-text no-underline transition-transform hover:scale-[1.03]"
+        >
+          <span className="material-symbols-rounded text-[18px]">north_east</span>
+          LinkedIn
         </a>
         <a
           href="mailto:fwbrandao@gmail.com"
