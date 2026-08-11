@@ -67,18 +67,19 @@ export default function Hero() {
             AI / Software Engineer
           </span>
 
-          {/* Oversized headline — name solid ink; tagline cyan→sky gradient */}
-          <h1 className="mt-8 max-w-4xl text-balance font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-            <span className="block text-[#0a0a0a] dark:text-text">
-              <CascadeWords text="Hi, I'm Brandao." className="text-inherit" />
-            </span>
-            <span className="mt-2 block sm:mt-3">
-              <CascadeWords
-                text="I build AI systems that ship."
-                baseDelay={0.32}
-                className="gradient-text-sky"
-              />
-            </span>
+          {/* Headline: solid ink; only "intelligent, well-crafted" is cyan→sky gradient */}
+          <h1 className="mt-8 max-w-4xl text-balance font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-[#0a0a0a] dark:text-text sm:text-6xl md:text-7xl">
+            <CascadeWords text="Hi, I'm Brandao." className="text-inherit" />
+            {' '}
+            <CascadeWords text="I build" baseDelay={0.28} className="text-inherit" />
+            {' '}
+            <CascadeWords
+              text="intelligent, well-crafted"
+              baseDelay={0.42}
+              className="gradient-text-sky"
+            />
+            {' '}
+            <CascadeWords text="software." baseDelay={0.62} className="text-inherit" />
           </h1>
 
           {/* Subcopy */}
