@@ -62,6 +62,14 @@ export default function Header() {
           >
             GitHub
           </a>
+          <a
+            href="https://www.linkedin.com/in/fernando-b-b3b63021b/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-DEFAULT px-3 py-2 text-sm font-semibold text-muted no-underline transition-colors hover:text-text"
+          >
+            LinkedIn
+          </a>
         </nav>
 
         <div className="flex items-center gap-1">
@@ -115,6 +123,14 @@ export default function Header() {
               className="rounded-DEFAULT px-3 py-3 text-base font-semibold text-muted no-underline"
             >
               GitHub
+            </a>
+            <a
+              href="https://www.linkedin.com/in/fernando-b-b3b63021b/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-DEFAULT px-3 py-3 text-base font-semibold text-muted no-underline"
+            >
+              LinkedIn
             </a>
             <a
               href="mailto:fwbrandao@gmail.com"
