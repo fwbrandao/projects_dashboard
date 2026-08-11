@@ -44,7 +44,7 @@ export default function DotGlobe() {
 
     let phi = 0.8
     let theta = 0.28
-    let width = 0
+    let displaySize = 0
     let pointerInteraction: { x: number; y: number } | null = null
     let pointerMomentum = 0
     let dragging = false
@@ -59,7 +59,7 @@ export default function DotGlobe() {
       : [0.12, 0.22, 0.38]
     const glowColor: [number, number, number] = colors.isLight
       ? [0.72, 0.78, 0.92]
-      : colors.primary.map((c) => Math.min(1, c * 0.55 + 0.15)) as [number, number, number]
+      : (colors.primary.map((c) => Math.min(1, c * 0.55 + 0.15)) as [number, number, number])
     const markerColor = colors.secondary
     const mapBrightness = colors.isLight ? 4.2 : 7.2
     const dark = colors.isLight ? 0 : 1
@@ -75,13 +75,12 @@ export default function DotGlobe() {
     const onResize = () => {
       // CSS size from container; cobe width/height are backing-store pixels
       const rect = wrap.getBoundingClientRect()
-      width = rect.width
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
       rafScale = dpr
-      // height matches width for a round globe; container may be taller
-      const size = Math.max(rect.width, rect.height)
-      canvas.style.width = `${size}px`
-      canvas.style.height = `${size}px`
+      // Round globe — slightly smaller than the hero panel so copy stays dominant
+      displaySize = Math.min(rect.width, rect.height) * 0.72
+      canvas.style.width = `${displaySize}px`
+      canvas.style.height = `${displaySize}px`
     }
 
     const ro = new ResizeObserver(() => {
@@ -91,7 +90,7 @@ export default function DotGlobe() {
     ro.observe(wrap)
     onResize()
 
-    const sizePx = () => Math.max(2, Math.floor(width * rafScale))
+    const sizePx = () => Math.max(2, Math.floor(displaySize * rafScale))
 
     try {
       globe = createGlobe(canvas, {
@@ -109,8 +108,8 @@ export default function DotGlobe() {
         markerColor,
         glowColor,
         opacity: colors.isLight ? 0.55 : 0.92,
-        scale: 1.05,
-        offset: [0, 40],
+        scale: 0.92,
+        offset: [0, 24],
         markers: [
           // Brazil (São Paulo-ish)
           { location: [-23.55, -46.63], size: 0.06 },
