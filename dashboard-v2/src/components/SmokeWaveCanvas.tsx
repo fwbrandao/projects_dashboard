@@ -5,13 +5,12 @@
  * Palette is Projects Dashboard tokens only: deep navy-violet anchors +
  * cyan / violet / magenta smoke streaks.
  *
- * Production guarantees
- * ---------------------
- * • SSR-safe: plain wrapper + CSS fallback; WebGL only in useEffect.
- * • Zero-crash: if WebGL fails, CSS gradient fallback stays painted.
- * • Battery-respectful: DPR ≤ 1.5; RAF pauses offscreen / tab hidden.
- * • Accessible: prefers-reduced-motion → one static frame; aria-hidden.
- * • pointer-events-none so DotGlobe drag / CTAs stay interactive.
+ * Stacking: must sit above the panel background and BELOW DotGlobe
+ * (z-0). Never use negative z-index inside an `isolate` parent — it
+ * paints under the stacking context and disappears.
+ *
+ * If WebGL is unavailable or the context is lost (e.g. another canvas
+ * holds the only GPU slot), the animated CSS fallback stays visible.
  */
 
 import { useEffect, useRef } from 'react'
@@ -50,23 +49,21 @@ function readSmokeRamp(): ReadonlyArray<readonly [number, number, number]> {
   const isLight = document.documentElement.classList.contains('light')
 
   if (isLight) {
-    // Soft PD light tokens — calm anchors, gentle brand streaks
-    const anchor = mix(bg, violet, 0.12)
+    const anchor = mix(bg, violet, 0.18)
     return [
-      anchor,
-      mix(bg, primary, 0.42),
-      mix(bg, violet, 0.48),
-      mix(mix(bg, secondary, 0.35), primary, 0.2),
+      mix(bg, violet, 0.08),
+      mix(anchor, primary, 0.55),
+      mix(anchor, violet, 0.62),
+      mix(mix(bg, secondary, 0.45), primary, 0.25),
     ]
   }
 
-  // Dark: #0d0b21 / navy-violet + cyan + violet + magenta smoke
-  const navyViolet = mix(bg, violet, 0.18) // lifted anchor so smoke has depth
+  const navyViolet = mix(bg, violet, 0.22)
   return [
     bg,
-    mix(navyViolet, primary, 0.55),
-    mix(navyViolet, violet, 0.72),
-    mix(mix(bg, secondary, 0.55), primary, 0.25),
+    mix(navyViolet, primary, 0.62),
+    mix(navyViolet, violet, 0.78),
+    mix(mix(bg, secondary, 0.62), primary, 0.28),
   ]
 }
 
@@ -112,9 +109,9 @@ float fbm(vec2 p) {
 }
 
 void main() {
-  vec2 uv = gl_FragCoord.xy / u_res;
-  vec2 p = uv * vec2(u_res.x / u_res.y, 1.0) * 1.6;
-  float t = u_time * 0.06;
+  vec2 uv = gl_FragCoord.xy / max(u_res, vec2(1.0));
+  vec2 p = uv * vec2(u_res.x / max(u_res.y, 1.0), 1.0) * 1.55;
+  float t = u_time * 0.055;
 
   vec2 q = vec2(
     fbm(p + vec2(0.0, 0.0) + t * vec2(0.8, 0.6)),
@@ -126,17 +123,15 @@ void main() {
   );
   float f = fbm(p + 3.0 * r);
 
-  vec3 col = mix(u_c0, u_c1, smoothstep(0.15, 0.55, f));
-  col = mix(col, u_c2, smoothstep(0.45, 0.8, length(q) * 0.75));
-  col = mix(col, u_c3, smoothstep(0.55, 0.95, r.y) * 0.55);
+  vec3 col = mix(u_c0, u_c1, smoothstep(0.12, 0.58, f));
+  col = mix(col, u_c2, smoothstep(0.4, 0.82, length(q) * 0.78));
+  col = mix(col, u_c3, smoothstep(0.5, 0.96, r.y) * 0.6);
 
-  // Silky diagonal light streaks riding the warp field.
-  float streak = sin((uv.x - uv.y) * 9.0 + f * 7.0 + u_time * 0.25);
-  col += 0.045 * vec3(streak);
+  float streak = sin((uv.x - uv.y) * 8.5 + f * 7.0 + u_time * 0.22);
+  col += 0.05 * vec3(streak);
 
-  // Soft vignette — depth for globe floating in smoke; edges stay dark.
-  float vig = smoothstep(1.25, 0.35, distance(uv, vec2(0.5, 0.45)));
-  col *= mix(0.78, 1.0, vig);
+  float vig = smoothstep(1.35, 0.32, distance(uv, vec2(0.5, 0.48)));
+  col *= mix(0.72, 1.0, vig);
 
   gl_FragColor = vec4(col, 1.0);
 }
@@ -160,139 +155,197 @@ interface SmokeWaveCanvasProps {
 }
 
 export default function SmokeWaveCanvas({ className = '' }: SmokeWaveCanvasProps) {
+  const wrapRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas) return
+    const wrap = wrapRef.current
+    if (!canvas || !wrap) return
 
     let gl: WebGLRenderingContext | null = null
-    try {
-      gl = canvas.getContext('webgl', {
-        alpha: false,
-        antialias: false,
-        powerPreference: 'low-power',
-      })
-    } catch {
-      gl = null
-    }
-    if (!gl) return // CSS fallback layer stays visible.
-
-    const vs = compile(gl, gl.VERTEX_SHADER, VERT)
-    const fs = compile(gl, gl.FRAGMENT_SHADER, FRAG)
-    const program = gl.createProgram()
-    if (!vs || !fs || !program) return
-    gl.attachShader(program, vs)
-    gl.attachShader(program, fs)
-    gl.linkProgram(program)
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return
-    gl.useProgram(program)
-
-    // Full-screen triangle.
-    const buf = gl.createBuffer()
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf)
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
-    const aPos = gl.getAttribLocation(program, 'a_pos')
-    gl.enableVertexAttribArray(aPos)
-    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0)
-
-    const uRes = gl.getUniformLocation(program, 'u_res')
-    const uTime = gl.getUniformLocation(program, 'u_time')
-    const uLocs = (['u_c0', 'u_c1', 'u_c2', 'u_c3'] as const).map((name) =>
-      gl!.getUniformLocation(program, name),
-    )
-
-    const applyRamp = () => {
-      const ramp = readSmokeRamp()
-      uLocs.forEach((loc, i) => {
-        const [r, g, b] = ramp[i]!
-        gl!.uniform3f(loc, r, g, b)
-      })
-    }
-    applyRamp()
-
-    const dpr = Math.min(typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1, 1.5)
-
-    const resize = () => {
-      const { clientWidth, clientHeight } = canvas
-      const w = Math.max(1, Math.round(clientWidth * dpr))
-      const h = Math.max(1, Math.round(clientHeight * dpr))
-      if (canvas.width !== w || canvas.height !== h) {
-        canvas.width = w
-        canvas.height = h
-        gl!.viewport(0, 0, w, h)
-      }
-    }
-
-    const draw = (timeSeconds: number) => {
-      resize()
-      gl!.uniform2f(uRes, canvas.width, canvas.height)
-      gl!.uniform1f(uTime, timeSeconds)
-      gl!.drawArrays(gl!.TRIANGLES, 0, 3)
-    }
-
-    const reducedMotion =
-      typeof window !== 'undefined' &&
-      typeof window.matchMedia === 'function' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    if (reducedMotion) {
-      draw(12)
-      return () => {
-        gl?.getExtension('WEBGL_lose_context')?.loseContext()
-      }
-    }
-
     let raf = 0
     let running = true
     let inView = true
+    let ro: ResizeObserver | undefined
+    let io: IntersectionObserver | undefined
+    let mo: MutationObserver | undefined
+    let started = false
     const start = performance.now()
 
-    const loop = () => {
-      if (running && inView && !document.hidden) {
-        draw((performance.now() - start) / 1000)
+    const teardownGl = () => {
+      try {
+        gl?.getExtension('WEBGL_lose_context')?.loseContext()
+      } catch {
+        /* ignore */
+      }
+      gl = null
+    }
+
+    const tryStart = () => {
+      if (started || !running) return
+      const { clientWidth, clientHeight } = wrap
+      if (clientWidth < 2 || clientHeight < 2) return
+      started = true
+
+      try {
+        gl = canvas.getContext('webgl', {
+          alpha: false,
+          antialias: false,
+          powerPreference: 'low-power',
+          failIfMajorPerformanceCaveat: false,
+        })
+      } catch {
+        gl = null
+      }
+      if (!gl) return // CSS fallback remains
+
+      const vs = compile(gl, gl.VERTEX_SHADER, VERT)
+      const fs = compile(gl, gl.FRAGMENT_SHADER, FRAG)
+      const program = gl.createProgram()
+      if (!vs || !fs || !program) {
+        teardownGl()
+        return
+      }
+      gl.attachShader(program, vs)
+      gl.attachShader(program, fs)
+      gl.linkProgram(program)
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        teardownGl()
+        return
+      }
+      gl.useProgram(program)
+
+      const buf = gl.createBuffer()
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf)
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
+      const aPos = gl.getAttribLocation(program, 'a_pos')
+      gl.enableVertexAttribArray(aPos)
+      gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0)
+
+      const uRes = gl.getUniformLocation(program, 'u_res')
+      const uTime = gl.getUniformLocation(program, 'u_time')
+      const uLocs = (['u_c0', 'u_c1', 'u_c2', 'u_c3'] as const).map((name) =>
+        gl!.getUniformLocation(program, name),
+      )
+
+      const applyRamp = () => {
+        if (!gl) return
+        const ramp = readSmokeRamp()
+        uLocs.forEach((loc, i) => {
+          const [r, g, b] = ramp[i]!
+          gl!.uniform3f(loc, r, g, b)
+        })
+      }
+      applyRamp()
+
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
+
+      const resize = () => {
+        if (!gl) return
+        const w = Math.max(1, Math.round(wrap.clientWidth * dpr))
+        const h = Math.max(1, Math.round(wrap.clientHeight * dpr))
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w
+          canvas.height = h
+          gl.viewport(0, 0, w, h)
+        }
+      }
+
+      const draw = (timeSeconds: number) => {
+        if (!gl) return
+        // Context lost
+        if (gl.isContextLost()) {
+          teardownGl()
+          return
+        }
+        resize()
+        if (canvas.width < 2 || canvas.height < 2) return
+        gl.uniform2f(uRes, canvas.width, canvas.height)
+        gl.uniform1f(uTime, timeSeconds)
+        gl.drawArrays(gl.TRIANGLES, 0, 3)
+      }
+
+      const reducedMotion =
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+      if (reducedMotion) {
+        draw(12)
+        mo = new MutationObserver(() => applyRamp())
+        mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+        return
+      }
+
+      const loop = () => {
+        if (!running) return
+        if (gl && inView && !document.hidden) {
+          draw((performance.now() - start) / 1000)
+        }
+        raf = requestAnimationFrame(loop)
       }
       raf = requestAnimationFrame(loop)
-    }
-    raf = requestAnimationFrame(loop)
 
-    let io: IntersectionObserver | undefined
-    if (typeof IntersectionObserver !== 'undefined') {
-      io = new IntersectionObserver(([entry]) => {
-        inView = entry?.isIntersecting ?? true
-      })
-      io.observe(canvas)
+      if (typeof IntersectionObserver !== 'undefined') {
+        io = new IntersectionObserver(([entry]) => {
+          inView = entry?.isIntersecting ?? true
+        })
+        io.observe(wrap)
+      }
+
+      if (typeof ResizeObserver !== 'undefined') {
+        ro = new ResizeObserver(() => {
+          if (gl) resize()
+        })
+        ro.observe(wrap)
+      }
+
+      mo = new MutationObserver(() => applyRamp())
+      mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+
+      canvas.addEventListener(
+        'webglcontextlost',
+        (e) => {
+          e.preventDefault()
+          teardownGl()
+        },
+        false,
+      )
     }
 
-    let ro: ResizeObserver | undefined
-    if (typeof ResizeObserver !== 'undefined') {
-      ro = new ResizeObserver(resize)
-      ro.observe(canvas)
+    // Wait for layout so canvas is not 0×0 when creating the GL context
+    const boot = () => {
+      tryStart()
+      if (!started) {
+        raf = requestAnimationFrame(boot)
+      }
     }
-
-    // Theme toggle (html.light / .dark) — refresh ramp without remount.
-    const mo = new MutationObserver(() => applyRamp())
-    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    raf = requestAnimationFrame(boot)
 
     return () => {
       running = false
       cancelAnimationFrame(raf)
       io?.disconnect()
       ro?.disconnect()
-      mo.disconnect()
-      gl?.getExtension('WEBGL_lose_context')?.loseContext()
+      mo?.disconnect()
+      teardownGl()
     }
   }, [])
 
   return (
     <div
+      ref={wrapRef}
       aria-hidden
       data-testid="smoke-wave"
-      className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`.trim()}
+      className={`pointer-events-none absolute inset-0 z-0 overflow-hidden ${className}`.trim()}
     >
-      {/* CSS fallback — always under canvas; matches PD dark/light tokens */}
-      <div className="hero-wave absolute inset-0" />
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
+      {/* CSS fallback — always under canvas; stronger motion when GL fails */}
+      <div className="hero-smoke absolute inset-0" />
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 h-full w-full"
+        style={{ display: 'block', width: '100%', height: '100%' }}
+      />
     </div>
   )
 }

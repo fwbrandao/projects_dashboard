@@ -39,17 +39,17 @@ export default function Hero() {
   return (
     <section className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 px-2 pt-20 sm:px-4 sm:pt-24">
       <div className="relative isolate overflow-hidden rounded-3xl border border-border shadow-lift">
-        {/* Smoke / liquid wave (WebGL + CSS fallback) — full bleed behind globe */}
-        <SmokeWaveCanvas className="-z-10" />
+        {/* Smoke / liquid wave — z-0 under globe; never negative z inside isolate */}
+        <SmokeWaveCanvas />
         {/* Interactive dotted globe (cobe) — drag to rotate; in front of smoke */}
         <DotGlobe />
-        {/* Soft scrim — text legibility without killing smoke + globe depth */}
+        {/* Soft edge scrim only — keep center smoke + globe visible */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 z-[1] opacity-40"
+          className="pointer-events-none absolute inset-0 z-[1] opacity-50"
           style={{
             background:
-              'radial-gradient(ellipse at 50% 120%, transparent 25%, color-mix(in srgb, var(--bg) 82%, transparent) 78%)',
+              'radial-gradient(ellipse 70% 60% at 50% 42%, transparent 35%, color-mix(in srgb, var(--bg) 55%, transparent) 100%)',
           }}
         />
 
