@@ -77,8 +77,8 @@ export default function DotGlobe() {
       const rect = wrap.getBoundingClientRect()
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
       rafScale = dpr
-      // Mid size: between full-bleed (too large) and 0.72×min (too small)
-      displaySize = Math.min(rect.width, rect.height) * 0.86
+      // Almost fill the hero panel (min dimension), slight inset so edges don't clip
+      displaySize = Math.min(rect.width, rect.height) * 0.96
       canvas.style.width = `${displaySize}px`
       canvas.style.height = `${displaySize}px`
     }
@@ -108,8 +108,8 @@ export default function DotGlobe() {
         markerColor,
         glowColor,
         opacity: colors.isLight ? 0.55 : 0.92,
-        scale: 0.98,
-        offset: [0, 32],
+        scale: 1.0,
+        offset: [0, 20],
         markers: [
           // Brazil (São Paulo-ish)
           { location: [-23.55, -46.63], size: 0.06 },
