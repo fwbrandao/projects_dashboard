@@ -54,40 +54,76 @@
   }
 }
 
-@keyframes hero-wave-shift {
+/* Liquid smoke backdrop (CSS fallback when WebGL fails / under canvas) */
+@keyframes hero-smoke-shift {
   0% {
-    background-position: 0% 40%, 100% 60%, 50% 0%, 0 0;
+    background-position: 0% 40%, 100% 60%, 50% 0%, 10% 80%, 0 0;
   }
   50% {
-    background-position: 80% 60%, 20% 30%, 40% 80%, 0 0;
+    background-position: 80% 55%, 15% 35%, 45% 85%, 70% 20%, 0 0;
   }
   100% {
-    background-position: 0% 40%, 100% 60%, 50% 0%, 0 0;
+    background-position: 0% 40%, 100% 60%, 50% 0%, 10% 80%, 0 0;
   }
 }
 
+.hero-smoke {
+  background-color: #0d0b21;
+  background-image:
+    radial-gradient(ellipse 90% 70% at 18% 28%, rgba(47, 246, 246, 0.42), transparent 58%),
+    radial-gradient(ellipse 80% 65% at 82% 18%, rgba(166, 140, 255, 0.48), transparent 55%),
+    radial-gradient(ellipse 100% 75% at 58% 92%, rgba(255, 92, 247, 0.36), transparent 58%),
+    radial-gradient(ellipse 60% 50% at 40% 55%, rgba(47, 246, 246, 0.14), transparent 60%),
+    linear-gradient(145deg, #0d0b21 0%, #16123a 38%, #1a1040 68%, #120e2c 100%);
+  background-size: 160% 160%, 160% 160%, 160% 160%, 140% 140%, 100% 100%;
+  background-position: 0% 40%, 100% 60%, 50% 0%, 10% 80%, 0 0;
+  filter: saturate(1.15);
+}
+
+.light .hero-smoke {
+  background-color: #d8d4f0;
+  background-image:
+    radial-gradient(ellipse 90% 70% at 18% 28%, rgba(10, 138, 138, 0.45), transparent 58%),
+    radial-gradient(ellipse 80% 65% at 82% 18%, rgba(109, 75, 219, 0.42), transparent 55%),
+    radial-gradient(ellipse 100% 75% at 58% 92%, rgba(192, 26, 184, 0.32), transparent 58%),
+    radial-gradient(ellipse 60% 50% at 40% 55%, rgba(10, 138, 138, 0.16), transparent 60%),
+    linear-gradient(145deg, #e4e0f6 0%, #cfc8ec 42%, #ddd6f2 100%);
+  background-size: 160% 160%, 160% 160%, 160% 160%, 140% 140%, 100% 100%;
+  filter: saturate(1.05);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-smoke {
+    animation: hero-smoke-shift 14s ease-in-out infinite;
+  }
+}
+
+/* Legacy class name kept for any leftover references */
 .hero-wave {
   background-color: #0d0b21;
   background-image:
-    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(47, 246, 246, 0.28), transparent 55%),
-    radial-gradient(ellipse 70% 55% at 80% 20%, rgba(166, 140, 255, 0.32), transparent 50%),
-    radial-gradient(ellipse 90% 70% at 60% 90%, rgba(255, 92, 247, 0.22), transparent 55%),
-    linear-gradient(145deg, #0d0b21 0%, #16123a 40%, #1a1040 70%, #120e2c 100%);
-  background-size: 140% 140%, 140% 140%, 140% 140%, 100% 100%;
-  background-position: 0% 40%, 100% 60%, 50% 0%, 0 0;
+    radial-gradient(ellipse 90% 70% at 18% 28%, rgba(47, 246, 246, 0.42), transparent 58%),
+    radial-gradient(ellipse 80% 65% at 82% 18%, rgba(166, 140, 255, 0.48), transparent 55%),
+    radial-gradient(ellipse 100% 75% at 58% 92%, rgba(255, 92, 247, 0.36), transparent 58%),
+    radial-gradient(ellipse 60% 50% at 40% 55%, rgba(47, 246, 246, 0.14), transparent 60%),
+    linear-gradient(145deg, #0d0b21 0%, #16123a 38%, #1a1040 68%, #120e2c 100%);
+  background-size: 160% 160%, 160% 160%, 160% 160%, 140% 140%, 100% 100%;
+  background-position: 0% 40%, 100% 60%, 50% 0%, 10% 80%, 0 0;
 }
 
 .light .hero-wave {
-  background-color: #e8e6f5;
+  background-color: #d8d4f0;
   background-image:
-    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(10, 138, 138, 0.2), transparent 55%),
-    radial-gradient(ellipse 70% 55% at 80% 20%, rgba(109, 75, 219, 0.22), transparent 50%),
-    radial-gradient(ellipse 90% 70% at 60% 90%, rgba(192, 26, 184, 0.14), transparent 55%),
-    linear-gradient(145deg, #ebe9f8 0%, #ddd8f0 45%, #e8e4f6 100%);
+    radial-gradient(ellipse 90% 70% at 18% 28%, rgba(10, 138, 138, 0.45), transparent 58%),
+    radial-gradient(ellipse 80% 65% at 82% 18%, rgba(109, 75, 219, 0.42), transparent 55%),
+    radial-gradient(ellipse 100% 75% at 58% 92%, rgba(192, 26, 184, 0.32), transparent 58%),
+    radial-gradient(ellipse 60% 50% at 40% 55%, rgba(10, 138, 138, 0.16), transparent 60%),
+    linear-gradient(145deg, #e4e0f6 0%, #cfc8ec 42%, #ddd6f2 100%);
+  background-size: 160% 160%, 160% 160%, 160% 160%, 140% 140%, 100% 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .hero-wave {
-    animation: hero-wave-shift 18s ease-in-out infinite;
+    animation: hero-smoke-shift 14s ease-in-out infinite;
   }
 }

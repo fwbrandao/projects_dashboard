@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../data/projects'
 import DotGlobe from './DotGlobe'
+import SmokeWaveCanvas from './SmokeWaveCanvas'
 import './heroMotion.css'
 
 const TRUST = ['AI / ML', 'Front-end', 'GCP'] as const
@@ -38,16 +39,17 @@ export default function Hero() {
   return (
     <section className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 px-2 pt-20 sm:px-4 sm:pt-24">
       <div className="relative isolate overflow-hidden rounded-3xl border border-border shadow-lift">
-        {/* Ambient gradient wave (CSS — dashboard cyan → violet → magenta) */}
-        <div aria-hidden className="hero-wave absolute inset-0 -z-10" />
-        {/* Interactive dotted globe (cobe) — drag to rotate; behind copy */}
+        {/* Smoke / liquid wave — z-0 under globe; never negative z inside isolate */}
+        <SmokeWaveCanvas />
+        {/* Interactive dotted globe (cobe) — drag to rotate; in front of smoke */}
         <DotGlobe />
+        {/* Soft edge scrim only — keep center smoke + globe visible */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 z-[1] opacity-50"
           style={{
             background:
-              'radial-gradient(ellipse at 50% 120%, transparent 20%, color-mix(in srgb, var(--bg) 88%, transparent) 75%)',
+              'radial-gradient(ellipse 70% 60% at 50% 42%, transparent 35%, color-mix(in srgb, var(--bg) 55%, transparent) 100%)',
           }}
         />
 
@@ -55,21 +57,27 @@ export default function Hero() {
         <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pb-14 pt-14 text-center pointer-events-none sm:px-8 sm:pb-20 sm:pt-20">
           {/* Pill badge + live ping */}
           <span
-            className="hero-fade glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold text-text"
+            className="hero-fade glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold text-text pointer-events-auto"
             style={{ ['--fade-delay' as string]: '0.08s' }}
           >
             <span className="relative flex h-2 w-2" aria-hidden>
               <span className="hero-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
-            AI Engineer · FE · GCP
+            AI / Software Engineer
           </span>
 
-          {/* Oversized headline */}
-          <h1 className="mt-8 max-w-4xl text-balance font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-text sm:text-6xl md:text-7xl">
-            <CascadeWords text="Hi, I'm Brandao." />
-            <span className="mt-2 block gradient-text sm:mt-3">
-              <CascadeWords text="I build AI systems that ship." baseDelay={0.32} />
+          {/* Oversized headline — name solid ink; tagline cyan→sky gradient */}
+          <h1 className="mt-8 max-w-4xl text-balance font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
+            <span className="block text-[#0a0a0a] dark:text-text">
+              <CascadeWords text="Hi, I'm Brandao." className="text-inherit" />
+            </span>
+            <span className="mt-2 block sm:mt-3">
+              <CascadeWords
+                text="I build AI systems that ship."
+                baseDelay={0.32}
+                className="gradient-text-sky"
+              />
             </span>
           </h1>
 
@@ -78,8 +86,8 @@ export default function Hero() {
             className="hero-fade mx-auto mt-6 max-w-2xl text-pretty text-base leading-relaxed text-muted sm:text-lg"
             style={{ ['--fade-delay' as string]: '0.55s' }}
           >
-            AI Engineer with deep front-end craft and GCP delivery — a working portfolio of {count}{' '}
-            projects across vision, NLP, data, and the web.
+            AI / Software Engineer with deep front-end craft and GCP delivery — a working portfolio of{' '}
+            {count} projects across vision, NLP, data, and the web.
           </p>
 
           {/* CTAs */}

@@ -221,7 +221,7 @@ export default function DotGlobe() {
   return (
     <div
       ref={wrapRef}
-      className="dot-globe-wrap pointer-events-auto absolute inset-0 z-0 flex items-center justify-center overflow-hidden"
+      className="dot-globe-wrap pointer-events-auto absolute inset-0 z-[1] flex items-center justify-center overflow-hidden"
       aria-hidden
     >
       <canvas
@@ -235,12 +235,12 @@ export default function DotGlobe() {
           opacity: 0.88,
         }}
       />
-      {/* Readability scrim — keeps headline legible over dense dots */}
+      {/* Soft halo only on the globe disk — do NOT cover full panel smoke */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 55% 50% at 50% 42%, color-mix(in srgb, var(--bg) 55%, transparent) 0%, transparent 70%), linear-gradient(180deg, color-mix(in srgb, var(--bg) 35%, transparent) 0%, transparent 35%, transparent 65%, color-mix(in srgb, var(--bg) 50%, transparent) 100%)',
+            'radial-gradient(circle 46% at 50% 48%, transparent 52%, color-mix(in srgb, var(--bg) 25%, transparent) 78%, color-mix(in srgb, var(--bg) 55%, transparent) 100%)',
         }}
       />
     </div>
