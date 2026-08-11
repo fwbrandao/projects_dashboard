@@ -57,7 +57,7 @@ export default function Hero() {
         <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pb-14 pt-14 text-center pointer-events-none sm:px-8 sm:pb-20 sm:pt-20">
           {/* Pill badge + live ping */}
           <span
-            className="hero-fade glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold text-text"
+            className="hero-fade glass inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold text-text pointer-events-auto"
             style={{ ['--fade-delay' as string]: '0.08s' }}
           >
             <span className="relative flex h-2 w-2" aria-hidden>
@@ -70,7 +70,7 @@ export default function Hero() {
           {/* Oversized headline — name solid ink; tagline cyan→sky gradient */}
           <h1 className="mt-8 max-w-4xl text-balance font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
             <span className="block text-[#0a0a0a] dark:text-text">
-              <CascadeWords text="Hi, I'm Brandao." />
+              <CascadeWords text="Hi, I'm Brandao." className="text-inherit" />
             </span>
             <span className="mt-2 block sm:mt-3">
               <CascadeWords
