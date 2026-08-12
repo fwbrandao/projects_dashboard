@@ -36,7 +36,7 @@ export default function ProjectDetail() {
       <header className="mt-8 grid gap-8 lg:grid-cols-2 lg:items-center">
         <div>
           <p className="eyebrow text-primary">{project.subtitle}</p>
-          <h1 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-text sm:text-4xl">
+          <h1 className="gradient-text mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
             {project.title}
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-muted">{project.summary}</p>
@@ -52,7 +52,18 @@ export default function ProjectDetail() {
                 View source
               </a>
             )}
-            {Demo && (
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-gradient inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-semibold text-bg no-underline transition-transform hover:scale-[1.03]"
+              >
+                <span className="material-symbols-rounded text-[18px]">play_arrow</span>
+                Try it live
+              </a>
+            )}
+            {Demo && !project.liveUrl && (
               <a
                 href="#demo"
                 className="glass inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-semibold text-text no-underline transition-transform hover:scale-[1.03]"
