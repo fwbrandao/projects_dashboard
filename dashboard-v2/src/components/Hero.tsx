@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../data/projects'
 import DotGlobe from './DotGlobe'
+import MoonOrbitCanvas from './MoonOrbitCanvas'
 import SmokeWaveCanvas from './SmokeWaveCanvas'
 import './heroMotion.css'
 
@@ -43,6 +44,8 @@ export default function Hero() {
         <SmokeWaveCanvas />
         {/* Interactive dotted globe (cobe) — drag to rotate; in front of smoke */}
         <DotGlobe />
+        {/* Dual-layer 3D moon (one rAF). Behind punches the Earth disk. */}
+        <MoonOrbitCanvas />
         {/* Soft edge scrim only — keep center smoke + globe visible */}
         <div
           aria-hidden
