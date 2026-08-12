@@ -1,13 +1,16 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 import {
+  COBE_DISK_NDC_RADIUS,
   DEFAULT_ORBIT,
   MOON_DIAMETER_KM,
   EARTH_DIAMETER_KM,
   MOON_EARTH_DIAMETER_RATIO,
   layerForDepth,
+  moonOverlapsEarthDisk,
   moonPose,
   thetaAt,
+  visualGlobeDiskRadiusPx,
 } from './moonOrbit.ts'
 
 describe('moon / earth size', () => {
@@ -19,9 +22,11 @@ describe('moon / earth size', () => {
     assert.ok(MOON_EARTH_DIAMETER_RATIO < 0.28)
   })
 
-  it('gives the moon a disk 0.273 of the globe radius units', () => {
+  it('renders at 1/3 of the real lunar diameter so it reads as a satellite', () => {
     const pose = moonPose(0)
-    assert.ok(Math.abs(pose.radius - MOON_EARTH_DIAMETER_RATIO) < 1e-9)
+    assert.ok(Math.abs(pose.radius - MOON_EARTH_DIAMETER_RATIO / 3) < 1e-9)
+    assert.ok(pose.radius < 0.1)
+    assert.ok(pose.radius > 0.08)
   })
 })
 
@@ -97,5 +102,31 @@ describe('reduced-motion pose', () => {
     assert.equal(p.layer, 'front')
     assert.ok(p.z > 0)
     assert.ok(Math.abs(p.x) > 0.35, 'should sit toward the limb, not dead-center')
+  })
+})
+
+describe('earth disk vs container occlusion', () => {
+  it('uses cobe land radius 0.8, not the square canvas half-size', () => {
+    assert.equal(COBE_DISK_NDC_RADIUS, 0.8)
+    const displaySize = 800
+    const disk = visualGlobeDiskRadiusPx(displaySize)
+    const squareHalf = displaySize / 2
+    assert.ok(Math.abs(disk - 320) < 1e-9)
+    assert.ok(disk < squareHalf, 'disk must be smaller than the cobe square')
+  })
+
+  it('hides only when the moon overlaps the circular Earth disk', () => {
+    const earthR = 100
+    const moonR = 9
+    // Just outside the disk (still inside a square that would cover this point)
+    assert.equal(moonOverlapsEarthDisk(earthR + moonR + 2, 0, moonR, 0, 0, earthR), false)
+    // On the limb
+    assert.equal(moonOverlapsEarthDisk(earthR + moonR - 1, 0, moonR, 0, 0, earthR), true)
+    // Corner of the square canvas is NOT the globe
+    const squareHalf = earthR / COBE_DISK_NDC_RADIUS
+    assert.equal(
+      moonOverlapsEarthDisk(squareHalf - 2, squareHalf - 2, moonR, 0, 0, earthR),
+      false,
+    )
   })
 })

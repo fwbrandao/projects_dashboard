@@ -1,23 +1,29 @@
 /**
  * Dual-layer hero moon on one rAF loop. Both canvases sit at z-[2] (above
- * DotGlobe z-[1], below copy z-10). The behind canvas punches the Earth disk
- * so the moon never shines through continents, while still wrapping around
- * cobe's square canvas.
+ * DotGlobe z-[1], below copy z-10). When behind, only the *visual Earth disk*
+ * is punched — never the square cobe container — so the moon stays visible
+ * until it actually hits the globe limb.
  *
- * Shading is a Lambert sphere + baked craters on a 2D canvas (no extra WebGL
- * context — smoke + cobe already occupy GPU slots). pointer-events-none so
+ * Shading is a Lambert + Phong sphere with crater bowls / rims (no extra
+ * WebGL — smoke + cobe already occupy GPU slots). pointer-events-none so
  * globe drag still works.
  */
 
 import { useEffect, useRef } from 'react'
-import { DEFAULT_ORBIT, moonPose, thetaAt, type MoonPose } from '../lib/moonOrbit'
+import {
+  DEFAULT_ORBIT,
+  moonPose,
+  thetaAt,
+  visualGlobeDiskRadiusPx,
+  type MoonPose,
+} from '../lib/moonOrbit'
 import { useReducedMotion } from '../lib/useReducedMotion'
 
 /** Matches DotGlobe `offset: [0, 20]` (cobe backing-store pixels). */
 const COBE_OFFSET_Y = 20
 const GLOBE_FILL = 0.96
-const GLOBE_RADIUS_FACTOR = 0.5
-const MOON_TEX = 256
+const COBE_SCALE = 1
+const MOON_TEX = 384
 const EDGE_FADE_PX = 28
 
 type OrbitLayer = 'front' | 'behind'
@@ -26,21 +32,24 @@ type ThemeMoon = {
   rock: [number, number, number]
   rockHi: [number, number, number]
   crater: [number, number, number]
+  rim: [number, number, number]
 }
 
 function readTheme(): ThemeMoon {
   const isLight = document.documentElement.classList.contains('light')
   if (isLight) {
     return {
-      rock: [168, 160, 148],
-      rockHi: [214, 206, 192],
-      crater: [120, 114, 104],
+      rock: [158, 150, 138],
+      rockHi: [228, 220, 206],
+      crater: [102, 96, 88],
+      rim: [236, 230, 218],
     }
   }
   return {
-    rock: [186, 178, 164],
-    rockHi: [232, 224, 210],
-    crater: [118, 112, 102],
+    rock: [176, 168, 154],
+    rockHi: [240, 232, 216],
+    crater: [92, 86, 78],
+    rim: [248, 242, 228],
   }
 }
 
@@ -53,23 +62,26 @@ function bakeMoon(theme: ThemeMoon): HTMLCanvasElement {
 
   const img = ctx.createImageData(MOON_TEX, MOON_TEX)
   const data = img.data
-  const lx = -0.42
-  const ly = 0.48
-  const lz = 0.77
+  // Key light upper-left, slight fill so the dark side still reads as volume.
+  const lx = -0.48
+  const ly = 0.52
+  const lz = 0.71
   const inv = 1 / Math.hypot(lx, ly, lz)
   const Lx = lx * inv
   const Ly = ly * inv
   const Lz = lz * inv
 
   const craters = [
-    { x: -0.22, y: 0.18, r: 0.16, d: 0.38 },
-    { x: 0.32, y: -0.12, r: 0.11, d: 0.32 },
-    { x: 0.08, y: 0.42, r: 0.09, d: 0.28 },
-    { x: -0.4, y: -0.28, r: 0.13, d: 0.34 },
-    { x: 0.18, y: 0.08, r: 0.06, d: 0.22 },
-    { x: -0.08, y: -0.36, r: 0.07, d: 0.26 },
-    { x: 0.44, y: 0.3, r: 0.08, d: 0.24 },
-    { x: -0.52, y: 0.12, r: 0.05, d: 0.2 },
+    { x: -0.22, y: 0.18, r: 0.18, d: 0.55 },
+    { x: 0.34, y: -0.14, r: 0.12, d: 0.48 },
+    { x: 0.08, y: 0.44, r: 0.1, d: 0.42 },
+    { x: -0.42, y: -0.28, r: 0.15, d: 0.5 },
+    { x: 0.2, y: 0.06, r: 0.07, d: 0.36 },
+    { x: -0.08, y: -0.38, r: 0.08, d: 0.4 },
+    { x: 0.46, y: 0.28, r: 0.09, d: 0.38 },
+    { x: -0.54, y: 0.1, r: 0.055, d: 0.32 },
+    { x: 0.02, y: -0.08, r: 0.045, d: 0.3 },
+    { x: -0.16, y: 0.48, r: 0.05, d: 0.28 },
   ]
 
   for (let py = 0; py < MOON_TEX; py++) {
@@ -85,36 +97,67 @@ function bakeMoon(theme: ThemeMoon): HTMLCanvasElement {
         data[i + 3] = 0
         continue
       }
-      const nz = Math.sqrt(1 - r2)
-      let ndl = nx * Lx + ny * Ly + nz * Lz
-      if (ndl < 0) ndl = 0
 
+      // Sphere normal + crater bowl displacement (pushes normal inward).
+      let nz = Math.sqrt(Math.max(0, 1 - r2))
+      let nnx = nx
+      let nny = ny
       let crater = 0
+      let rim = 0
       for (const c0 of craters) {
         const dx = nx - c0.x
         const dy = ny - c0.y
-        const d2 = dx * dx + dy * dy
-        const rr = c0.r * c0.r
-        if (d2 < rr) {
-          const t = 1 - d2 / rr
-          crater = Math.max(crater, t * t * c0.d)
+        const d = Math.hypot(dx, dy)
+        if (d >= c0.r * 1.18) continue
+        const u = d / c0.r
+        if (u < 1) {
+          const bowl = (1 - u * u) * c0.d
+          crater = Math.max(crater, bowl)
+          // Fake slope toward crater center.
+          const slope = c0.d * (1 - u) * 0.85
+          if (d > 1e-4) {
+            nnx -= (dx / d) * slope
+            nny -= (dy / d) * slope
+          }
+        } else {
+          // Raised rim just outside the bowl.
+          const t = 1 - (u - 1) / 0.18
+          rim = Math.max(rim, t * t * 0.45)
         }
       }
 
-      const wrap = 0.12 + 0.88 * ndl
-      const shade = wrap * (1 - crater * 0.55)
-      const rim = Math.pow(1 - r2, 0.35) * 0.08
+      const nlen = Math.hypot(nnx, nny, nz) || 1
+      nnx /= nlen
+      nny /= nlen
+      nz /= nlen
+
+      let ndl = nnx * Lx + nny * Ly + nz * Lz
+      if (ndl < 0) ndl = 0
+
+      // Phong specular — small hot highlight so it reads as a ball, not a disk.
+      const specBase = Math.max(0, 2 * ndl * nz - Lz)
+      const spec = Math.pow(specBase, 28) * 0.55 * (1 - crater * 0.7)
+
+      const wrap = 0.16 + 0.84 * ndl
+      const shade = wrap * (1 - crater * 0.62) + rim * 0.28
+      const limb = Math.pow(1 - r2, 0.55) * 0.1
+
       const mixR = theme.rock[0] + (theme.rockHi[0] - theme.rock[0]) * shade
       const mixG = theme.rock[1] + (theme.rockHi[1] - theme.rock[1]) * shade
       const mixB = theme.rock[2] + (theme.rockHi[2] - theme.rock[2]) * shade
-      const r = mixR * (1 - crater) + theme.crater[0] * crater + rim * 40
-      const g = mixG * (1 - crater) + theme.crater[1] * crater + rim * 36
-      const b = mixB * (1 - crater) + theme.crater[2] * crater + rim * 28
-      const terminator = ndl < 0.08 ? ndl / 0.08 : 1
-      data[i] = Math.max(0, Math.min(255, r * (0.22 + 0.78 * terminator)))
-      data[i + 1] = Math.max(0, Math.min(255, g * (0.22 + 0.78 * terminator)))
-      data[i + 2] = Math.max(0, Math.min(255, b * (0.22 + 0.78 * terminator)))
-      data[i + 3] = Math.round(255 * Math.min(1, (1 - r2) * 18))
+      let r = mixR * (1 - crater) + theme.crater[0] * crater
+      let g = mixG * (1 - crater) + theme.crater[1] * crater
+      let b = mixB * (1 - crater) + theme.crater[2] * crater
+      r += theme.rim[0] * rim * 0.22 + spec * 255 + limb * 36
+      g += theme.rim[1] * rim * 0.2 + spec * 248 + limb * 32
+      b += theme.rim[2] * rim * 0.16 + spec * 230 + limb * 24
+
+      const terminator = ndl < 0.12 ? 0.12 + (ndl / 0.12) * 0.88 : 1
+      data[i] = Math.max(0, Math.min(255, r * terminator))
+      data[i + 1] = Math.max(0, Math.min(255, g * terminator))
+      data[i + 2] = Math.max(0, Math.min(255, b * terminator))
+      // Hard circular alpha so the sprite reads as a sphere, not a soft blob.
+      data[i + 3] = Math.round(255 * Math.min(1, (1 - r2) * 40))
     }
   }
   ctx.putImageData(img, 0, 0)
@@ -125,7 +168,7 @@ function layout(wrap: HTMLElement) {
   const rect = wrap.getBoundingClientRect()
   const dpr = Math.min(window.devicePixelRatio || 1, 2)
   const displaySize = Math.min(rect.width, rect.height) * GLOBE_FILL
-  const globeR = displaySize * GLOBE_RADIUS_FACTOR
+  const globeR = visualGlobeDiskRadiusPx(displaySize, COBE_SCALE)
   return {
     w: rect.width,
     h: rect.height,
@@ -171,11 +214,11 @@ function drawLayer(
   ctx.restore()
 
   if (layer === 'behind') {
-    // Even if cobe's square canvas is opaque, never shine through the Earth disk.
+    // Punch only the visual Earth *disk* (cobe globe), not the square canvas.
     ctx.save()
     ctx.globalCompositeOperation = 'destination-out'
     ctx.beginPath()
-    ctx.arc(cx, cy, globeR * 0.98, 0, Math.PI * 2)
+    ctx.arc(cx, cy, globeR, 0, Math.PI * 2)
     ctx.fill()
     ctx.restore()
   }
