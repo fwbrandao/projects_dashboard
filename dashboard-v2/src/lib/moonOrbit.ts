@@ -29,8 +29,9 @@ export type OrbitConfig = {
 }
 
 export const DEFAULT_ORBIT: OrbitConfig = {
-  a: 1.38,
-  b: 1.18,
+  // Previous cinematic axes 1.38 / 1.18, then +1/3 farther from the globe.
+  a: 1.38 * (4 / 3),
+  b: 1.18 * (4 / 3),
   tiltRad: (20 * Math.PI) / 180,
   periodMs: 28_000,
   perspective: 0.22,

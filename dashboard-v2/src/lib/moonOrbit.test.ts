@@ -84,8 +84,13 @@ describe('elliptical orbit + depth', () => {
   it('keeps a stylized radius around the globe (not a real lunar distance)', () => {
     const p = moonPose(0)
     const dist = Math.hypot(p.x, p.y, p.z)
-    assert.ok(dist > 1.05, 'moon center should clear the globe surface')
-    assert.ok(dist < 1.8, 'moon should stay close to the globe, not fly off the hero')
+    assert.ok(dist > 1.4, 'moon should sit a third farther than the first cinematic orbit')
+    assert.ok(dist < 2.2, 'moon should stay in the hero, not fly off-screen')
+  })
+
+  it('is 1/3 farther from the globe than the first cinematic axes', () => {
+    assert.ok(Math.abs(DEFAULT_ORBIT.a - 1.38 * (4 / 3)) < 1e-9)
+    assert.ok(Math.abs(DEFAULT_ORBIT.b - 1.18 * (4 / 3)) < 1e-9)
   })
 
   it('uses the default cinematic period and a 15–25° tilt', () => {

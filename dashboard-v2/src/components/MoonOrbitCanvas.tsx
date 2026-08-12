@@ -4,9 +4,9 @@
  * is punched — never the square cobe container — so the moon stays visible
  * until it actually hits the globe limb.
  *
- * Shading is a Lambert + Phong sphere with crater bowls / rims (no extra
- * WebGL — smoke + cobe already occupy GPU slots). pointer-events-none so
- * globe drag still works.
+ * Sprite is NASA Galileo PIA00405 (public domain) clipped to the lunar disk,
+ * with a light photometric wrap so it still reads as a sphere at icon size.
+ * No extra WebGL — smoke + cobe already occupy GPU slots.
  */
 
 import { useEffect, useRef } from 'react'
@@ -23,67 +23,96 @@ import { useReducedMotion } from '../lib/useReducedMotion'
 const COBE_OFFSET_Y = 20
 const GLOBE_FILL = 0.96
 const COBE_SCALE = 1
-const MOON_TEX = 384
+const MOON_TEX = 512
 const EDGE_FADE_PX = 28
+const MOON_PHOTO = '/moon.jpg'
 
 type OrbitLayer = 'front' | 'behind'
 
-type ThemeMoon = {
-  rock: [number, number, number]
-  rockHi: [number, number, number]
-  crater: [number, number, number]
-  rim: [number, number, number]
+function loadMoonPhoto(): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.decoding = 'async'
+    img.onload = () => resolve(img)
+    img.onerror = () => reject(new Error('moon photo failed'))
+    img.src = MOON_PHOTO
+  })
 }
 
-function readTheme(): ThemeMoon {
-  const isLight = document.documentElement.classList.contains('light')
-  if (isLight) {
-    return {
-      rock: [158, 150, 138],
-      rockHi: [228, 220, 206],
-      crater: [102, 96, 88],
-      rim: [236, 230, 218],
+/** Tight circle around the bright lunar disk (ignore the black NASA frame). */
+function detectDisk(img: HTMLImageElement): { sx: number; sy: number; sr: number } {
+  const w = img.naturalWidth || img.width
+  const h = img.naturalHeight || img.height
+  const probe = 160
+  const c = document.createElement('canvas')
+  c.width = probe
+  c.height = probe
+  const ctx = c.getContext('2d', { willReadFrequently: true })
+  if (!ctx) return { sx: 0, sy: 0, sr: Math.min(w, h) / 2 }
+  ctx.drawImage(img, 0, 0, probe, probe)
+  const data = ctx.getImageData(0, 0, probe, probe).data
+  let minX = probe
+  let minY = probe
+  let maxX = 0
+  let maxY = 0
+  for (let y = 0; y < probe; y++) {
+    for (let x = 0; x < probe; x++) {
+      const i = (y * probe + x) * 4
+      const luma = 0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]
+      if (luma < 18) continue
+      if (x < minX) minX = x
+      if (y < minY) minY = y
+      if (x > maxX) maxX = x
+      if (y > maxY) maxY = y
     }
   }
-  return {
-    rock: [176, 168, 154],
-    rockHi: [240, 232, 216],
-    crater: [92, 86, 78],
-    rim: [248, 242, 228],
+  if (maxX <= minX || maxY <= minY) {
+    return { sx: 0, sy: 0, sr: Math.min(w, h) / 2 }
   }
+  const scaleX = w / probe
+  const scaleY = h / probe
+  const cx = ((minX + maxX) / 2) * scaleX
+  const cy = ((minY + maxY) / 2) * scaleY
+  const r = (Math.max(maxX - minX, maxY - minY) / 2) * ((scaleX + scaleY) / 2)
+  return { sx: cx - r, sy: cy - r, sr: r }
 }
 
-function bakeMoon(theme: ThemeMoon): HTMLCanvasElement {
+function bakeFromPhoto(img: HTMLImageElement, isLight: boolean): HTMLCanvasElement {
   const c = document.createElement('canvas')
   c.width = MOON_TEX
   c.height = MOON_TEX
   const ctx = c.getContext('2d')
   if (!ctx) return c
 
-  const img = ctx.createImageData(MOON_TEX, MOON_TEX)
-  const data = img.data
-  // Key light upper-left, slight fill so the dark side still reads as volume.
-  const lx = -0.48
-  const ly = 0.52
-  const lz = 0.71
+  const disk = detectDisk(img)
+  ctx.save()
+  ctx.beginPath()
+  ctx.arc(MOON_TEX / 2, MOON_TEX / 2, MOON_TEX / 2 - 0.5, 0, Math.PI * 2)
+  ctx.clip()
+  ctx.drawImage(
+    img,
+    disk.sx,
+    disk.sy,
+    disk.sr * 2,
+    disk.sr * 2,
+    0,
+    0,
+    MOON_TEX,
+    MOON_TEX,
+  )
+  ctx.restore()
+
+  // Soft photometric wrap — keeps maria/craters, adds a little volume at icon size.
+  const overlay = ctx.getImageData(0, 0, MOON_TEX, MOON_TEX)
+  const data = overlay.data
+  const lx = -0.35
+  const ly = 0.42
+  const lz = 0.84
   const inv = 1 / Math.hypot(lx, ly, lz)
   const Lx = lx * inv
   const Ly = ly * inv
   const Lz = lz * inv
-
-  const craters = [
-    { x: -0.22, y: 0.18, r: 0.18, d: 0.55 },
-    { x: 0.34, y: -0.14, r: 0.12, d: 0.48 },
-    { x: 0.08, y: 0.44, r: 0.1, d: 0.42 },
-    { x: -0.42, y: -0.28, r: 0.15, d: 0.5 },
-    { x: 0.2, y: 0.06, r: 0.07, d: 0.36 },
-    { x: -0.08, y: -0.38, r: 0.08, d: 0.4 },
-    { x: 0.46, y: 0.28, r: 0.09, d: 0.38 },
-    { x: -0.54, y: 0.1, r: 0.055, d: 0.32 },
-    { x: 0.02, y: -0.08, r: 0.045, d: 0.3 },
-    { x: -0.16, y: 0.48, r: 0.05, d: 0.28 },
-  ]
-
+  const lift = isLight ? 0.92 : 1
   for (let py = 0; py < MOON_TEX; py++) {
     for (let px = 0; px < MOON_TEX; px++) {
       const nx = ((px + 0.5) / MOON_TEX) * 2 - 1
@@ -91,73 +120,53 @@ function bakeMoon(theme: ThemeMoon): HTMLCanvasElement {
       const r2 = nx * nx + ny * ny
       const i = (py * MOON_TEX + px) * 4
       if (r2 > 1) {
-        data[i] = 0
-        data[i + 1] = 0
-        data[i + 2] = 0
         data[i + 3] = 0
         continue
       }
-
-      // Sphere normal + crater bowl displacement (pushes normal inward).
-      let nz = Math.sqrt(Math.max(0, 1 - r2))
-      let nnx = nx
-      let nny = ny
-      let crater = 0
-      let rim = 0
-      for (const c0 of craters) {
-        const dx = nx - c0.x
-        const dy = ny - c0.y
-        const d = Math.hypot(dx, dy)
-        if (d >= c0.r * 1.18) continue
-        const u = d / c0.r
-        if (u < 1) {
-          const bowl = (1 - u * u) * c0.d
-          crater = Math.max(crater, bowl)
-          // Fake slope toward crater center.
-          const slope = c0.d * (1 - u) * 0.85
-          if (d > 1e-4) {
-            nnx -= (dx / d) * slope
-            nny -= (dy / d) * slope
-          }
-        } else {
-          // Raised rim just outside the bowl.
-          const t = 1 - (u - 1) / 0.18
-          rim = Math.max(rim, t * t * 0.45)
-        }
-      }
-
-      const nlen = Math.hypot(nnx, nny, nz) || 1
-      nnx /= nlen
-      nny /= nlen
-      nz /= nlen
-
-      let ndl = nnx * Lx + nny * Ly + nz * Lz
+      const nz = Math.sqrt(1 - r2)
+      let ndl = nx * Lx + ny * Ly + nz * Lz
       if (ndl < 0) ndl = 0
+      const wrap = 0.62 + 0.38 * ndl
+      const limb = 1 - Math.pow(r2, 2.4) * 0.18
+      const k = wrap * limb * lift
+      data[i] = Math.max(0, Math.min(255, data[i] * k))
+      data[i + 1] = Math.max(0, Math.min(255, data[i + 1] * k))
+      data[i + 2] = Math.max(0, Math.min(255, data[i + 2] * k))
+      data[i + 3] = Math.round(255 * Math.min(1, (1 - r2) * 80))
+    }
+  }
+  ctx.putImageData(overlay, 0, 0)
+  return c
+}
 
-      // Phong specular — small hot highlight so it reads as a ball, not a disk.
-      const specBase = Math.max(0, 2 * ndl * nz - Lz)
-      const spec = Math.pow(specBase, 28) * 0.55 * (1 - crater * 0.7)
-
-      const wrap = 0.16 + 0.84 * ndl
-      const shade = wrap * (1 - crater * 0.62) + rim * 0.28
-      const limb = Math.pow(1 - r2, 0.55) * 0.1
-
-      const mixR = theme.rock[0] + (theme.rockHi[0] - theme.rock[0]) * shade
-      const mixG = theme.rock[1] + (theme.rockHi[1] - theme.rock[1]) * shade
-      const mixB = theme.rock[2] + (theme.rockHi[2] - theme.rock[2]) * shade
-      let r = mixR * (1 - crater) + theme.crater[0] * crater
-      let g = mixG * (1 - crater) + theme.crater[1] * crater
-      let b = mixB * (1 - crater) + theme.crater[2] * crater
-      r += theme.rim[0] * rim * 0.22 + spec * 255 + limb * 36
-      g += theme.rim[1] * rim * 0.2 + spec * 248 + limb * 32
-      b += theme.rim[2] * rim * 0.16 + spec * 230 + limb * 24
-
-      const terminator = ndl < 0.12 ? 0.12 + (ndl / 0.12) * 0.88 : 1
-      data[i] = Math.max(0, Math.min(255, r * terminator))
-      data[i + 1] = Math.max(0, Math.min(255, g * terminator))
-      data[i + 2] = Math.max(0, Math.min(255, b * terminator))
-      // Hard circular alpha so the sprite reads as a sphere, not a soft blob.
-      data[i + 3] = Math.round(255 * Math.min(1, (1 - r2) * 40))
+/** Last-resort rock sphere if the NASA photo fails to load. */
+function bakeFallback(isLight: boolean): HTMLCanvasElement {
+  const c = document.createElement('canvas')
+  c.width = MOON_TEX
+  c.height = MOON_TEX
+  const ctx = c.getContext('2d')
+  if (!ctx) return c
+  const img = ctx.createImageData(MOON_TEX, MOON_TEX)
+  const data = img.data
+  const rock = isLight ? 168 : 186
+  for (let py = 0; py < MOON_TEX; py++) {
+    for (let px = 0; px < MOON_TEX; px++) {
+      const nx = ((px + 0.5) / MOON_TEX) * 2 - 1
+      const ny = -(((py + 0.5) / MOON_TEX) * 2 - 1)
+      const r2 = nx * nx + ny * ny
+      const i = (py * MOON_TEX + px) * 4
+      if (r2 > 1) continue
+      const nz = Math.sqrt(1 - r2)
+      const ndl = Math.max(0, nx * -0.35 + ny * 0.42 + nz * 0.84)
+      const n =
+        Math.sin(nx * 17.3 + ny * 13.1) * 0.04 +
+        Math.sin(nx * 41 + ny * 29.7) * 0.025 +
+        Math.sin((nx + ny) * 73.2) * 0.015
+      const shade = 0.55 + 0.45 * ndl + n
+      data[i] = Math.max(0, Math.min(255, rock * shade))
+      data[i + 1] = Math.max(0, Math.min(255, (rock - 8) * shade))
+      data[i + 2] = Math.max(0, Math.min(255, (rock - 18) * shade))
+      data[i + 3] = 255
     }
   }
   ctx.putImageData(img, 0, 0)
@@ -214,7 +223,6 @@ function drawLayer(
   ctx.restore()
 
   if (layer === 'behind') {
-    // Punch only the visual Earth *disk* (cobe globe), not the square canvas.
     ctx.save()
     ctx.globalCompositeOperation = 'destination-out'
     ctx.beginPath()
@@ -247,13 +255,30 @@ export default function MoonOrbitCanvas() {
     const frontCtx = front.getContext('2d', { alpha: true })
     if (!behindCtx || !frontCtx) return
 
-    let sprite = bakeMoon(readTheme())
+    let cancelled = false
+    const isLight = () => document.documentElement.classList.contains('light')
+    let sprite = bakeFallback(isLight())
     let running = true
     let inView = true
     let raf = 0
     let geo = layout(wrap)
     sizeCanvas(behind, geo)
     sizeCanvas(front, geo)
+
+    const rebakeFrom = (img: HTMLImageElement | null) => {
+      sprite = img ? bakeFromPhoto(img, isLight()) : bakeFallback(isLight())
+    }
+
+    let photo: HTMLImageElement | null = null
+    loadMoonPhoto()
+      .then((img) => {
+        if (cancelled) return
+        photo = img
+        rebakeFrom(img)
+      })
+      .catch(() => {
+        if (!cancelled) rebakeFrom(null)
+      })
 
     const tick = () => {
       if (!running) return
@@ -286,13 +311,14 @@ export default function MoonOrbitCanvas() {
     }
 
     const mo = new MutationObserver(() => {
-      sprite = bakeMoon(readTheme())
+      rebakeFrom(photo)
     })
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
 
     raf = requestAnimationFrame(tick)
 
     return () => {
+      cancelled = true
       running = false
       cancelAnimationFrame(raf)
       io?.disconnect()
