@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
 import createGlobe from 'cobe'
+import { BOCA_CHICA, BRAZIL } from '../lib/geoProject'
+import { publishGlobeView } from '../lib/globeView'
 import { useReducedMotion } from '../lib/useReducedMotion'
 
 /** RGB 0–1 from CSS hex (supports #rgb / #rrggbb). */
@@ -111,8 +113,8 @@ export default function DotGlobe() {
         scale: 1.0,
         offset: [0, 20],
         markers: [
-          // Brazil (São Paulo-ish)
-          { location: [-23.55, -46.63], size: 0.06 },
+          { location: [BRAZIL.lat, BRAZIL.lon], size: 0.06 },
+          { location: [BOCA_CHICA.lat, BOCA_CHICA.lon], size: 0.05 },
         ],
         onRender: (state) => {
           if (destroyed) return
@@ -131,6 +133,7 @@ export default function DotGlobe() {
             // phi updated from pointer move
           }
 
+          publishGlobeView(phi, theta)
           state.phi = phi
           state.theta = theta
           const w = sizePx()

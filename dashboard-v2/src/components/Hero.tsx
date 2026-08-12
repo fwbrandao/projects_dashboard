@@ -3,6 +3,7 @@ import { projects } from '../data/projects'
 import DotGlobe from './DotGlobe'
 import MoonOrbitCanvas from './MoonOrbitCanvas'
 import SmokeWaveCanvas from './SmokeWaveCanvas'
+import StarshipLaunchCanvas from './StarshipLaunchCanvas'
 import './heroMotion.css'
 
 const TRUST = ['AI / ML', 'Front-end', 'GCP'] as const
@@ -46,6 +47,8 @@ export default function Hero() {
         <DotGlobe />
         {/* Dual-layer 3D moon (one rAF). Behind punches the Earth disk. */}
         <MoonOrbitCanvas />
+        {/* Starship mission — 2D, above moon; no third WebGL */}
+        <StarshipLaunchCanvas />
         {/* Soft edge scrim only — keep center smoke + globe visible */}
         <div
           aria-hidden
