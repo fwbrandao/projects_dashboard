@@ -25,6 +25,7 @@ const GLOBE_FILL = 0.96
 const COBE_SCALE = 1
 const MOON_TEX = 512
 const EDGE_FADE_PX = 28
+/** NASA Galileo PIA00405, public domain. https://images.nasa.gov/details/PIA00405 */
 const MOON_PHOTO = '/moon.jpg'
 
 type OrbitLayer = 'front' | 'behind'
