@@ -123,12 +123,27 @@
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+ .line-clamp-2 {
+ display: -webkit-box;
+ -webkit-line-clamp: 2;
+ -webkit-box-orient: vertical;
+ overflow: hidden;
+ }
+ .featured-card {
+ border-color: transparent;
+ background-image:
+   linear-gradient(var(--surface), var(--surface)),
+   linear-gradient(120deg, var(--primary), var(--violet), var(--secondary));
+ background-origin: border-box;
+ background-clip: padding-box, border-box;
+ }
+ .featured-card:hover {
+ box-shadow: 0 12px 40px var(--shadow), 0 0 28px var(--ambient-1);
+ }
+ .cta-gradient {
+ background: linear-gradient(120deg, var(--primary), var(--secondary));
+ color: var(--bg);
+ }
 }
 
 @media (prefers-reduced-motion: reduce) {

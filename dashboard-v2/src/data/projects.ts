@@ -18,6 +18,7 @@ import ticTacToe from '../assets/tic-tac-toe.png'
 import citySearch from '../assets/citySearch.png'
 import drum from '../assets/drum.png'
 import clock from '../assets/clock.png'
+import ragFaceOff from '../assets/rag-grokipedia-vs-wikipedia.png'
 
 export type CategoryId =
   | 'cnn'
@@ -53,6 +54,8 @@ export interface Project {
   stack: string[]
   /** External source link (GitHub etc.). */
   repo?: string
+  /** External live demo (Streamlit, etc.). */
+  liveUrl?: string
   /** Highlights for the detail page (what was actually built/learned). */
   highlights: string[]
 }
@@ -74,6 +77,28 @@ export const getCategorySection = (id: CategoryId): ProjectSection =>
   categorySection[id]
 
 export const projects: Project[] = [
+  {
+    id: 'rag-grokipedia-vs-wikipedia',
+    title: 'RAG Face-Off: Grokipedia vs Wikipedia',
+    subtitle: 'Dual-corpus retrieval',
+    summary:
+      'Two RAG pipelines, one generator. The same model answers the same question from Grokipedia and Wikipedia side by side.',
+    overview:
+      'A fair A/B of retrieval-augmented generation: identical Groq model, prompt, temperature, and top-k on both sides. The only variable is the knowledge base. Articles are ingested from Grokipedia and Wikipedia, chunked under MiniLM’s 256-token limit, embedded locally, and stored in two Chroma collections. Divergence is a signal about coverage and framing — not a verdict on which encyclopedia is true.',
+    category: 'nlp',
+    tags: ['RAG', 'embeddings', 'retrieval', 'Grokipedia', 'Wikipedia'],
+    thumbnail: ragFaceOff,
+    year: 2026,
+    stack: ['Python', 'Groq', 'ChromaDB', 'Streamlit', 'Jupyter'],
+    repo: 'https://github.com/fwbrandao/RAG-grokipedia-vs-wikipedia',
+    liveUrl: 'https://rag-grokipedia-vs-wikipedia.streamlit.app',
+    highlights: [
+      'Same model, prompt, and top-k; only the corpus changes.',
+      'Free stack: Groq llama-3.3-70b plus local MiniLM embeddings.',
+      'Paragraph-aware 220-token chunks so MiniLM does not silently truncate.',
+      'Cached ingest with Wikipedia 429 backoff and a COVID title override.',
+    ],
+  },
   {
     id: 'autonomous-driving',
     title: 'Autonomous Driving — Car Detection',

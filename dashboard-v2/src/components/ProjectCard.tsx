@@ -5,11 +5,14 @@ import { hasDemo } from '../demos'
 
 export default function ProjectCard({ project }: { project: Project }) {
   const category = getCategoryById(project.category)
-  const playable = hasDemo(project.id)
+  const playable = hasDemo(project.id) || Boolean(project.liveUrl)
+  const featured = Boolean(project.liveUrl)
   return (
     <Link
       to={`/projects/${project.id}`}
-      className="glass group flex flex-col overflow-hidden rounded-lg no-underline transition-all duration-300 hover:-translate-y-1 hover:border-border-strong hover:shadow-lift"
+      className={`glass group flex flex-col overflow-hidden rounded-lg no-underline transition-all duration-300 hover:-translate-y-1 hover:border-border-strong hover:shadow-lift ${
+        featured ? 'featured-card' : ''
+      }`}
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-surface-2">
         <img
