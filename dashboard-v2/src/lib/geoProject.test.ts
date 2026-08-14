@@ -10,6 +10,7 @@ import {
   isFrontHemisphere,
   latLonToWorld,
   projectLatLon,
+  worldFromCamera,
 } from './geoProject.ts'
 
 const PHI0 = 0
@@ -83,6 +84,15 @@ describe('cameraFromWorld (cobe J(theta, phi) inverse)', () => {
     // 90° yaw should move the same world point off the previous camera axis
     const dot = a.x * b.x + a.y * b.y + a.z * b.z
     almost(dot, 0, 1e-6)
+  })
+
+  it('round-trips cameraFromWorld ↔ worldFromCamera', () => {
+    const w = latLonToWorld(BOCA_CHICA.lat, BOCA_CHICA.lon)
+    const cam = cameraFromWorld(w, 0.8, 0.28)
+    const back = worldFromCamera(cam, 0.8, 0.28)
+    almost(back.x, w.x)
+    almost(back.y, w.y)
+    almost(back.z, w.z)
   })
 })
 

@@ -39,6 +39,19 @@ export function cameraFromWorld(world: Vec3, phi: number, theta: number): Vec3 {
   }
 }
 
+/** Inverse of `cameraFromWorld` (orthonormal J). Keep trails on the globe as it spins. */
+export function worldFromCamera(cam: Vec3, phi: number, theta: number): Vec3 {
+  const c = Math.cos(theta)
+  const d = Math.cos(phi)
+  const e = Math.sin(theta)
+  const f = Math.sin(phi)
+  return {
+    x: d * cam.x + f * e * cam.y - f * c * cam.z,
+    y: c * cam.y + e * cam.z,
+    z: f * cam.x - d * e * cam.y + d * c * cam.z,
+  }
+}
+
 export type Projected = Vec3
 
 /** Unit vector in camera space. Screen mapping is `cx + x·R`, `cy − y·R`. */
