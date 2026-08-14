@@ -33,7 +33,8 @@ export const DEFAULT_ORBIT: OrbitConfig = {
   a: 1.38 * (4 / 3),
   b: 1.18 * (4 / 3),
   tiltRad: (20 * Math.PI) / 180,
-  periodMs: 28_000,
+  // Slower than one Earth auto-spin (~37s) so the moon reads as the outer body.
+  periodMs: 48_000,
   perspective: 0.22,
   // Slightly in front, on the right limb.
   reducedMotionTheta: 0.35,

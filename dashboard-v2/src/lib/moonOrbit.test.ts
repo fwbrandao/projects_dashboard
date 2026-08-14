@@ -95,7 +95,7 @@ describe('elliptical orbit + depth', () => {
 
   it('uses the default cinematic period and a 15–25° tilt', () => {
     assert.ok(DEFAULT_ORBIT.periodMs >= 20_000)
-    assert.ok(DEFAULT_ORBIT.periodMs <= 35_000)
+    assert.ok(DEFAULT_ORBIT.periodMs <= 60_000)
     const deg = (DEFAULT_ORBIT.tiltRad * 180) / Math.PI
     assert.ok(deg >= 15 && deg <= 25)
   })

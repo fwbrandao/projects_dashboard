@@ -1,9 +1,11 @@
 /** Pure Starship mission: phase machine + poses in globe-radius units. */
 
-import { COMING_UP_Z, type Vec3 } from './geoProject'
+import { COMING_UP_Z, type Vec3 } from './geoProject.ts'
 
 export const STACK_HEIGHT = 0.042
 export const LEO_RADIUS = 1.17
+/** Loft before hot-stage — visibly above circular LEO. */
+export const SEP_RADIUS = 1.32
 
 export const PHASE_ORDER = [
   'idle',
@@ -32,6 +34,7 @@ export type VehiclePose = {
   y: number
   z: number
   visible: boolean
+  heading: number
 }
 
 export type FlightPose = {
@@ -171,6 +174,21 @@ function clamp01(t: number): number {
   return t
 }
 
+function smoothstep(t: number): number {
+  const u = clamp01(t)
+  return u * u * (3 - 2 * u)
+}
+
+function easeOutCubic(t: number): number {
+  const u = clamp01(t)
+  return 1 - (1 - u) ** 3
+}
+
+function easeInOutCubic(t: number): number {
+  const u = clamp01(t)
+  return u < 0.5 ? 4 * u * u * u : 1 - (-2 * u + 2) ** 3 / 2
+}
+
 function padBasis(pad: Vec3) {
   const radial = norm(pad)
   let east = cross(v(0, 1, 0), radial)
@@ -185,10 +203,7 @@ function rotateAround(p: Vec3, axis: Vec3, angle: number): Vec3 {
   const c = Math.cos(angle)
   const s = Math.sin(angle)
   const d = p.x * a.x + p.y * a.y + p.z * a.z
-  return add(
-    add(scale(p, c), scale(cross(a, p), s)),
-    scale(a, d * (1 - c)),
-  )
+  return add(add(scale(p, c), scale(cross(a, p), s)), scale(a, d * (1 - c)))
 }
 
 function leoAt(u: number, pad: Vec3): Vec3 {
@@ -198,11 +213,39 @@ function leoAt(u: number, pad: Vec3): Vec3 {
 }
 
 function hidden(): VehiclePose {
-  return { x: 0, y: 0, z: 0, visible: false }
+  return { x: 0, y: 0, z: 0, visible: false, heading: -Math.PI / 2 }
 }
 
-function vis(p: Vec3): VehiclePose {
-  return { x: p.x, y: p.y, z: p.z, visible: true }
+function headingOf(curr: Vec3, next: Vec3, fallback: number): number {
+  const dx = next.x - curr.x
+  const dy = next.y - curr.y
+  if (dx * dx + dy * dy < 1e-12) return fallback
+  return Math.atan2(dx, dy)
+}
+
+function vis(p: Vec3, heading: number): VehiclePose {
+  return { x: p.x, y: p.y, z: p.z, visible: true, heading }
+}
+
+/** Stylized Hohmann raise: elliptical r(ν) from LEO to the moon, not a chord hop. */
+function hohmannRaise(from: Vec3, to: Vec3, uRaw: number): Vec3 {
+  const u = smoothstep(uRaw)
+  const rp = hypot3(from) || LEO_RADIUS
+  const ra = hypot3(to) || rp + 0.4
+  const a = (rp + ra) / 2
+  const e = Math.max(0, Math.min(0.92, (ra - rp) / (ra + rp || 1)))
+  const r = (a * (1 - e * e)) / (1 + e * Math.cos(u * Math.PI))
+  const fromDir = norm(from)
+  const toDir = norm(to)
+  const axis = cross(fromDir, toDir)
+  const axisLen = hypot3(axis)
+  const cosA = Math.max(
+    -1,
+    Math.min(1, fromDir.x * toDir.x + fromDir.y * toDir.y + fromDir.z * toDir.z),
+  )
+  const angle = Math.acos(cosA)
+  if (axisLen < 1e-6 || angle < 1e-6) return scale(fromDir, r)
+  return scale(norm(rotateAround(fromDir, axis, angle * u)), r)
 }
 
 export function flightPose(args: {
@@ -221,63 +264,88 @@ export function flightPose(args: {
   const moon = v(args.moon.x, args.moon.y, args.moon.z)
   const moonR = args.moon.radius * args.moon.scale
   const landed = add(moon, scale(norm(moon), Math.min(moonR * 0.35, 0.04)))
+  const capture = add(landed, scale(east, 0.06))
 
-  let ship = scale(radial, 1 + 0.012)
+  const padUp = scale(radial, 1 + 0.012)
+  const liftEnd = scale(radial, 1.09)
+  const sepShip = add(scale(radial, SEP_RADIUS), scale(east, 0.16))
+  const hotEndShip = add(scale(radial, SEP_RADIUS + 0.01), scale(east, 0.21))
+  const hotEndBooster = add(scale(radial, SEP_RADIUS - 0.05), scale(east, 0.09))
+  const insert = leoAt(0, args.pad)
+  const landStart = add(args.pad, scale(radial, 0.04))
+
+  let ship = padUp
   let booster: Vec3 | null = null
   let plume = 0
   let flash = 0
   let dust = 0
+  let shipHead = -Math.PI / 2
+  let boosterHead = -Math.PI / 2
 
   if (phase === 'liftoff') {
-    const u = clamp01(t / T.liftoff)
-    ship = scale(radial, 1 + lerp(0.012, 0.08, u))
+    const u = easeOutCubic(t / T.liftoff)
+    ship = lerpV(padUp, liftEnd, u)
     plume = 0.85
+    shipHead = headingOf(padUp, liftEnd, -Math.PI / 2)
   } else if (phase === 'ascent') {
-    const u = clamp01((t - T.liftoff) / (T.ascent - T.liftoff))
-    const r = lerp(1.08, LEO_RADIUS, u)
-    ship = add(scale(radial, r), scale(east, 0.12 * u))
+    const u = easeInOutCubic((t - T.liftoff) / (T.ascent - T.liftoff))
+    ship = lerpV(liftEnd, sepShip, u)
     plume = 0.75
+    shipHead = headingOf(liftEnd, sepShip, -Math.PI / 2)
   } else if (phase === 'hot_stage') {
-    const u = clamp01((t - T.ascent) / (T.hotStage - T.ascent))
-    ship = add(scale(radial, LEO_RADIUS + 0.01), scale(east, 0.14 + 0.04 * u))
-    booster = add(scale(radial, LEO_RADIUS - 0.03), scale(east, 0.1 - 0.04 * u))
+    const u = easeInOutCubic((t - T.ascent) / (T.hotStage - T.ascent))
+    ship = lerpV(sepShip, hotEndShip, u)
+    booster = lerpV(sepShip, hotEndBooster, u)
     plume = 0.55
-    flash = 0.85
+    flash = 0.85 * (1 - u * 0.35)
+    shipHead = headingOf(sepShip, hotEndShip, -Math.PI / 2)
+    boosterHead = headingOf(sepShip, hotEndBooster, -Math.PI / 2)
   } else if (phase === 'boostback') {
-    const u = clamp01((t - T.hotStage) / (T.boostback - T.hotStage))
-    const insert = add(scale(radial, LEO_RADIUS), scale(east, 0.18))
-    ship = lerpV(insert, leoAt(0, args.pad), u)
-    const sep = add(scale(radial, LEO_RADIUS - 0.03), scale(east, 0.06))
-    booster = lerpV(sep, args.pad, u)
+    const u = easeInOutCubic((t - T.hotStage) / (T.boostback - T.hotStage))
+    ship = lerpV(hotEndShip, insert, u)
+    booster = lerpV(hotEndBooster, landStart, u)
     plume = 0.35 * (1 - u)
+    shipHead = headingOf(hotEndShip, insert, -Math.PI / 2)
+    boosterHead = headingOf(hotEndBooster, landStart, Math.PI / 2)
   } else if (phase === 'booster_land') {
-    const u = clamp01((t - T.boostback) / (T.boosterLand - T.boostback))
-    ship = leoAt(0, args.pad)
-    booster = lerpV(add(args.pad, scale(radial, 0.04)), args.pad, u)
-    dust = 0.7
+    const u = easeOutCubic((t - T.boostback) / (T.boosterLand - T.boostback))
+    ship = insert
+    booster = lerpV(landStart, args.pad, u)
+    dust = 0.7 * (0.35 + 0.65 * u)
     plume = 0.2 * (1 - u)
+    shipHead = headingOf(insert, leoAt(0.02, args.pad), -Math.PI / 2)
+    boosterHead = headingOf(landStart, args.pad, Math.PI / 2)
   } else if (phase === 'ship_orbit') {
-    const u = (t - ORBIT_START) / ORBIT_PERIOD
+    const raw = (t - ORBIT_START) / ORBIT_PERIOD
+    const u = raw >= 1 ? 1 : raw
     ship = leoAt(u, args.pad)
+    const look = leoAt(u + 0.01, args.pad)
+    shipHead = headingOf(ship, look, -Math.PI / 2)
   } else if (phase === 'translunar') {
     const u = clamp01((t - T.shipOrbit) / (T.translunar - T.shipOrbit))
-    ship = lerpV(leoAt(1, args.pad), landed, u)
+    ship = hohmannRaise(insert, capture, u)
+    const look = hohmannRaise(insert, capture, Math.min(1, u + 0.02))
+    shipHead = headingOf(ship, look, -Math.PI / 2)
   } else if (phase === 'moon_orbit') {
-    const u = clamp01((t - T.translunar) / (T.moonOrbit - T.translunar))
-    const hold = add(landed, scale(east, 0.06 * (1 - u)))
-    ship = lerpV(hold, landed, u)
+    const hover = add(landed, scale(norm(moon), 0.03))
+    const u = easeInOutCubic((t - T.translunar) / (T.moonOrbit - T.translunar))
+    ship = lerpV(capture, hover, u)
+    shipHead = headingOf(capture, hover, -Math.PI / 2)
   } else if (phase === 'moon_land') {
-    const u = clamp01((t - T.moonOrbit) / (T.moonLand - T.moonOrbit))
-    ship = lerpV(add(landed, scale(norm(moon), 0.03)), landed, u)
+    const u = easeOutCubic((t - T.moonOrbit) / (T.moonLand - T.moonOrbit))
+    const hover = add(landed, scale(norm(moon), 0.03))
+    ship = lerpV(hover, landed, u)
     dust = 0.25 * u
+    shipHead = headingOf(hover, landed, -Math.PI / 2)
   } else {
     ship = landed
+    shipHead = headingOf(add(landed, scale(norm(moon), 0.03)), landed, -Math.PI / 2)
   }
 
   return {
     phase,
-    ship: vis(ship),
-    booster: booster ? vis(booster) : undefined,
+    ship: vis(ship, shipHead),
+    booster: booster ? vis(booster, boosterHead) : undefined,
     plume,
     flash,
     dust,

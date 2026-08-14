@@ -5,6 +5,14 @@
 
 import { useEffect, useRef } from 'react'
 import { BOCA_CHICA, projectLatLon, type Vec3 } from '../lib/geoProject'
+import {
+  TRAIL_CAP,
+  clearTrail,
+  createTrail,
+  pushTrail,
+  trailAlpha,
+  type Trail,
+} from '../lib/flightTrail'
 import { getGlobeView } from '../lib/globeView'
 import { DEFAULT_ORBIT, moonPose, thetaAt, visualGlobeDiskRadiusPx } from '../lib/moonOrbit'
 import {
@@ -148,11 +156,33 @@ function drawBooster(
   ctx.restore()
 }
 
-function headingOf(vehicle: VehiclePose, pad: Vec3): number {
-  const dx = vehicle.x - pad.x
-  const dy = vehicle.y - pad.y
-  if (dx * dx + dy * dy < 1e-8) return -Math.PI / 2
-  return Math.atan2(dx, dy)
+function drawTrail(
+  ctx: CanvasRenderingContext2D,
+  trail: Trail,
+  layer: Layer,
+  geo: ReturnType<typeof layout>,
+  color: string,
+) {
+  const pts = trail.samples
+  if (pts.length < 2) return
+  ctx.save()
+  ctx.lineCap = 'round'
+  ctx.lineJoin = 'round'
+  ctx.lineWidth = 1.6
+  for (let i = 1; i < pts.length; i++) {
+    const a = screenOf(pts[i - 1]!, geo)
+    const b = screenOf(pts[i]!, geo)
+    if (b.behind !== (layer === 'behind')) continue
+    const alpha = trailAlpha(i, pts.length)
+    if (alpha < 0.02) continue
+    ctx.strokeStyle = color
+    ctx.globalAlpha = alpha * 0.72
+    ctx.beginPath()
+    ctx.moveTo(a.x, a.y)
+    ctx.lineTo(b.x, b.y)
+    ctx.stroke()
+  }
+  ctx.restore()
 }
 
 function drawLayer(
@@ -161,11 +191,16 @@ function drawLayer(
   geo: ReturnType<typeof layout>,
   pose: FlightPose,
   pad: Vec3,
+  shipTrail: Trail,
+  boosterTrail: Trail,
 ) {
   const { w, h, dpr, cx, cy, globeR } = geo
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
   ctx.clearRect(0, 0, w, h)
   if (pose.phase === 'idle' && !pose.ship.visible) return
+
+  drawTrail(ctx, shipTrail, layer, geo, 'rgba(47, 246, 246, 1)')
+  drawTrail(ctx, boosterTrail, layer, geo, 'rgba(166, 140, 255, 1)')
 
   const stackPx = STACK_HEIGHT * globeR
   const drawOne = (veh: VehiclePose, kind: 'ship' | 'booster', plume: number) => {
@@ -174,7 +209,7 @@ function drawLayer(
     if (scr.behind !== (layer === 'behind')) return
     const fade = edgeFade(scr.x, scr.y, stackPx, w, h)
     if (fade <= 0.01) return
-    const head = headingOf(veh, pad)
+    const head = veh.heading
     if (plume > 0) drawPlume(ctx, scr.x, scr.y, stackPx, plume * fade, head)
     if (kind === 'ship') drawShip(ctx, scr.x, scr.y, stackPx, head, fade)
     else drawBooster(ctx, scr.x, scr.y, stackPx * 0.85, head, fade)
@@ -244,6 +279,9 @@ export default function StarshipLaunchCanvas() {
       getGlobeView().phi,
       getGlobeView().theta,
     ).z
+    const shipTrail = createTrail(TRAIL_CAP)
+    const boosterTrail = createTrail(TRAIL_CAP)
+    let boosterLanded = false
 
     const tick = () => {
       if (!running) return
@@ -273,8 +311,18 @@ export default function StarshipLaunchCanvas() {
         reducedMotion: reduced || mission.phase === 'idle',
       })
 
-      drawLayer(behindCtx, 'behind', geo, pose, pad)
-      drawLayer(frontCtx, 'front', geo, pose, pad)
+      if (pose.phase === 'idle' || reduced) {
+        clearTrail(shipTrail)
+        clearTrail(boosterTrail)
+        boosterLanded = false
+      } else {
+        if (pose.ship.visible) pushTrail(shipTrail, pose.ship, now)
+        if (pose.phase === 'booster_land' && pose.dust > 0.4) boosterLanded = true
+        if (pose.booster?.visible && !boosterLanded) pushTrail(boosterTrail, pose.booster, now)
+      }
+
+      drawLayer(behindCtx, 'behind', geo, pose, pad, shipTrail, boosterTrail)
+      drawLayer(frontCtx, 'front', geo, pose, pad, shipTrail, boosterTrail)
     }
 
     let io: IntersectionObserver | null = null

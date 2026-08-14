@@ -1,7 +1,12 @@
 import { useEffect, useRef } from 'react'
 import createGlobe from 'cobe'
 import { BOCA_CHICA, BRAZIL } from '../lib/geoProject'
-import { publishGlobeView } from '../lib/globeView'
+import {
+  GLOBE_SPIN_PER_FRAME,
+  GLOBE_START_PHI,
+  GLOBE_START_THETA,
+  publishGlobeView,
+} from '../lib/globeView'
 import { useReducedMotion } from '../lib/useReducedMotion'
 
 /** RGB 0–1 from CSS hex (supports #rgb / #rrggbb). */
@@ -44,8 +49,8 @@ export default function DotGlobe() {
     const wrap = wrapRef.current
     if (!canvas || !wrap) return
 
-    let phi = 0.8
-    let theta = 0.28
+    let phi = GLOBE_START_PHI
+    let theta = GLOBE_START_THETA
     let displaySize = 0
     let pointerInteraction: { x: number; y: number } | null = null
     let pointerMomentum = 0
@@ -121,7 +126,7 @@ export default function DotGlobe() {
 
           // Auto-spin only when idle and motion allowed
           if (!dragging && !reduced) {
-            phi += 0.0028 + pointerMomentum
+            phi += GLOBE_SPIN_PER_FRAME + pointerMomentum
             pointerMomentum *= 0.93
             if (Math.abs(pointerMomentum) < 0.00015) pointerMomentum = 0
           } else if (!dragging && reduced) {

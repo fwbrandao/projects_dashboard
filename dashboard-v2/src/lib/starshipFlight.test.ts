@@ -243,4 +243,43 @@ describe('vehicles', () => {
     )
     assert.ok(sep > 0.005)
   })
+
+  it('climbs visibly higher than LEO before hot-stage', () => {
+    const hot = flightPose({ missionTimeMs: 10_200, pad, moon: MOON, reducedMotion: false })
+    assert.equal(hot.phase, 'hot_stage')
+    const r = Math.hypot(hot.ship.x, hot.ship.y, hot.ship.z)
+    assert.ok(r >= 1.26, `expected loft above LEO before sep, r=${r}`)
+    assert.ok(r > LEO_RADIUS + 0.08, `sep altitude should beat circular LEO ${LEO_RADIUS}`)
+  })
+
+  it('keeps pose continuous across phase cuts', () => {
+    const cuts = [4_000, 10_000, 13_000, 22_000, 26_000, 46_000, 58_000, 66_000]
+    for (const cut of cuts) {
+      const a = flightPose({ missionTimeMs: cut - 16, pad, moon: MOON, reducedMotion: false })
+      const b = flightPose({ missionTimeMs: cut + 16, pad, moon: MOON, reducedMotion: false })
+      const d = Math.hypot(a.ship.x - b.ship.x, a.ship.y - b.ship.y, a.ship.z - b.ship.z)
+      assert.ok(d < 0.06, `ship pop at ${cut}ms dist=${d}`)
+    }
+  })
+
+  it('raises on a Hohmann-like transfer instead of hopping the chord', () => {
+    const start = flightPose({ missionTimeMs: 46_200, pad, moon: MOON, reducedMotion: false })
+    const mid = flightPose({ missionTimeMs: 52_000, pad, moon: MOON, reducedMotion: false })
+    const end = flightPose({ missionTimeMs: 57_800, pad, moon: MOON, reducedMotion: false })
+    assert.equal(start.phase, 'translunar')
+    assert.equal(mid.phase, 'translunar')
+    const rs = Math.hypot(start.ship.x, start.ship.y, start.ship.z)
+    const rm = Math.hypot(mid.ship.x, mid.ship.y, mid.ship.z)
+    const re = Math.hypot(end.ship.x, end.ship.y, end.ship.z)
+    assert.ok(rm > rs + 0.06, `transfer should raise, ${rs} → ${rm}`)
+    assert.ok(re > rm, `apoapsis still climbing toward the moon, ${rm} → ${re}`)
+    const u = 0.5
+    const hop = {
+      x: start.ship.x + (end.ship.x - start.ship.x) * u,
+      y: start.ship.y + (end.ship.y - start.ship.y) * u,
+      z: start.ship.z + (end.ship.z - start.ship.z) * u,
+    }
+    const offChord = Math.hypot(mid.ship.x - hop.x, mid.ship.y - hop.y, mid.ship.z - hop.z)
+    assert.ok(offChord > 0.12, `Hohmann should leave the hop chord, dist=${offChord}`)
+  })
 })
