@@ -91,7 +91,7 @@ export const projects: Project[] = [
     year: 2026,
     stack: ['Python', 'Groq', 'ChromaDB', 'Streamlit', 'Jupyter'],
     repo: 'https://github.com/fwbrandao/RAG-grokipedia-vs-wikipedia',
-    liveUrl: 'https://rag-grokipedia-vs-wikipedia.streamlit.app',
+    liveUrl: 'https://rag-grokipedia-vs-wikipedia-ejglykwi6qnbvunielbn3e.streamlit.app',
     highlights: [
       'Same model, prompt, and top-k; only the corpus changes.',
       'Free stack: Groq llama-3.3-70b plus local MiniLM embeddings.',
