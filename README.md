@@ -4,7 +4,7 @@ This is a scalable app with microfrontend architecture and module federation. Th
 
 Work in progress dashboard to host projects and technologies I've learned.
 
-Live at: https://d1j9462wmwsk33.cloudfront.net/
+Live at: https://projects-dashboard-fb.netlify.app/
 
 Microfrontends are used to divide a large app into a series of smaller apps. This provides a set of unique benefits to any frontend:
 
