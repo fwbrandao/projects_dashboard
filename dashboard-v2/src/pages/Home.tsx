@@ -58,6 +58,10 @@ export default function Home() {
 
   const isLanding = !query.trim() && active === 'all'
 
+  const ragProjects = useMemo(
+    () => (isLanding ? results.filter((p) => getCategorySection(p.category) === 'rag') : []),
+    [isLanding, results],
+  )
   const aiProjects = useMemo(
     () => (isLanding ? results.filter((p) => getCategorySection(p.category) === 'ai') : []),
     [isLanding, results],
@@ -79,7 +83,7 @@ export default function Home() {
           </h2>
           <p className="mt-1.5 text-muted">
             {isLanding
-              ? 'AI and machine learning first, then web, games, and smaller experiments.'
+              ? 'RAG first, then AI and machine learning, then web, games, and smaller experiments.'
               : `Search and filter across ${projects.length} projects.`}
           </p>
         </div>
@@ -117,6 +121,23 @@ export default function Home() {
         ) : isLanding ? (
           <div className="mt-8 space-y-14">
             <div>
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <h3 className="font-display text-xl font-bold tracking-tight text-text sm:text-2xl">
+                    RAG
+                  </h3>
+                  <p className="mt-1.5 max-w-2xl text-sm text-muted sm:text-base">
+                    Retrieval-augmented generation and the embedding geometry underneath it.
+                  </p>
+                </div>
+                <span className="text-xs font-medium uppercase tracking-wider text-faint">
+                  {ragProjects.length} projects
+                </span>
+              </div>
+              <ProjectGrid items={ragProjects} />
+            </div>
+
+            <div className="border-t border-border pt-12">
               <div className="flex flex-wrap items-end justify-between gap-3">
                 <div>
                   <h3 className="font-display text-xl font-bold tracking-tight text-text sm:text-2xl">

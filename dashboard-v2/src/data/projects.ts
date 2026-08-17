@@ -19,8 +19,10 @@ import citySearch from '../assets/citySearch.png'
 import drum from '../assets/drum.png'
 import clock from '../assets/clock.png'
 import ragFaceOff from '../assets/rag-grokipedia-vs-wikipedia.png'
+import semanticSearch from '../assets/semantic-search.png'
 
 export type CategoryId =
+  | 'rag'
   | 'cnn'
   | 'nlp'
   | 'data'
@@ -28,8 +30,8 @@ export type CategoryId =
   | 'mini-js'
   | 'react'
 
-/** Top-level home grouping: AI/ML first, everything else below. */
-export type ProjectSection = 'ai' | 'other'
+/** Top-level home grouping: RAG first, then AI/ML, then everything else. */
+export type ProjectSection = 'rag' | 'ai' | 'other'
 
 export interface Category {
   id: CategoryId
@@ -61,6 +63,7 @@ export interface Project {
 }
 
 export const categories: Category[] = [
+  { id: 'rag', title: 'RAG', short: 'RAG', blurb: 'Retrieval-augmented generation and the embedding geometry underneath it.', icon: 'hub', section: 'rag' },
   { id: 'cnn', title: 'Computer Vision', short: 'Vision', blurb: 'Convolutional networks for detection, recognition, and classification.', icon: 'visibility', section: 'ai' },
   { id: 'nlp', title: 'Natural Language', short: 'NLP', blurb: 'Models for understanding, classifying, and generating text.', icon: 'translate', section: 'ai' },
   { id: 'data', title: 'Data & Prediction', short: 'Data', blurb: 'Exploratory analysis, visualization, and predictive modeling.', icon: 'analytics', section: 'ai' },
@@ -85,7 +88,7 @@ export const projects: Project[] = [
       'Two RAG pipelines, one generator. The same model answers the same question from Grokipedia and Wikipedia side by side.',
     overview:
       'A fair A/B of retrieval-augmented generation: identical Groq model, prompt, temperature, and top-k on both sides. The only variable is the knowledge base. Articles are ingested from Grokipedia and Wikipedia, chunked under MiniLM’s 256-token limit, embedded locally, and stored in two Chroma collections. Divergence is a signal about coverage and framing — not a verdict on which encyclopedia is true.',
-    category: 'nlp',
+    category: 'rag',
     tags: ['RAG', 'embeddings', 'retrieval', 'Grokipedia', 'Wikipedia'],
     thumbnail: ragFaceOff,
     year: 2026,
@@ -97,6 +100,28 @@ export const projects: Project[] = [
       'Free stack: Groq llama-3.3-70b plus local MiniLM embeddings.',
       'Paragraph-aware 220-token chunks so MiniLM does not silently truncate.',
       'Cached ingest with Wikipedia 429 backoff and a COVID title override.',
+    ],
+  },
+  {
+    id: 'semantic-search',
+    title: 'Semantic Search — Embeddings',
+    subtitle: 'Cosine rank + PCA map',
+    summary:
+      'The same local MiniLM used in RAG Face-Off, without a generator: search a corpus by cosine similarity and see the vectors on a 2D/3D PCA map.',
+    overview:
+      'A free, keyless companion to RAG Face-Off. Every string is encoded with Chroma’s ONNX MiniLM, then shown two ways: a ranked neighbor list (full-vector cosine) and a PCA camera of the same points. Labels are only colors on the plot — they do not affect rank. Add a word or sentence, search, and nearby points on the map should also sit high in the neighbor list.',
+    category: 'rag',
+    tags: ['embeddings', 'cosine', 'PCA', 'MiniLM'],
+    thumbnail: semanticSearch,
+    year: 2026,
+    stack: ['Python', 'MiniLM', 'Streamlit', 'Plotly'],
+    repo: 'https://github.com/fwbrandao/semantic_search',
+    liveUrl: 'https://semanticsearch-mgyczpmnpifocevpeppzbn.streamlit.app',
+    highlights: [
+      'Same MiniLM embedder as RAG Face-Off; no API key.',
+      'Cosine search on the full vector; PCA is only the camera.',
+      'In-memory index — add items, search, plot, no database.',
+      'Seed corpus mixes words and sentences so neighbors are visible.',
     ],
   },
   {
