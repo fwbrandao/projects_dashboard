@@ -76,18 +76,8 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <section id="work" className="mx-auto max-w-page scroll-mt-20 px-5 pb-4 sm:px-8">
-        <div className="mb-8">
-          <h2 className="font-display text-2xl font-extrabold tracking-tight text-text sm:text-3xl">
-            Selected work
-          </h2>
-          <p className="mt-1.5 text-muted">
-            {isLanding
-              ? 'RAG first, then AI and machine learning, then web, games, and smaller experiments.'
-              : `Search and filter across ${projects.length} projects.`}
-          </p>
-        </div>
-
+      <section id="work" className="mx-auto max-w-page scroll-mt-20 px-5 pb-4 pt-8 sm:px-8 sm:pt-10">
+        <h2 className="sr-only">Work</h2>
         <SearchFilterBar
           query={query}
           onQuery={setQuery}
