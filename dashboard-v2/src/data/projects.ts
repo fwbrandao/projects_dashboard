@@ -18,6 +18,7 @@ import ticTacToe from '../assets/tic-tac-toe.png'
 import citySearch from '../assets/citySearch.png'
 import drum from '../assets/drum.png'
 import clock from '../assets/clock.png'
+import ragSpaceChatbot from '../assets/rag-space-chatbot.png'
 import ragFaceOff from '../assets/rag-grokipedia-vs-wikipedia.png'
 import semanticSearch from '../assets/semantic-search.png'
 
@@ -80,6 +81,29 @@ export const getCategorySection = (id: CategoryId): ProjectSection =>
   categorySection[id]
 
 export const projects: Project[] = [
+  {
+    id: 'rag-space-chatbot',
+    title: 'Cosmos RAG Chatbot',
+    subtitle: 'Space knowledge, routed RAG',
+    summary:
+      'A space and universe chatbot that routes each query, sets creative vs technical parameters, retrieves context, and can answer with a JSON catalog record.',
+    overview:
+      'Assignment work turned into a routed RAG system with a Streamlit mission-control UI: a router labels each turn, generation settings change with creative vs technical intent, retrieved chunks are injected before the answer, and celestial bodies are validated JSON products. Local runs use Ollama when available; Streamlit Cloud uses Groq. This page shows the eight-gate architecture.',
+    category: 'rag',
+    tags: ['RAG', 'routing', 'JSON', 'chatbot'],
+    thumbnail: ragSpaceChatbot,
+    year: 2026,
+    stack: ['Python', 'Groq', 'MiniLM', 'ChromaDB', 'Streamlit'],
+    repo: 'https://github.com/fwbrandao/space-rag-chatbot',
+    liveUrl: 'https://space-rag-chatbot-uf8asvqcmjk8aemn9wcyda.streamlit.app',
+    highlights: [
+      'Eight-gate pipeline: corpus, loaders, router, params, retrieve/inject, JSON, generator, orchestrator.',
+      'Query router: catalog JSON, factual, comparison, creative, or chitchat.',
+      'Technical answers use temperature 0.1 and top-k 4; creative uses 0.8 and 2.',
+      'Pydantic JSON products for planets, moons, the Sun, JWST, ISS, and black holes.',
+      'Streamlit mission-control UI: route chips, retrieval scores, catalog spec cards.',
+    ],
+  },
   {
     id: 'rag-grokipedia-vs-wikipedia',
     title: 'RAG Face-Off: Grokipedia vs Wikipedia',
