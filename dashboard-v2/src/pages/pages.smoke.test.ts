@@ -12,6 +12,12 @@ describe('page copy smoke', () => {
     assert.match(src, /<h2 className="sr-only">Work<\/h2>/)
   })
 
+  it('project detail can render an architecture panel', () => {
+    const src = readFileSync(join(dir, 'ProjectDetail.tsx'), 'utf8')
+    assert.match(src, /architecturePanels/)
+    assert.match(src, /id="architecture"/)
+  })
+
   it('about renders identity, experience, portrait size, and hidden CTA icons', () => {
     const src = readFileSync(join(dir, 'About.tsx'), 'utf8')
     assert.match(src, /\{profile\.name\}/)
@@ -21,5 +27,13 @@ describe('page copy smoke', () => {
     assert.match(src, /height=\{224\}/)
     assert.match(src, /aria-hidden/)
     assert.doesNotMatch(src, /fwbAvatar/)
+  })
+
+  it('space RAG architecture lists ask() and the eight gates', () => {
+    const src = readFileSync(join(dir, '../demos/SpaceRagArchitecture.tsx'), 'utf8')
+    assert.match(src, /Chatbot\.ask/)
+    assert.match(src, /route_query/)
+    assert.match(src, /inject_context/)
+    assert.match(src, /Orchestrator/)
   })
 })
